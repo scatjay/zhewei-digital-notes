@@ -191,6 +191,16 @@ td.num{font-family:var(--mono);text-align:right}
   word-break:break-all}
 
 /* 回饋區塊 */
+.gsignin{display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:13.5px;
+  font-weight:600;padding:9px 16px;border-radius:6px;border:1px solid var(--rule-strong);
+  background:var(--surface);color:var(--ink);cursor:pointer;min-height:40px}
+.gsignin:hover{background:var(--sunk)}
+.gsignin svg{width:16px;height:16px;flex-shrink:0}
+.gwho{display:none;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);margin-bottom:4px}
+.gwho.on{display:flex}
+.gwho b{color:var(--jade)}
+.gwho button{font-family:var(--mono);font-size:11px;color:var(--ink-3);background:none;
+  border:none;text-decoration:underline;cursor:pointer;padding:0}
 .fb-form{display:flex;flex-direction:column;gap:12px;margin-top:8px;max-width:520px}
 .fb-form label{font-size:12.5px;color:var(--ink-3);font-family:var(--mono);
   text-transform:uppercase;letter-spacing:.04em}
@@ -485,6 +495,11 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   <p class="sec-lede">寫上名字跟一句回饋（例如哪個環節最有用、還想多講什麼），送出後大家都看得到。
     不需要登入帳號，任何裝置都能填。</p>
   <div class="fb-form">
+    <div class="gwho" id="gwho"><span>已用Gmail登入：<b id="gwhoEmail"></b></span><button id="gsignout">登出</button></div>
+    <button class="gsignin" type="button" id="gsignin">
+      <svg viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.6 3 24 3 12.4 3 3 12.4 3 24s9.4 21 21 21 21-9.4 21-21c0-1.4-.1-2.7-.4-4z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 16 18.9 13 24 13c3.1 0 5.8 1.1 8 3l6-6C34.5 5.1 29.6 3 24 3 16.3 3 9.7 7.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 45c5.5 0 10.4-1.9 14.3-5.1l-6.6-5.4C29.7 36.2 27 37 24 37c-5.2 0-9.6-3.3-11.2-8l-6.6 5.1C9.5 40.6 16.2 45 24 45z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.2 4.2-4.1 5.6l6.6 5.4C41.2 35.6 45 30.5 45 24c0-1.4-.1-2.7-.4-3.5z"/></svg>
+      用 Gmail 登入（推薦，讓回饋更可信）
+    </button>
     <div>
       <label for="fbName">姓名 / 稱呼</label>
       <input id="fbName" type="text" maxlength="20" placeholder="例如：智傑">
@@ -514,6 +529,8 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
 <script>
 (function(){
   var PAGE_URL = 'https://scatjay.github.io/zhewei-digital-notes/';
@@ -553,6 +570,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
    規則沒生效時安靜吞掉，不在與會者面前亮紅燈）
    ══════════════════════════════════════════════════════════ */
 var FB_DB = "https://gen-lang-client-0929530380-default-rtdb.asia-southeast1.firebasedatabase.app";
+var _googleUser = null;   // {email, name} 目前登入的Google帳號，null=未登入（仍可匿名送出）
 var FB_NS = "zhewei0918";
 var FB_LIVE = null;
 function fbDead(s){ if(s===401||s===403){ FB_LIVE=false; return true; } return false; }
@@ -605,7 +623,11 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
   fetch(fbURL('feedback'), {
     method: 'POST',
     headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({ name: name.slice(0,20), comment: comment.slice(0,500), t: Date.now() })
+    body: JSON.stringify({
+      name: name.slice(0,20), comment: comment.slice(0,500), t: Date.now(),
+      authed: !!_googleUser,
+      email: (_googleUser && _googleUser.email) ? _googleUser.email.slice(0,60) : ''
+    })
   }).then(function(r){
     btn.disabled = false;
     if (fbDead(r.status)){
@@ -629,6 +651,47 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
     statusEl.className = 'fb-status';
   });
 });
+
+/* ── Google 登入（選填，讓回饋掛真實身分）── */
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBwPR0oE5VK0eBlqq8JY1B56UXy3R9cyng",
+  authDomain: "gen-lang-client-0929530380.firebaseapp.com",
+  databaseURL: FB_DB,
+  projectId: "gen-lang-client-0929530380"
+};
+function initGoogleAuth(){
+  if (!window.firebase) return;
+  firebase.initializeApp(FIREBASE_CONFIG);
+  var auth = firebase.auth();
+  var provider = new firebase.auth.GoogleAuthProvider();
+
+  auth.onAuthStateChanged(function(user){
+    var who = document.getElementById('gwho'), email = document.getElementById('gwhoEmail');
+    var signinBtn = document.getElementById('gsignin');
+    var nameEl = document.getElementById('fbName');
+    if (user){
+      _googleUser = { email: user.email || '', name: user.displayName || user.email || '' };
+      who.classList.add('on');
+      email.textContent = _googleUser.email;
+      signinBtn.style.display = 'none';
+      nameEl.value = _googleUser.name.slice(0,20);
+      nameEl.readOnly = true;
+    } else {
+      _googleUser = null;
+      who.classList.remove('on');
+      signinBtn.style.display = '';
+      nameEl.readOnly = false;
+    }
+  });
+
+  document.getElementById('gsignin').addEventListener('click', function(){
+    auth.signInWithPopup(provider).catch(function(e){
+      document.getElementById('fbStatus').textContent = '登入沒成功（' + (e && e.code || '未知原因') + '），可以直接手動填名字送出。';
+    });
+  });
+  document.getElementById('gsignout').addEventListener('click', function(){ auth.signOut(); });
+}
+initGoogleAuth();
 </script>
 
 </body>
