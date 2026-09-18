@@ -61,6 +61,10 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   font-family:var(--mono);font-size:12px;color:var(--ink-3);padding:8px 14px;
   border:1px solid var(--rule-strong);border-radius:20px;background:var(--surface)}
 .session-tag b{color:var(--indigo);font-weight:600}
+#presBox{flex-wrap:wrap;gap:6px}
+.presname{font-family:var(--sans);font-size:11.5px;padding:2px 9px;border-radius:12px;
+  background:var(--sunk);color:var(--ink-2)}
+.presname.me{background:var(--jade-bg);color:var(--jade);font-weight:600}
 
 #gate{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .gate-card{max-width:420px;width:100%;border:1px solid var(--rule-strong);border-radius:10px;
@@ -307,6 +311,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     → 從筆記提煉出表格/資料庫 → 從永久筆記寫成一篇學術文章。範例全部用他
     親自準備的教材（1954年台灣醫師名鑑、水經注）。手機、電腦都能開，最下面可以留言回饋。</p>
   <div class="session-tag">📍 <b>13:30-15:00 第二場</b>「從數位筆記到數位思維」（張哲維老師，成大歷史系）</div>
+  <div class="session-tag" id="presBox" hidden>🟢 目前在線 <b id="presN">0</b> 人：<span id="presList"></span></div>
 
   <details class="slidereader">
     <summary><span>📑 展開原始投影片（151張，可直接在這裡翻閱）<span class="hint">14.4MB PDF</span></span>
@@ -782,6 +787,63 @@ var FIREBASE_CONFIG = {
 function showMain(){
   document.getElementById('gate').style.display = 'none';
   document.getElementById('mainContent').style.display = '';
+  startPresence();
+}
+
+/* ── 在線人數（照寬欣0828那一套：心跳+10分鐘窗口判定在線）── */
+var PRESENCE_WINDOW = 10 * 60 * 1000;
+var _presStarted = false;
+function startPresence(){
+  if (_presStarted) return;
+  _presStarted = true;
+  beat();
+  paintPresence();
+  setInterval(beat, 60 * 1000);
+  setInterval(paintPresence, 20 * 1000);
+}
+function beat(){
+  if (!FB_DB || FB_LIVE === false || !_googleUser) return Promise.resolve();
+  var gsaved = JSON.parse(localStorage.getItem('zhewei0918_gate') || 'null');
+  var displayName = (gsaved && gsaved.name) || _googleUser.name || '';
+  return pseudonymKey().then(function(k){
+    return fetch(fbURL('present/' + k), {
+      method: 'PUT', headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ n: displayName.slice(0,20), t: Date.now() })
+    }).then(function(r){ if(!fbDead(r.status) && r.ok) FB_LIVE = true; }).catch(function(){});
+  });
+}
+function pseudonymKey(){
+  var seed = (_googleUser && _googleUser.email) ? _googleUser.email : localSalt();
+  return crypto.subtle ? crypto.subtle.digest('SHA-256', u8('zhewei0918-pres:' + seed)).then(hex).then(function(h){ return h.slice(0,16); })
+    : Promise.resolve('nc' + Math.random().toString(36).slice(2,10));
+}
+function paintPresence(){
+  var box = document.getElementById('presBox');
+  if (!FB_DB || FB_LIVE === false){ box.hidden = true; return; }
+  fetch(fbURL('present'))
+    .then(function(r){ if(fbDead(r.status)) return null; return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d === null){ box.hidden = true; return; }
+      var now = Date.now(), people = [];
+      for (var k in d){
+        var v = d[k];
+        if (!v || !v.t || (now - v.t) > PRESENCE_WINDOW) continue;
+        people.push(v.n || '（未具名）');
+      }
+      box.hidden = false;
+      document.getElementById('presN').textContent = people.length;
+      var gsaved = JSON.parse(localStorage.getItem('zhewei0918_gate') || 'null');
+      var mine = (gsaved && gsaved.name) || '';
+      var list = document.getElementById('presList');
+      list.innerHTML = '';
+      people.sort(function(a,b){ return a.localeCompare(b, 'zh-Hant'); }).forEach(function(n){
+        var s = document.createElement('span');
+        s.className = 'presname' + (n === mine ? ' me' : '');
+        s.textContent = n;
+        list.appendChild(s);
+      });
+    })
+    .catch(function(){});
 }
 
 function writeCheckin(user, name, org){
