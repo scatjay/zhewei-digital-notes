@@ -1612,6 +1612,17 @@ document.querySelectorAll('.pdfjs-viewer').forEach(function(el){ initPdfjsViewer
 (function(){
   var bar = document.getElementById('tabbar');
   if (!bar) return;
+  var TAB_TO_SECTION = {
+    s1: '第一場', s2: '第二場', ethics: '第三場', s4: '第四場', s5: '第五場',
+    s6: '第六場', explore: '第七場', open: '開幕式', panel1: '圓桌一',
+    panel2: '圓桌二（Day2）', s8: '未來展望'
+  };
+  function syncFeedbackDefault(tab){
+    var sel = document.getElementById('fbSection');
+    if (!sel) return;
+    var val = TAB_TO_SECTION[tab];
+    if (val && sel.querySelector('option[value="' + val.replace(/"/g,'') + '"]')) sel.value = val;
+  }
   bar.addEventListener('click', function(e){
     var btn = e.target.closest('.tabbtn');
     if (!btn) return;
@@ -1621,6 +1632,7 @@ document.querySelectorAll('.pdfjs-viewer').forEach(function(el){ initPdfjsViewer
       p.hidden = (p.getAttribute('data-tab') !== tab);
     });
     try { localStorage.setItem('zhewei0918_lasttab', tab); } catch(e){}
+    syncFeedbackDefault(tab);
     window.scrollTo(0, 0);
   });
   var last = null;
@@ -1628,6 +1640,9 @@ document.querySelectorAll('.pdfjs-viewer').forEach(function(el){ initPdfjsViewer
   if (last && document.getElementById('tab-' + last)){
     var b = bar.querySelector('[data-tab="' + last + '"]');
     if (b) b.click();
+  } else {
+    var activeBtn = bar.querySelector('.tabbtn.active');
+    if (activeBtn) syncFeedbackDefault(activeBtn.getAttribute('data-tab'));
   }
 })();
 </script>
