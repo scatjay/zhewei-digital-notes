@@ -84,6 +84,19 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .gate-status.err{color:var(--seal)}
 .gate-note{margin-top:18px;font-size:11.5px;color:var(--ink-3);line-height:1.6}
 
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;margin-top:22px;padding-bottom:2px}
+.tabbtn{font-family:var(--sans);font-size:13px;padding:9px 14px;border-radius:8px 8px 0 0;
+  border:1px solid var(--rule-strong);border-bottom:none;background:var(--sunk);color:var(--ink-2);
+  cursor:pointer;text-align:left;line-height:1.4;min-height:44px}
+.tabbtn span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;font-family:var(--mono)}
+.tabbtn.active{background:var(--surface);color:var(--ink);font-weight:700;
+  border-bottom:2px solid var(--surface);margin-bottom:-1px;position:relative;z-index:1}
+.tabpanel{border-top:1px solid var(--rule-strong);padding-top:8px}
+.stub-note{border:1px dashed var(--rule-strong);border-radius:6px;padding:16px 20px;
+  background:var(--surface);margin-bottom:8px}
+.stub-note b{font-family:var(--serif);font-size:15px;display:block;margin-bottom:4px}
+.stub-note p{margin:0;font-size:13px;color:var(--ink-2)}
+
 .slidereader{margin-top:24px;border:1px solid var(--rule-strong);border-radius:8px;
   background:var(--surface);overflow:hidden}
 .slidereader summary{cursor:pointer;padding:14px 18px;font-family:var(--serif);font-weight:700;
@@ -304,15 +317,37 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 <div id="mainContent" style="display:none">
 
 <header>
-  <p class="eyebrow">從數位筆記到數位思維 · 張哲維老師第二場配套學習單</p>
-  <h1>從手稿到永久筆記：卡片盒筆記法在史學研究上的落地</h1>
-  <p class="lede">這頁是哲維老師151張投影片的濃縮整理，順序跟著他的教學走：
-    Obsidian的基礎操作 → 手稿如何變成一則有結構的筆記 → 卡片盒筆記法四層
-    → 從筆記提煉出表格/資料庫 → 從永久筆記寫成一篇學術文章。範例全部用他
-    親自準備的教材（1954年台灣醫師名鑑、水經注）。手機、電腦都能開，最下面可以留言回饋。</p>
-  <div class="session-tag">📍 <b>13:30-15:00 第二場</b>「從數位筆記到數位思維」（張哲維老師，成大歷史系）</div>
+  <p class="eyebrow">2026年國科會人文處歷史學門主管會議 · 09-18～09-19 國立清華大學</p>
+  <h1>歷史學的智慧人文轉向：運用生成式AI優化歷史研究流程工作坊</h1>
+  <p class="lede">兩天的工作坊，每一場都是實機操作。這裡把張哲維老師（成大歷史系助理教授）
+    負責的幾場配套整理成可以隨時查閱的筆記，下面用分頁切換——手機、電腦都能開，
+    最下面可以留言回饋或提問。</p>
   <div class="session-tag" id="presBox" hidden>🟢 目前在線 <b id="presN">0</b> 人：<span id="presList"></span></div>
+  <div class="session-tag" id="whoBox" hidden>👤 <b id="whoName"></b> <button id="topSignout" style="font-family:var(--mono);font-size:11px;color:var(--ink-3);background:none;border:none;text-decoration:underline;cursor:pointer;padding:0;margin-left:6px">登出</button></div>
 
+  <nav class="tabbar" id="tabbar" role="tablist">
+    <button class="tabbtn" data-tab="s1" role="tab">第一場<span>歷史研究的開端－寫筆記</span></button>
+    <button class="tabbtn active" data-tab="s2" role="tab">第二場<span>從數位筆記到數位思維</span></button>
+    <button class="tabbtn" data-tab="s4" role="tab">第四場<span>提示詞工程與生成式AI</span></button>
+    <button class="tabbtn" data-tab="s5" role="tab">第五場<span>打造AI史料對話機器人</span></button>
+    <button class="tabbtn" data-tab="s6" role="tab">第六場<span>AI優化研究工作流程</span></button>
+    <button class="tabbtn" data-tab="s8" role="tab">第八場<span>未來展望</span></button>
+  </nav>
+</header>
+
+<div class="tabpanel" data-tab="s1" id="tab-s1" hidden>
+  <div class="stub-note">
+    <b>第一場：歷史研究的開端－寫筆記</b>
+    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+  </div>
+  <details class="slidereader">
+    <summary><span>📑 展開投影片<span class="hint">第一場</span></span><span class="chevron">▶</span></summary>
+    <div class="body"><iframe src="slides-session1.pdf" title="歷史研究的開端－寫筆記 投影片" loading="lazy"></iframe>
+      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  </details>
+</div>
+
+<div class="tabpanel" data-tab="s2" id="tab-s2">
   <details class="slidereader">
     <summary><span>📑 展開原始投影片（151張，可直接在這裡翻閱）<span class="hint">14.4MB PDF</span></span>
       <span class="chevron">▶</span></summary>
@@ -322,7 +357,13 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
         也可以<a href="slides-session2.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p>
     </div>
   </details>
-</header>
+
+  <div class="cmdcard" id="nblmSlot">
+    <div class="cmdcard-head"><b>🎧 語音摘要 / 📊 資訊圖表（NBLM生成中）</b>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">稍後補上</span></div>
+    <pre style="color:var(--ink-3)">已送進NBLM中央管線生成中——生成完成後，語音摘要跟資訊圖表會直接放在這個框裡，
+就在投影片下面，不用另外找位置。</pre>
+  </div>
 
 <section>
   <span class="sec-eyebrow">起點</span>
@@ -574,6 +615,56 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
       仍然是研究者主體性的展現。</span></div>
   </div>
 </section>
+
+</div><!-- /#tab-s2 -->
+
+<div class="tabpanel" data-tab="s4" id="tab-s4" hidden>
+  <div class="stub-note">
+    <b>第四場：從提示詞工程了解生成式AI的本質</b>
+    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+  </div>
+  <details class="slidereader">
+    <summary><span>📑 展開投影片<span class="hint">第四場</span></span><span class="chevron">▶</span></summary>
+    <div class="body"><iframe src="slides-session4.pdf" title="從提示詞工程了解生成式AI的本質 投影片" loading="lazy"></iframe>
+      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session4.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  </details>
+</div>
+
+<div class="tabpanel" data-tab="s5" id="tab-s5" hidden>
+  <div class="stub-note">
+    <b>第五場：打造AI史料資料對話機器人</b>
+    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+  </div>
+  <details class="slidereader">
+    <summary><span>📑 展開投影片<span class="hint">第五場</span></span><span class="chevron">▶</span></summary>
+    <div class="body"><iframe src="slides-session5.pdf" title="打造AI史料資料對話機器人 投影片" loading="lazy"></iframe>
+      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session5.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  </details>
+</div>
+
+<div class="tabpanel" data-tab="s6" id="tab-s6" hidden>
+  <div class="stub-note">
+    <b>第六場：利用生成式AI工具優化史學研究工作流程</b>
+    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+  </div>
+  <details class="slidereader">
+    <summary><span>📑 展開投影片<span class="hint">第六場</span></span><span class="chevron">▶</span></summary>
+    <div class="body"><iframe src="slides-session6.pdf" title="利用生成式AI工具優化史學研究工作流程 投影片" loading="lazy"></iframe>
+      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session6.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  </details>
+</div>
+
+<div class="tabpanel" data-tab="s8" id="tab-s8" hidden>
+  <div class="stub-note">
+    <b>第八場：未來展望</b>
+    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+  </div>
+  <details class="slidereader">
+    <summary><span>📑 展開投影片<span class="hint">第八場，10張</span></span><span class="chevron">▶</span></summary>
+    <div class="body"><iframe src="slides-session8.pdf" title="未來展望 投影片" loading="lazy"></iframe>
+      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session8.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  </details>
+</div>
 
 <section>
   <span class="sec-eyebrow">回饋 / 提問區</span>
@@ -870,6 +961,7 @@ function initGoogleAuth(){
     var who = document.getElementById('gwho'), email = document.getElementById('gwhoEmail');
     var signinBtn = document.getElementById('gsignin');
     var nameEl = document.getElementById('fbName');
+    var whoBox = document.getElementById('whoBox'), whoName = document.getElementById('whoName');
     if (user){
       _googleUser = { email: user.email || '', name: user.displayName || user.email || '' };
       who.classList.add('on');
@@ -877,6 +969,9 @@ function initGoogleAuth(){
       signinBtn.style.display = 'none';
       nameEl.value = _googleUser.name.slice(0,20);
       nameEl.readOnly = true;
+      var gsaved = JSON.parse(localStorage.getItem('zhewei0918_gate') || 'null');
+      whoName.textContent = (gsaved && gsaved.name) || _googleUser.name;
+      whoBox.hidden = false;
       // 已經 check-in 過（本機記過）就直接放行，不用每次重填
       if (localStorage.getItem('zhewei0918_checked_in') === user.uid) showMain();
     } else {
@@ -884,18 +979,24 @@ function initGoogleAuth(){
       who.classList.remove('on');
       signinBtn.style.display = '';
       nameEl.readOnly = false;
+      whoBox.hidden = true;
     }
   });
 
+  function doSignOut(){
+    localStorage.removeItem('zhewei0918_checked_in');
+    auth.signOut();
+    document.getElementById('mainContent').style.display = 'none';
+    document.getElementById('gate').style.display = '';
+    _presStarted = false;
+  }
   document.getElementById('gsignin').addEventListener('click', function(){
     auth.signInWithPopup(provider).catch(function(e){
       document.getElementById('fbStatus').textContent = '登入沒成功（' + (e && e.code || '未知原因') + '），可以直接手動填名字送出。';
     });
   });
-  document.getElementById('gsignout').addEventListener('click', function(){
-    localStorage.removeItem('zhewei0918_checked_in');
-    auth.signOut();
-  });
+  document.getElementById('gsignout').addEventListener('click', doSignOut);
+  document.getElementById('topSignout').addEventListener('click', doSignOut);
 
   var gname = document.getElementById('gateName'), gorg = document.getElementById('gateOrg');
   var gsaved = JSON.parse(localStorage.getItem('zhewei0918_gate') || 'null');
@@ -929,6 +1030,29 @@ function initGoogleAuth(){
   });
 }
 initGoogleAuth();
+
+/* ── 分頁切換 ── */
+(function(){
+  var bar = document.getElementById('tabbar');
+  if (!bar) return;
+  bar.addEventListener('click', function(e){
+    var btn = e.target.closest('.tabbtn');
+    if (!btn) return;
+    var tab = btn.getAttribute('data-tab');
+    bar.querySelectorAll('.tabbtn').forEach(function(b){ b.classList.toggle('active', b === btn); });
+    document.querySelectorAll('.tabpanel').forEach(function(p){
+      p.hidden = (p.getAttribute('data-tab') !== tab);
+    });
+    try { localStorage.setItem('zhewei0918_lasttab', tab); } catch(e){}
+    window.scrollTo(0, 0);
+  });
+  var last = null;
+  try { last = localStorage.getItem('zhewei0918_lasttab'); } catch(e){}
+  if (last && document.getElementById('tab-' + last)){
+    var b = bar.querySelector('[data-tab="' + last + '"]');
+    if (b) b.click();
+  }
+})();
 </script>
 
 </body>
