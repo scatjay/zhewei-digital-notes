@@ -479,7 +479,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   </div>
   <div class="stub-note">
     <b>第一場：歷史研究的開端－寫筆記</b>
-    <p>投影片＋逐字稿已經整合在下面同一個框裡；深度配套整理製作中，稍後會補上。</p>
+    <p>投影片＋逐字稿已經整合在下面同一個框裡；下方另有整理過的內容章節可以直接閱讀。</p>
   </div>
   <details class="slidereader" open>
     <summary><span>📑 投影片 ＋ 逐字稿</span>
@@ -509,6 +509,292 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
       </div>
     </div>
   </details>
+
+  <section>
+  <span class="sec-eyebrow">起點</span>
+  <h2>典範轉移的時間軸，跟歷史系一直都在的生存焦慮</h2>
+  <p class="sec-lede">錄音從老師已經開講的地方才開始收到——第一句「它已經構成了如Thomas Kuhn所說的典範轉移」前面的鋪陳沒有錄到，但接下來的時間軸跟論證是完整的。</p>
+  <div class="flowline">
+    <div class="fnode"><b>1960-70年代</b><span>AI技術本身其實一直在發展，
+      只是受限於演算法、系統工程跟硬體，一直難以突破</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>2017年</b><span>Google八位科學家發表〈Attention Is All You Need〉
+      （arxiv.org/pdf/1706.03762），提出Transformer架構——老師在投影片第5頁玩了雙關：
+      「這個Transformer，不是這個Transformer，是這個Transformer」（配兩張變形金剛電影海報）</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>2022/11/30</b><span>OpenAI公開發行ChatGPT（全名「聊天生成預訓練轉換器」），
+      AI開始取代COVID-19成為大眾最熱門話題；同期台股加權指數「從一萬四千八百九十七點漲到四萬六千點，
+      兩倍之多」——逐字稿原話引用的數字</span></div>
+  </div>
+
+  <h2 style="margin-top:28px;font-size:17px">歷史系的生存危機，其實不是AI</h2>
+  <div class="example-box">
+    <div class="tag">逐字稿原話</div>
+    「歷史系，或者說人文學科，真正的生存危機從來都不是AI，其實關鍵的危機，我覺得是就業……
+    這個危機，在十九世紀末以來，或者說現在的歷史學出現以來，一直以來都被討論、都被這樣子問，
+    不是從現在才開始問的。」——老師舉自己大學修陳登武老師中國通史時就已經很擔憂就業，
+    不是現在才有的焦慮。
+  </div>
+  <div class="closing" style="grid-template-columns:repeat(3,1fr);margin-top:14px">
+    <div><b>判斷力</b><span>黃仁勳演講點名AI時代無法取代的三個能力之一</span></div>
+    <div><b>創造力</b><span>三個能力的第二個</span></div>
+    <div><b>敘事力</b><span>三個能力的第三個——老師接著反問：
+      「請問哪一個科系是同時培養這三個能力的科系？」答案就是歷史系</span></div>
+  </div>
+  <div class="protocol-box">
+    <b>老師自己講明是玩笑話：</b>在陽明交通大學演講時，跟盧正恆老師說「我覺得二十年後歷史系會超越醫學系，
+    變成全台灣第一高分的科系」——老師自己補一句「這是開玩笑啦，也許二十年後真的我們都看得到，也說不定」。
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">現場設置</span>
+  <h2>課前準備五件事，照實際操作順序整理</h2>
+  <p class="sec-lede">投影片第15頁列出的清單：下載範例資料／安裝Obsidian／註冊ChatGPT／
+    安裝ChatGPT桌面版／註冊Hugging Face。下面兩張是投影片裡直接給的連結，其餘三步是操作流程。</p>
+
+  <div class="cmdcard">
+    <div class="cmdcard-head"><b>0. 範例資料下載連結（投影片QR碼／縮短連結）</b>
+      <button class="copy-btn" data-copy="https://reurl.cc/bedGvd">複製連結</button></div>
+    <pre>https://reurl.cc/bedGvd</pre>
+  </div>
+  <p style="margin:8px 0 0;font-size:12.5px;color:var(--ink-3)">
+    點開後有五個資料夾：明天要用的CodeLab AI原理教學程式、老師自己寫的AI Agent skill程式框架、
+    兩天課程所有簡報、範例史料（含Markdown筆記檔案），以及安裝檔。現場也有助教發USB，
+    老師說「USB是最快的」。</p>
+
+  <div class="cmdcard">
+    <div class="cmdcard-head"><b>1. 下載 Obsidian</b>
+      <button class="copy-btn" data-copy="https://obsidian.md/">複製連結</button></div>
+    <pre>https://obsidian.md/</pre>
+  </div>
+  <div class="protocol-box">
+    <b>老師選Obsidian的三個理由（逐字稿原話整理）：</b>它免費、不用錢；它用Markdown格式儲存，
+    是純文字檔，跟現在AI的腳本大多也用Markdown寫剛好接得上；最關鍵的是「你的筆記不是存在服務商的雲端，
+    而是存在自己的電腦裡面……它只是一個閱讀的工具而已」——資料留在本地端，不會因此外洩。
+  </div>
+
+  <div class="stepline" style="margin-top:20px">
+    <div class="step hit"><b>2. 建立筆記儲存庫，選好存放位置</b>
+      <p>取一個名字（老師舉例：會議名稱、或「張哲維的筆記」都可以），按「瀏覽」選位置——
+        可以放桌面、放USB隨身碟（筆記跟著硬碟走，比較不容易不見），或放Google雲端硬碟。
+        老師順口提了一句：「所有的資料備份要3-2-1，就是必須要有三份備份、兩種介質，這很重要喔」。
+        Google雲端硬碟路徑設定因為時間有限，老師直接說「大家回去自己看PPT」，現場沒有展開。</p></div>
+    <div class="step"><b>3. 註冊 Hugging Face</b>
+      <p>投影片標題直接寫「開源模型託管網站」——老師形容它是「模型界的Github、提供雲端算力」，
+        免費算力雖然不多，但教學使用沒問題。<b>註冊完一定要回到信箱按「開通」</b>，
+        老師特別提醒「我們通常教學的時候，有時候遇到問題就是因為沒有按開通」。
+        老師也順口提了一個時事：「前幾天9月3號的時候，NVIDIA宣布以130億美元收購Hugging Face這個平台，
+        並且承諾維持開放」——這是老師課堂上講的內容，供參考。</p></div>
+    <div class="step"><b>4. 安裝 ChatGPT 桌面版</b>
+      <p>從ChatGPT網頁版右上角「工作」選單裡的「開啟桌面應用程式」進入下載，
+        依系統（Windows／Mac）自動抓對應版本。</p></div>
+    <div class="step hit"><b>5. 把 Obsidian 筆記資料夾接進 ChatGPT「專案」</b>
+      <p>滑鼠移到「專案」旁邊會出現一個小加號，點下去建立專案、選「加資料夾」，
+        指向剛剛用Obsidian建立的那個筆記庫資料夾——「這樣的話，你在Obsidian裡面做的所有東西，
+        都有辦法在AI裡面讀到，然後幫你進一步處理」。這是第一場最後、也是整個安裝流程真正收尾的一步。</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">範例教材</span>
+  <h2>兩天課程共用的五份真實檔案</h2>
+  <p class="sec-lede">老師在下載範例資料的等待時間裡，口頭逐一介紹了這五份實際會用到的材料——
+    不是示範用的假資料，其中兩份接下來兩天都會反覆練習。</p>
+  <div class="format-grid">
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">1954年台灣醫師名鑑</p>
+          <p class="doc-meta">學生逐筆手key的民間資料 · 每則筆記＝一位醫師</p></div>
+        <span class="yaml-badge">人物資料</span>
+      </div>
+      <p class="doc-note">老師以前開的數位相關課程，帶學生一個字一個字打出來的。
+        老師口頭給的筆數前後不完全一致——先說「大概一千三四百位台灣醫師」，
+        後來又說「我記得有一兩千筆」，兩個數字都是他自己講的，這裡照實保留，不代為統一。</p>
+    </div>
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">德國外交部台灣外交檔案</p>
+          <p class="doc-meta">老師在德國找到的一手檔案</p></div>
+        <span class="yaml-badge">外交檔案</span>
+      </div>
+      <p class="doc-note">德國外交部所儲存、關於台灣的外交檔案。</p>
+    </div>
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">法肯豪森將軍手稿檔案</p>
+          <p class="doc-meta">蔣介石的德國軍事顧問 · 近代史／民國史重要人物</p></div>
+        <span class="yaml-badge">手稿</span>
+      </div>
+      <p class="doc-note">老師點名提到「楊老師，就是楊偉珍老師應該知道法肯豪森檔案」——
+        現場對台下某位老師的直接點名，保留這個互動細節。</p>
+    </div>
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">《水經注》／《洛陽伽藍記》</p>
+          <p class="doc-meta">老師自己先整理好的兩份古籍文本</p></div>
+        <span class="yaml-badge">古籍文本</span>
+      </div>
+      <p class="doc-note">選《洛陽伽藍記》是因為老師以前上過相關課程，
+        「我們今天這兩天會一直出現《洛陽伽藍記》的資料，然後我會帶大家透過這個文本資料去訓練」——
+        這兩份是往後兩天反覆練習用的主要文本，不是只出現一次的範例。</p>
+    </div>
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">老師自己的論文</p>
+          <p class="doc-meta">用來示範Obsidian讀論文的工作流程</p></div>
+        <span class="yaml-badge">論文</span>
+      </div>
+      <p class="doc-note">老師的原話：「只是為了跟大家講說，以後如果透過Obsidian這樣的數位筆記去讀論文，
+        會比較方便」。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">01 — 歷史學何以成為科學</span>
+  <h2>從笛卡爾到新康德主義，四位哲學家一路推出來的四點邏輯</h2>
+  <p class="sec-lede">這是第一場份量最重的一段（投影片p59-68）——老師說自己「花了蠻多時間讀他們的原典去統合起來」，
+    是整場唯一一段接近純哲學史鋪陳的內容。</p>
+  <div class="flowline">
+    <div class="fnode"><b>笛卡爾</b><span>提出「科學萬能論」，偏向數理化的科學方法，
+      強調邏輯、統整、量化統計</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>維柯</b><span>義大利哲學家，提出除了數理化科學方法之外，
+      應該還有一種「詩性的邏輯」——不是萬事萬物都能純粹客觀地用數據解釋</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>康德</b><span>認為只有數學跟哲學才具有「絕對的科學性」，
+      其餘學科（物理、化學、生物……）都只是基於某種假設前提推演出來的「相對的科學性」</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>新康德主義四子</b><span>狄泰爾、文德爾班、李凱爾特、卡西勒，
+      以「回到康德」的口號，維護人文科學的獨特性</span></div>
+  </div>
+
+  <h2 style="margin-top:28px;font-size:17px">人文科學的研究邏輯，四點</h2>
+  <div class="principle">
+    <div class="prow"><span class="letter">A</span>
+      <p><b>研究對象的個別性。</b>老師舉的例子：如果按自然科學邏輯，要有一千個蔣介石，
+        統計分析之後跑出來的數據才叫「蔣介石」；但全世界只有一個蔣介石，
+        人文研究對象都是個別的，不可能重複出現。</p></div>
+    <div class="prow"><span class="letter">B</span>
+      <p><b>研究者的自身經驗。</b>我們必然透過自己的經驗跟文化脈絡去解釋過去。</p>
+      <div class="example-box">
+        <div class="tag">逐字稿舉例</div>
+        「我們對於『民主』這個概念的想法，台灣可能跟中國大陸就不太一樣……
+        我們看到中國大陸寫『民主』這兩個字，跟台灣人寫的雖然是同樣兩個字，它的核心概念一定不同。」
+      </div></div>
+    <div class="prow"><span class="letter">C</span>
+      <p><b>意義來自共鳴、來自連結。</b>老師舉自己的研究：因為做近代史，
+        看到跟自己研究時代相近的東西（例如「楊瑞珍老師的研究」）就更有連結、更有意義；
+        但這不代表沒連結就沒意義，只是對個人來講的意義不同——老師自己說對荷蘭時代台灣史接觸就比較少。</p></div>
+    <div class="prow"><span class="letter">D</span>
+      <p><b>主客合一的客觀精神。</b>人文研究追求的不是一個純粹客觀的東西，
+        而是主觀涉入之後的客觀見證——「人文科學本來就不是資料的堆砌，也不是模型的分析，
+        這跟AI的根本原理是有很大不同的」。</p></div>
+  </div>
+
+  <p style="margin:16px 0 0;font-size:13px;color:var(--ink-2)">
+    老師接著補了一段對後現代批判的看法，自己形容是「張飛打岳飛」——他認為後現代批判從來不是在批判
+    探究歷史事實的歷史學本身，而是批判自黑格爾哲學以來對單一主體性的霸權宰制；基於史料辯證為前提的歷史學，
+    本身就具有科學性，「如果基於史料辯證為前提的歷史學不被認為是科學的話，那麼從康德的視角來看，
+    從物理學以降的所有科學，都不具備科學性了」。</p>
+
+  <div class="protocol-box">
+    <b>傅斯年〈中央研究院歷史語言研究所工作之旨趣〉（1928年，投影片原文）：</b>
+    「史學只是史料學」「讓史料自己說話」，利用社會科學理論和方法來處理史料——
+    老師由此主張歷史學的科學性根本，落在史料的<b>可驗證性、可追溯性、可糾錯性</b>三點上
+    （投影片p68三詞原文）。
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">02 — 電腦與人</span>
+  <h2>電腦的本質，以及AI取代不了的三件事</h2>
+  <p class="sec-lede">投影片p74是一張人與電腦的對照表，老師直接照著唸過一遍，這是整場唯一一張現成表格。</p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>項目</th><th>人</th><th>電腦</th></tr></thead>
+      <tbody>
+        <tr><td>記憶量</td><td>小</td><td>趨近於無限</td></tr>
+        <tr><td>運算速度</td><td>慢</td><td>快</td></tr>
+        <tr><td>疲勞</td><td>會累</td><td>不會累</td></tr>
+        <tr><td>情緒</td><td>愛鬧脾氣</td><td>不會鬧脾氣</td></tr>
+        <tr><td>出錯</td><td>會出錯</td><td>不會出錯</td></tr>
+        <tr><td>思考</td><td>會思考 ✓</td><td>不會思考 ✗</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin:12px 0 0;font-size:13px;color:var(--ink-3)">
+    運算流程（投影片p71）：問題 → 拆解成複雜數學運算 → 拆解成簡單數學運算 → 二進位運算 →
+    交給邏輯單元運算，再反向推演出答案。老師的結語：「它展現出來的看似人一般的智慧，
+    其實都是用計算模擬出來的結果」「只要有辦法跟電腦溝通，電腦就是反過來，從邏輯單元的運算，
+    一步一步推演出去，最後給你答案」。
+  </p>
+  <div class="closing" style="grid-template-columns:repeat(3,1fr);margin-top:16px">
+    <div><b>靈感與創見</b><span>AI只會在自己的運算框架裡繞，突破只能由人給的新資料、新想法帶來</span></div>
+    <div><b>共鳴</b><span>寫作如何跟別人產生共情，這件事AI做不到</span></div>
+    <div><b>脈絡化理解</b><span>從個人自己出發去理解一個文本、再轉譯給當代的人，
+      這是電腦沒有辦法做的事</span></div>
+  </div>
+  <div class="protocol-box">
+    <b>老師的樂觀論點：</b>「AI反而是人文再興的一個可能」——過去要花十幾萬找工讀生寫網頁前端，
+    或投入大量時間精力做一款歷史遊戲，「現在不用了……只要把自己的想法描述出來，它就可以變成一款簡單的歷史遊戲」；
+    但老師也點出反面：資工的人拿到我們的東西變簡單了，「他們要理解我們，還是一樣困難」——
+    人文因此反而變得更重要，「但最重要的東西還是思考，就是思考」。
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">03 — 卡片盒筆記法源起</span>
+  <h2>從抽屜裡的卡片，到魯曼的三萬張卡片</h2>
+  <p class="sec-lede">這一段是老師個人經歷的敘事，不是理論鋪陳——從中研院近史所的一個老研究室講起。</p>
+  <div class="flowline">
+    <div class="fnode"><b>中研院近史所抽屜</b><span>老師還在當博士後時，整理一位已過世老研究員的研究室，
+      發現一個個小抽屜，裡面全是手寫卡片——讀到的資料先寫成卡片、編碼分類，
+      寫文章時再把卡片抽出來排列</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>余英時「史無定法」</b><span>《史學評論》發刊詞的說法——
+      老師反問：「寫筆記不就是所有方法一開始的開端嗎？」</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>魯曼 Zettelkasten</b><span>德國社會學家，1927-1998，
+      45、46歲才拿到博士學位，短短二三十年學術生涯寫了二十幾本社會學著作；
+      他的三萬多張卡片盒筆記現存於比勒費爾德大學，已是世界文化遺產</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>梅棹忠夫《智識的生產技術》</b><span>日本人類學家，1969年著作，
+      同樣主張把閱讀思考時的筆記寫在卡片上，是做筆記最根本的方法</span></div>
+  </div>
+  <p style="margin:14px 0 0;font-size:13px;color:var(--ink-2)">
+    老師補了一句魯曼的個人色彩：「當我們大部分人提起他，都會形容他的社會學理論，
+    卻忽略了他這個卡片盒筆記法」——他跟哈伯瑪斯的大辯論最有名，但老師真正想強調的是他的研究方法本身。
+  </p>
+  <div class="example-box">
+    <div class="tag">投影片p84原文 ＋ 老師提供的中譯</div>
+    …dass wir jetzt, besonders angesichts der Möglichkeiten, die der Computer bietet,
+    wieder mehr auf die Eigenleistungen des Schreibens zurückkommen müssen.<br>
+    <b>中譯：</b>我們現在，特別是考慮到未來電腦所提供的可能性，所以需要重新關注讓書寫成為自主運作的工作。
+    ——魯曼〈學習閱讀〉，1998年，過世之前發表，老師形容這是一段「預言式的描述」。
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">結語</span>
+  <h2>研究流程六步驟，最後都回到寫筆記</h2>
+  <p class="sec-lede">投影片p86把整套歷史研究流程拆解成六步，第四、六步是選配（老師特別註記「有時候不見得一定會有」）。</p>
+  <div class="stepline">
+    <div class="step hit"><b>1. 知識分類</b><p></p></div>
+    <div class="step hit"><b>2. 快速記錄自己的想法</b><p></p></div>
+    <div class="step hit"><b>3. 凝聚跟思考</b><p>這些內容到底是什麼</p></div>
+    <div class="step"><b>（4. 數位分析方法）</b><p>非必要——有些老師用近距離詮釋的方式也很平常</p></div>
+    <div class="step hit"><b>5. 書寫</b><p></p></div>
+    <div class="step"><b>（6. 知識共享）</b><p>非必要——投稿發表的過程</p></div>
+  </div>
+  <div class="closing" style="grid-template-columns:1fr">
+    <div><b>「這幾個步驟，無論哪個步驟，都還是會回到寫筆記上面，寫筆記上面。」</b>
+      <span>老師逐字稿原話，緊接在六步驟之後——這句話也呼應本場一開頭引的那句
+      「歷史學家的技藝，開端是筆記功夫」。</span></div>
+  </div>
+</section>
+
 </div>
 
 <div class="tabpanel" data-tab="s2" id="tab-s2">
