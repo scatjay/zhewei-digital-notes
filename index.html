@@ -1416,12 +1416,12 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
   var name = nameEl.value.trim();
   var comment = commentEl.value.trim();
   var section = sectionEl.value;
-  if (!name || !comment){
-    statusEl.textContent = '稱呼跟內容都要填喔（可以是回饋，也可以是提問）。';
+  if (!comment){
+    statusEl.textContent = '內容要填喔（可以是回饋，也可以是提問）。';
     statusEl.className = 'fb-status';
     return;
   }
-  try { localStorage.setItem('zhewei0918_nickname', name.slice(0,20)); } catch(e){}
+  if (name){ try { localStorage.setItem('zhewei0918_nickname', name.slice(0,20)); } catch(e){} }
   var btn = document.getElementById('fbSubmit');
   btn.disabled = true;
   statusEl.textContent = '送出中…';
