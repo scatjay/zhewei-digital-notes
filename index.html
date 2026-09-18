@@ -98,6 +98,16 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .tabbtn span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;font-family:var(--mono)}
 .tabbtn.active{background:var(--surface);color:var(--ink);font-weight:700;
   border-bottom:2px solid var(--surface);margin-bottom:-1px;position:relative;z-index:1}
+.tabbtn{border-top:3px solid var(--rule-strong)}
+.tabbtn[data-type="hands"]{border-top-color:var(--jade)}
+.tabbtn[data-type="lecture"]{border-top-color:var(--indigo)}
+.tabbtn[data-type="other"]{border-top-color:var(--ink-3)}
+.tab-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--ink-3)}
+.tab-legend span{display:inline-flex;align-items:center;gap:5px}
+.tab-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.tab-legend .i-hands{background:var(--jade)}
+.tab-legend .i-lecture{background:var(--indigo)}
+.tab-legend .i-other{background:var(--ink-3)}
 .tabpanel{border-top:1px solid var(--rule-strong);padding-top:8px}
 .stub-note{border:1px dashed var(--rule-strong);border-radius:6px;padding:16px 20px;
   background:var(--surface);margin-bottom:8px}
@@ -338,22 +348,27 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 <header>
   <p class="eyebrow">2026年國科會人文處歷史學門主管會議 · 09-18～09-19 國立清華大學</p>
   <h1>歷史學的智慧人文轉向：運用生成式AI優化歷史研究流程工作坊</h1>
-  <p class="lede">兩天的工作坊，每一場都是實機操作。這裡把張哲維老師（成大歷史系助理教授）
-    負責的幾場配套整理成可以隨時查閱的筆記，下面用分頁切換——手機、電腦都能開，
+  <p class="lede">兩天的工作坊，有實機操作也有演講／圓桌討論。這裡把每一場整理成可以隨時
+    查閱的筆記，下面用分頁切換（顏色分實機操作／演講／其他場次）——手機、電腦都能開，
     最下面可以留言回饋或提問。</p>
+  <div class="tab-legend">
+    <span><i class="i-hands"></i>實機操作</span>
+    <span><i class="i-lecture"></i>演講</span>
+    <span><i class="i-other"></i>開幕・圓桌・其他</span>
+  </div>
 
   <nav class="tabbar" id="tabbar" role="tablist">
-    <button class="tabbtn" data-tab="s1" role="tab">第一場<span>歷史研究的開端－寫筆記</span></button>
-    <button class="tabbtn active" data-tab="s2" role="tab">第二場<span>從數位筆記到數位思維</span></button>
-    <button class="tabbtn" data-tab="s4" role="tab">第四場<span>提示詞工程與生成式AI</span></button>
-    <button class="tabbtn" data-tab="s5" role="tab">第五場<span>打造AI史料對話機器人</span></button>
-    <button class="tabbtn" data-tab="s6" role="tab">第六場<span>AI優化研究工作流程</span></button>
-    <button class="tabbtn" data-tab="s8" role="tab">未來展望<span>哲維老師延伸材料</span></button>
-    <button class="tabbtn" data-tab="open" role="tab">開幕式<span>陳登武・李卓穎</span></button>
-    <button class="tabbtn" data-tab="ethics" role="tab">第三場<span>學術倫理・林文源</span></button>
-    <button class="tabbtn" data-tab="panel1" role="tab">圓桌一<span>Day1・林文源等</span></button>
-    <button class="tabbtn" data-tab="explore" role="tab">第七場<span>人社探索・王道維</span></button>
-    <button class="tabbtn" data-tab="panel2" role="tab">圓桌二<span>Day2・王道維等</span></button>
+    <button class="tabbtn" data-tab="s1" data-type="hands" role="tab">第一場<span>歷史研究的開端－寫筆記</span></button>
+    <button class="tabbtn active" data-tab="s2" data-type="hands" role="tab">第二場<span>從數位筆記到數位思維</span></button>
+    <button class="tabbtn" data-tab="s4" data-type="hands" role="tab">第四場<span>提示詞工程與生成式AI</span></button>
+    <button class="tabbtn" data-tab="s5" data-type="hands" role="tab">第五場<span>打造AI史料對話機器人</span></button>
+    <button class="tabbtn" data-tab="ethics" data-type="lecture" role="tab">第三場<span>學術倫理・林文源</span></button>
+    <button class="tabbtn" data-tab="s6" data-type="lecture" role="tab">第六場<span>AI優化研究工作流程</span></button>
+    <button class="tabbtn" data-tab="explore" data-type="lecture" role="tab">第七場<span>人社探索・王道維</span></button>
+    <button class="tabbtn" data-tab="open" data-type="other" role="tab">開幕式<span>陳登武・李卓穎</span></button>
+    <button class="tabbtn" data-tab="panel1" data-type="other" role="tab">圓桌一<span>Day1・林文源等</span></button>
+    <button class="tabbtn" data-tab="panel2" data-type="other" role="tab">圓桌二<span>Day2・王道維等</span></button>
+    <button class="tabbtn" data-tab="s8" data-type="other" role="tab">未來展望<span>哲維老師延伸材料</span></button>
   </nav>
 </header>
 
