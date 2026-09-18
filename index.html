@@ -197,11 +197,13 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   border-radius:6px;background:var(--sunk)}
 @media(max-width:820px){.pdf-transcript-grid{grid-template-columns:1fr !important}}
 
-/* PDF.js 單頁瀏覽器 — 跟右邊逐字稿共用同一個高度變數，兩邊視覺對齊 */
-:root{--pt-pair-height:52vh; --pt-pair-min:380px}
+/* PDF.js 單頁瀏覽器 — 畫布用投影片實際比例(16:9)算高度，不再用固定vh留白；
+   右邊逐字稿的高度由JS量測畫布實際高度後回填同一個變數，兩邊視覺對齊 */
+:root{--pt-pair-height:52vh; --pt-pair-min:160px}
 .pdfjs-viewer{border:1px solid var(--rule);border-radius:6px;background:var(--sunk);
   overflow:hidden;display:flex;flex-direction:column}
-.pdfjs-canvas-wrap{height:var(--pt-pair-height);min-height:var(--pt-pair-min);overflow:hidden;
+.pdfjs-canvas-wrap{aspect-ratio:16/9;height:auto;max-height:var(--pt-pair-height);
+  min-height:var(--pt-pair-min);overflow:hidden;
   display:flex;align-items:center;justify-content:center;background:var(--sunk);padding:0}
 .pdfjs-canvas-wrap canvas{max-width:100%;max-height:100%;width:auto;height:auto;
   box-shadow:0 1px 4px rgba(0,0,0,.15);background:#fff}
@@ -1481,6 +1483,9 @@ function initPdfjsViewer(containerId){
         prevBtn.disabled = (n <= 1);
         nextBtn.disabled = (n >= state.pdf.numPages);
         state.rendering = false;
+        var pairGrid = box.closest('.pdf-transcript-grid');
+        var syncH = canvasWrap.getBoundingClientRect().height;
+        if (syncH > 0) (pairGrid || document.documentElement).style.setProperty('--pt-pair-height', syncH + 'px');
       });
     }).catch(function(e){
       canvasWrap.innerHTML = '<div class="pdfjs-status">第' + n + '頁載入失敗。</div>';
