@@ -98,7 +98,10 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .tabbtn span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;font-family:var(--mono)}
 .tabbtn.active{background:var(--surface);color:var(--ink);font-weight:700;
   border-bottom:2px solid var(--surface);margin-bottom:-1px;position:relative;z-index:1}
-.tabbtn .live{display:none;color:var(--seal);font-family:var(--mono);font-weight:700}
+.tabbtn .live{display:none;color:var(--seal);font-family:var(--mono);font-weight:700;
+  animation:livepulsetext 1.6s ease-in-out infinite}
+@keyframes livepulsetext{0%,100%{opacity:1}50%{opacity:.45}}
+@media(prefers-reduced-motion:reduce){.tabbtn .live{animation:none}}
 .tabbtn.is-live .live{display:inline}
 .tabbtn.is-live{box-shadow:0 0 0 2px var(--seal-bg) inset}
 .tabbtn{border-top:3px solid var(--rule-strong)}
@@ -117,8 +120,16 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .now-card.is-live{border:2px solid var(--seal);background:var(--seal-bg)}
 .now-card.is-soon{border:2px solid var(--indigo);background:var(--indigo-bg)}
 .now-badge{font-family:var(--mono);font-weight:700;font-size:13px;white-space:nowrap}
-.now-card.is-live .now-badge{color:var(--seal)}
+.now-card.is-live .now-badge{color:var(--seal);position:relative;padding-left:16px}
+.now-card.is-live .now-badge::before{content:"";position:absolute;left:0;top:50%;
+  width:9px;height:9px;margin-top:-4.5px;border-radius:50%;background:var(--seal);
+  animation:livepulse 1.6s ease-out infinite}
+@keyframes livepulse{
+  0%{box-shadow:0 0 0 0 rgba(168,52,43,.55)}
+  100%{box-shadow:0 0 0 9px rgba(168,52,43,0)}
+}
 .now-card.is-soon .now-badge{color:var(--indigo)}
+@media(prefers-reduced-motion:reduce){.now-card.is-live .now-badge::before{animation:none}}
 .now-body{flex:1 1 200px;min-width:0}
 .now-body b{font-family:var(--serif);font-size:15.5px;display:block}
 .now-body span{font-size:12px;color:var(--ink-2)}
@@ -178,6 +189,22 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .slidereader iframe{width:100%;height:70vh;min-height:420px;border:1px solid var(--rule);
   border-radius:6px;background:var(--sunk)}
 @media(max-width:820px){.pdf-transcript-grid{grid-template-columns:1fr !important}}
+
+/* PDF.js 單頁瀏覽器 */
+.pdfjs-viewer{border:1px solid var(--rule);border-radius:6px;background:var(--sunk);
+  overflow:hidden;display:flex;flex-direction:column}
+.pdfjs-canvas-wrap{height:56vh;min-height:360px;overflow:auto;display:flex;
+  align-items:flex-start;justify-content:center;background:var(--sunk);padding:8px}
+.pdfjs-canvas-wrap canvas{max-width:100%;height:auto;box-shadow:0 1px 4px rgba(0,0,0,.15);
+  background:#fff}
+.pdfjs-toolbar{display:flex;align-items:center;justify-content:center;gap:10px;
+  padding:8px 10px;background:var(--surface);border-top:1px solid var(--rule)}
+.pdfjs-btn{font-family:var(--sans);font-weight:600;font-size:13px;padding:7px 14px;
+  border-radius:6px;border:1px solid var(--rule-strong);background:var(--sunk);
+  color:var(--ink);cursor:pointer;min-height:36px}
+.pdfjs-btn:disabled{opacity:.4;cursor:default}
+.pdfjs-pagenum{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);white-space:nowrap}
+.pdfjs-status{padding:30px;text-align:center;color:var(--ink-3);font-size:13px}
 .slidereader .fallback{margin:10px 0 0;font-size:12.5px;color:var(--ink-3)}
 
 .qr-card{display:flex;gap:18px;align-items:center;margin-top:24px;padding:16px 20px;
@@ -442,8 +469,15 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     <div class="body">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px" class="pdf-transcript-grid">
         <div>
-          <iframe src="slides-session1.pdf" title="歷史研究的開端－寫筆記 投影片" loading="lazy" style="height:60vh;min-height:420px"></iframe>
-          <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p>
+          <div class="pdfjs-viewer" id="pdfjsS1" data-src="slides-session1.pdf">
+            <div class="pdfjs-canvas-wrap"><div class="pdfjs-status">投影片載入中…</div></div>
+            <div class="pdfjs-toolbar">
+              <button class="pdfjs-btn" data-act="prev">◀ 上一頁</button>
+              <span class="pdfjs-pagenum"><span data-cur>–</span> / <span data-total>–</span></span>
+              <button class="pdfjs-btn" data-act="next">下一頁 ▶</button>
+            </div>
+          </div>
+          <p class="fallback">載入不出來的話<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟原始PDF</a>。</p>
         </div>
         <div>
           <div class="transcript">
@@ -600,25 +634,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 <div class="ts-seg"><span class="ts-time">01:08:57</span><span class="ts-text">所創建的那個資料夾這樣子的話你在Obsidian裡面做的所有東西都有辦法在AI裡面去讀到然後幫你進一步的處理幫你進一步的處理大家可以試看看喔好你就選擇比如說我是以這個名稱為伴侶你可以選擇你選擇你剛剛所用的那個自己創建出來的一個桌面放在桌面的一個筆記的自己的筆記庫喔筆記庫</span></div>
 <div class="ts-seg"><span class="ts-time">01:09:28</span><span class="ts-text">然後按建立專案建立專案可以嗎那個助理幫忙一下那個Obsidian都會建立建立都不行剛剛是放在桌面上對那現在這邊就是一樣的</span></div>
           </div>
-          <p class="fallback">⚠️底色標記的兩段（00:34:32-00:36:32、00:41:04-00:41:34）是ASR低信心段落；
-            00:42:30附近「一位義大利哲學家」的人名被完全漏辨識（對照投影片應為維柯），沒有代填，
-            這裡誠實標出來——逐字稿是ASR＋術語校正，不是逐字聽打核實稿，重要引用請回聽原始錄音。</p>
         </div>
-      </div>
-      <div class="term-tbl">
-        <table>
-          <thead><tr><th>ASR原始辨識</th><th>校正為</th><th>出現次數</th><th>依據</th></tr></thead>
-          <tbody>
-            <tr><td class="wrong">第一卡／迪卡爾</td><td class="right">笛卡爾</td><td>3</td><td>投影片p60</td></tr>
-            <tr><td class="wrong">私性的邏輯</td><td class="right">詩性的邏輯</td><td>1</td><td>投影片p61（維柯）</td></tr>
-            <tr><td class="wrong">以太爾</td><td class="right">狄泰爾</td><td>1</td><td>投影片p63</td></tr>
-            <tr><td class="wrong">李泰爾特</td><td class="right">李凱爾特</td><td>1</td><td>投影片p63</td></tr>
-            <tr><td class="wrong">尼克勒斯魯曼</td><td class="right">尼克拉斯·魯曼</td><td>1</td><td>投影片p81</td></tr>
-            <tr><td class="wrong">ChurchGPT／CheerGPT／CureGPT</td><td class="right">ChatGPT</td><td>8</td><td>投影片p3</td></tr>
-            <tr><td class="wrong">深層次</td><td class="right">生成式（AI）</td><td>3</td><td>投影片多處</td></tr>
-            <tr><td class="wrong">黑戈爾／哈佛馬斯基</td><td class="right">黑格爾／哈伯瑪斯</td><td>3</td><td>學界標準譯名（非投影片直接文字）</td></tr>
-          </tbody>
-        </table>
       </div>
     </div>
   </details>
@@ -1098,6 +1114,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-auth-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 (function(){
   var PAGE_URL = 'https://scatjay.github.io/zhewei-digital-notes/';
@@ -1496,6 +1513,76 @@ initGoogleAuth();
     if (btn) btn.click();
   });
 })();
+
+/* ── PDF.js 單頁投影片瀏覽器 ──
+   換掉瀏覽器內建iframe(會捲動看整份/沒辦法程式控制跳頁)，改用pdf.js直接畫canvas，
+   一次只顯示一頁，並且開放 window.pdfjsGoToPage(viewerId, pageNum) 給之後逐字稿
+   點擊跳頁用。 */
+window.PDFJS_VIEWERS = {};
+function initPdfjsViewer(containerId){
+  var box = document.getElementById(containerId);
+  if (!box || box.dataset.inited) return;
+  box.dataset.inited = '1';
+  var src = box.getAttribute('data-src');
+  var canvasWrap = box.querySelector('.pdfjs-canvas-wrap');
+  var curEl = box.querySelector('[data-cur]');
+  var totalEl = box.querySelector('[data-total]');
+  var prevBtn = box.querySelector('[data-act="prev"]');
+  var nextBtn = box.querySelector('[data-act="next"]');
+
+  if (!window.pdfjsLib){
+    canvasWrap.innerHTML = '<div class="pdfjs-status">PDF元件載入失敗，請用下面的連結開原始檔。</div>';
+    return;
+  }
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+  var state = { pdf: null, page: 1, rendering: false };
+  window.PDFJS_VIEWERS[containerId] = state;
+
+  function renderPage(n){
+    if (!state.pdf || state.rendering) return;
+    state.rendering = true;
+    state.pdf.getPage(n).then(function(page){
+      var wrapWidth = canvasWrap.clientWidth - 16;
+      var baseViewport = page.getViewport({scale: 1});
+      var scale = Math.min(2.2, Math.max(0.5, wrapWidth / baseViewport.width));
+      var viewport = page.getViewport({scale: scale});
+      var canvas = document.createElement('canvas');
+      canvas.width = viewport.width; canvas.height = viewport.height;
+      var ctx = canvas.getContext('2d');
+      return page.render({canvasContext: ctx, viewport: viewport}).promise.then(function(){
+        canvasWrap.innerHTML = '';
+        canvasWrap.appendChild(canvas);
+        state.page = n;
+        curEl.textContent = n;
+        prevBtn.disabled = (n <= 1);
+        nextBtn.disabled = (n >= state.pdf.numPages);
+        state.rendering = false;
+      });
+    }).catch(function(e){
+      canvasWrap.innerHTML = '<div class="pdfjs-status">第' + n + '頁載入失敗。</div>';
+      state.rendering = false;
+    });
+  }
+
+  pdfjsLib.getDocument(src).promise.then(function(pdf){
+    state.pdf = pdf;
+    totalEl.textContent = pdf.numPages;
+    renderPage(1);
+  }).catch(function(){
+    canvasWrap.innerHTML = '<div class="pdfjs-status">投影片載入失敗，請用下面的連結開原始檔。</div>';
+  });
+
+  prevBtn.addEventListener('click', function(){ if (state.page > 1) renderPage(state.page - 1); });
+  nextBtn.addEventListener('click', function(){ if (state.pdf && state.page < state.pdf.numPages) renderPage(state.page + 1); });
+
+  box._goTo = renderPage;
+}
+window.pdfjsGoToPage = function(containerId, pageNum){
+  var box = document.getElementById(containerId);
+  if (box && box._goTo) box._goTo(pageNum);
+};
+document.querySelectorAll('.pdfjs-viewer').forEach(function(el){ initPdfjsViewer(el.id); });
 
 /* ── 分頁切換 ── */
 (function(){
