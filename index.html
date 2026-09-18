@@ -25,6 +25,8 @@
   --jade-bg:#DCE8E1;
   --indigo:#33456B;
   --indigo-bg:#DEE3EC;
+  --amber:#8C6A1F;
+  --amber-bg:#F1E6C6;
   --ok:#3D6B5C;
 
   --serif:"Noto Serif TC",'Songti TC',serif;
@@ -39,6 +41,7 @@
     --seal:#E2725C; --seal-bg:#3A2019;
     --jade:#6FB49B; --jade-bg:#17302A;
     --indigo:#8CA3D6; --indigo-bg:#1C2740;
+    --amber:#D9B25C; --amber-bg:#3A2E12;
     --ok:#6FB49B;
   }
 }
@@ -105,13 +108,13 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .tabbtn.is-live .live{display:inline}
 .tabbtn.is-live{box-shadow:0 0 0 2px var(--seal-bg) inset}
 .tabbtn{border-top:3px solid var(--rule-strong)}
-.tabbtn[data-type="hands"]{border-top-color:var(--jade)}
-.tabbtn[data-type="lecture"]{border-top-color:var(--indigo)}
+.tabbtn[data-type="hands"]{border-top-color:var(--amber);border-top-width:5px}
+.tabbtn[data-type="lecture"]{border-top-color:var(--indigo);border-top-width:5px}
 .tabbtn[data-type="other"]{border-top-color:var(--ink-3)}
 .tab-legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--ink-3)}
 .tab-legend span{display:inline-flex;align-items:center;gap:5px}
 .tab-legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
-.tab-legend .i-hands{background:var(--jade)}
+.tab-legend .i-hands{background:var(--amber)}
 .tab-legend .i-lecture{background:var(--indigo)}
 .tab-legend .i-other{background:var(--ink-3)}
 
@@ -458,7 +461,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 <div class="tabpanel" data-tab="s1" id="tab-s1" hidden>
   <div class="live-quote">
     <p>「歷史學家的技藝，開端是筆記功夫。」</p>
-    <cite>— 張哲維老師，第一場口頭講述（投影片上沒有這句，現場筆記）</cite>
+    <cite>— 張哲維老師，第一場口頭講述</cite>
   </div>
   <div class="stub-note">
     <b>第一場：歷史研究的開端－寫筆記</b>
