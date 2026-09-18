@@ -507,13 +507,32 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     <p>「記錄個人想法才是關鍵。」</p>
     <cite>— 張哲維老師，第二場口頭講述</cite>
   </div>
-  <details class="slidereader">
-    <summary><span>📑 展開原始投影片（151張，可直接在這裡翻閱）<span class="hint">14.4MB PDF</span></span>
+  <details class="slidereader" open>
+    <summary><span>📑 投影片 ＋ 逐字稿</span>
       <span class="chevron">▶</span></summary>
     <div class="body">
-      <iframe src="slides-session2.pdf" title="從數位筆記到數位思維 完整投影片" loading="lazy"></iframe>
-      <p class="fallback">手機瀏覽器可能不會直接顯示，會改成下載——那就直接開下載下來的檔案看。
-        也可以<a href="slides-session2.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px" class="pdf-transcript-grid">
+        <div>
+          <div class="pdfjs-viewer" id="pdfjsS2" data-src="slides-session2.pdf" data-transcript-map="PAGE_TRANSCRIPT_S2">
+            <div class="pdfjs-canvas-wrap"><div class="pdfjs-status">投影片載入中…</div></div>
+            <div class="pdfjs-toolbar">
+              <button class="pdfjs-btn pdfjs-jump" data-act="first" title="回到第一頁">⏮ 最前</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="back10" title="往前跳10頁">-10</button>
+              <button class="pdfjs-btn" data-act="prev">◀ 上一頁</button>
+              <span class="pdfjs-pagenum"><span data-cur>–</span> / <span data-total>–</span></span>
+              <button class="pdfjs-btn" data-act="next">下一頁 ▶</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="fwd10" title="往後跳10頁">+10</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="last" title="跳到最後一頁">最後 ⏭</button>
+            </div>
+          </div>
+          <p class="fallback">載入不出來的話<a href="slides-session2.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟原始PDF</a>。</p>
+        </div>
+        <div>
+          <div class="transcript page-transcript" id="pageTranscriptS2">
+            <p class="pt-placeholder">翻到有逐字稿的頁面時，這裡會自動顯示這一頁對應的內容。</p>
+          </div>
+        </div>
+      </div>
     </div>
   </details>
 
@@ -554,9 +573,9 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 
   <div class="cmdcard" id="recordingSlot">
     <div class="cmdcard-head"><b>📼 上課錄音 / 逐字稿</b>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">課後補上</span></div>
-    <pre style="color:var(--ink-3)">這堂課結束後會補上錄音檔連結與逐字稿（辨識處理中）——這個位置先保留，
-之後更新這頁時會直接把連結貼進這個框，不用重找。</pre>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">已整合</span></div>
+    <pre style="color:var(--ink-3)">逐字稿已經整合在上面「投影片＋逐字稿」框裡，翻到哪一頁右邊就顯示那一頁對應的內容，
+不用另外找連結。</pre>
   </div>
 
   <div class="cmdcard">
