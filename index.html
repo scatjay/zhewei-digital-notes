@@ -210,12 +210,13 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   display:flex;align-items:center;justify-content:center;background:var(--sunk);padding:0}
 .pdfjs-canvas-wrap canvas{max-width:100%;max-height:100%;width:auto;height:auto;
   box-shadow:0 1px 4px rgba(0,0,0,.15);background:#fff}
-.pdfjs-toolbar{display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:8px 10px;background:var(--surface);border-top:1px solid var(--rule)}
-.pdfjs-btn{font-family:var(--sans);font-weight:600;font-size:13px;padding:7px 14px;
+.pdfjs-toolbar{display:flex;align-items:center;justify-content:center;gap:6px;
+  flex-wrap:wrap;padding:8px 10px;background:var(--surface);border-top:1px solid var(--rule)}
+.pdfjs-btn{font-family:var(--sans);font-weight:600;font-size:13px;padding:7px 12px;
   border-radius:6px;border:1px solid var(--rule-strong);background:var(--sunk);
   color:var(--ink);cursor:pointer;min-height:36px}
 .pdfjs-btn:disabled{opacity:.4;cursor:default}
+.pdfjs-btn.pdfjs-jump{font-size:12px;padding:7px 9px;color:var(--ink-2)}
 .pdfjs-pagenum{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);white-space:nowrap}
 .pdfjs-status{padding:30px;text-align:center;color:var(--ink-3);font-size:13px}
 .slidereader .fallback{margin:10px 0 0;font-size:12.5px;color:var(--ink-3)}
@@ -476,9 +477,13 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
           <div class="pdfjs-viewer" id="pdfjsS1" data-src="slides-session1.pdf" data-transcript-map="PAGE_TRANSCRIPT_S1">
             <div class="pdfjs-canvas-wrap"><div class="pdfjs-status">投影片載入中…</div></div>
             <div class="pdfjs-toolbar">
+              <button class="pdfjs-btn pdfjs-jump" data-act="first" title="回到第一頁">⏮ 最前</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="back10" title="往前跳10頁">-10</button>
               <button class="pdfjs-btn" data-act="prev">◀ 上一頁</button>
               <span class="pdfjs-pagenum"><span data-cur>–</span> / <span data-total>–</span></span>
               <button class="pdfjs-btn" data-act="next">下一頁 ▶</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="fwd10" title="往後跳10頁">+10</button>
+              <button class="pdfjs-btn pdfjs-jump" data-act="last" title="跳到最後一頁">最後 ⏭</button>
             </div>
           </div>
           <p class="fallback">載入不出來的話<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟原始PDF</a>。</p>
@@ -1573,6 +1578,19 @@ function initPdfjsViewer(containerId){
 
   prevBtn.addEventListener('click', function(){ if (state.page > 1) renderPage(state.page - 1); });
   nextBtn.addEventListener('click', function(){ if (state.pdf && state.page < state.pdf.numPages) renderPage(state.page + 1); });
+
+  function goClamped(n){
+    if (!state.pdf) return;
+    renderPage(Math.max(1, Math.min(state.pdf.numPages, n)));
+  }
+  var firstBtn = box.querySelector('[data-act="first"]');
+  var lastBtn = box.querySelector('[data-act="last"]');
+  var back10Btn = box.querySelector('[data-act="back10"]');
+  var fwd10Btn = box.querySelector('[data-act="fwd10"]');
+  if (firstBtn) firstBtn.addEventListener('click', function(){ goClamped(1); });
+  if (lastBtn) lastBtn.addEventListener('click', function(){ if (state.pdf) goClamped(state.pdf.numPages); });
+  if (back10Btn) back10Btn.addEventListener('click', function(){ goClamped(state.page - 10); });
+  if (fwd10Btn) fwd10Btn.addEventListener('click', function(){ goClamped(state.page + 10); });
 
   box._goTo = renderPage;
 }
