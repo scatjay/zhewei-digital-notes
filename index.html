@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>從手稿到永久筆記 — 哲維老師配套學習單</title>
+<meta name="description" content="張哲維老師「從數位筆記到數位思維」配套學習單：卡片盒筆記法、Obsidian、手稿辨識到學術文章的完整流程，附現場設置指令與即時回饋。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
+<style>
+:root{color-scheme:light dark}
+:root{
+  --ground:#EDE6D3;
+  --surface:#F7F2E4;
+  --sunk:#E1D8BE;
+  --ink:#24211A;
+  --ink-2:#57503E;
+  --ink-3:#8A8066;
+  --rule:#D2C7A5;
+  --rule-strong:#B0A278;
+  --seal:#A8342B;
+  --seal-bg:#F0DAD3;
+  --jade:#3D6B5C;
+  --jade-bg:#DCE8E1;
+  --indigo:#33456B;
+  --indigo-bg:#DEE3EC;
+  --ok:#3D6B5C;
+
+  --serif:"Noto Serif TC",'Songti TC',serif;
+  --sans:"Noto Sans TC",'PingFang TC','Microsoft JhengHei',system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#1B1812; --surface:#242019; --sunk:#141110;
+    --ink:#EDE7D6; --ink-2:#BDB49A; --ink-3:#8A8066;
+    --rule:#3A3427; --rule-strong:#544C38;
+    --seal:#E2725C; --seal-bg:#3A2019;
+    --jade:#6FB49B; --jade-bg:#17302A;
+    --indigo:#8CA3D6; --indigo-bg:#1C2740;
+    --ok:#6FB49B;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px 100px}
+@media(max-width:640px){.wrap{padding:0 16px 72px}}
+a{color:var(--seal)}
+img{max-width:100%}
+
+header{padding:40px 0 32px;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--seal);margin:0 0 16px}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
+  line-height:1.25;margin:0 0 14px;text-wrap:balance}
+.lede{font-family:var(--serif);font-size:clamp(15px,3vw,17.5px);color:var(--ink-2);
+  max-width:60ch;margin:0;line-height:1.65}
+.session-tag{display:inline-flex;gap:8px;align-items:center;margin-top:20px;
+  font-family:var(--mono);font-size:12px;color:var(--ink-3);padding:8px 14px;
+  border:1px solid var(--rule-strong);border-radius:20px;background:var(--surface)}
+.session-tag b{color:var(--indigo);font-weight:600}
+
+.qr-card{display:flex;gap:18px;align-items:center;margin-top:24px;padding:16px 20px;
+  border:1px solid var(--rule-strong);border-radius:8px;background:var(--surface);flex-wrap:wrap}
+.qr-card img{width:96px;height:96px;border-radius:6px;border:1px solid var(--rule)}
+.qr-card .txt b{font-family:var(--serif);font-size:15px;display:block;margin-bottom:4px}
+.qr-card .txt span{font-size:12.5px;color:var(--ink-2)}
+.qr-card .txt code{font-family:var(--mono);font-size:11.5px;background:var(--sunk);
+  padding:2px 6px;border-radius:4px;word-break:break-all}
+
+section{padding:34px 0;border-bottom:1px solid var(--rule)}
+section:last-of-type{border-bottom:none}
+.sec-eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 8px}
+h2{font-family:var(--serif);font-weight:700;font-size:clamp(19px,4vw,25px);
+  margin:0 0 10px;line-height:1.35;text-wrap:balance}
+.sec-lede{color:var(--ink-2);max-width:64ch;margin:0 0 22px;font-size:14.5px}
+
+.flowline{display:flex;flex-wrap:wrap;gap:0;margin:8px 0 0}
+.fnode{flex:1 1 150px;border:1px solid var(--rule-strong);background:var(--surface);
+  padding:16px 14px;text-align:center;position:relative}
+.fnode b{font-family:var(--serif);font-size:15px;display:block;margin-bottom:6px}
+.fnode span{font-size:12px;color:var(--ink-2);line-height:1.5}
+.farrow{display:flex;align-items:center;justify-content:center;padding:0 4px;
+  color:var(--ink-3);font-size:18px;flex:0 0 auto}
+@media(max-width:700px){.flowline{flex-direction:column}.farrow{transform:rotate(90deg);padding:4px 0}}
+
+.principle{display:flex;flex-direction:column;gap:0;border:1px solid var(--rule-strong);
+  background:var(--surface);border-radius:6px;overflow:hidden;margin-top:8px}
+.prow{padding:16px 20px;display:grid;grid-template-columns:32px 1fr;gap:14px;
+  border-bottom:1px solid var(--rule)}
+.prow:last-child{border-bottom:none}
+.prow .letter{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--seal)}
+.prow p{margin:0;font-size:13.5px;color:var(--ink-2);line-height:1.65}
+.prow b{color:var(--ink)}
+
+.example-box{border:1px solid var(--rule-strong);background:var(--sunk);border-radius:6px;
+  padding:16px 18px;margin-top:14px;font-family:var(--mono);font-size:12.5px;color:var(--ink-2)}
+.prow .example-box{grid-column:2}
+@media(max-width:480px){.prow .example-box{grid-column:1/-1}}
+.example-box .tag{font-family:var(--sans);font-size:11px;color:var(--ink-3);margin-bottom:8px;
+  text-transform:uppercase;letter-spacing:.05em}
+.example-box .num{color:var(--indigo);font-weight:600}
+
+.doc-card{border:1px solid var(--rule-strong);background:var(--surface);
+  border-radius:6px;padding:22px 24px;position:relative;overflow:hidden;margin-top:8px}
+.doc-card::before{content:"";position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--seal),var(--jade),var(--indigo))}
+.doc-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+  flex-wrap:wrap;margin-bottom:14px;padding-bottom:14px;border-bottom:1px dashed var(--rule-strong)}
+.doc-title{font-family:var(--serif);font-weight:700;font-size:16.5px;margin:0 0 4px}
+.doc-meta{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+.yaml-badge{font-family:var(--mono);font-size:10.5px;padding:3px 9px;border-radius:12px;
+  background:var(--jade-bg);color:var(--jade);font-weight:600;white-space:nowrap}
+.doc-card pre{margin:0;font-family:var(--mono);font-size:12px;line-height:1.75;color:var(--ink);
+  background:var(--sunk);padding:14px 16px;border-radius:4px;overflow-x:auto}
+.doc-card pre .k{color:var(--indigo)}
+.doc-card pre .v{color:var(--jade)}
+.doc-note{margin:12px 0 0;font-size:12.5px;color:var(--ink-2)}
+
+.format-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+@media(max-width:720px){.format-grid{grid-template-columns:1fr}}
+
+.gap{display:flex;flex-direction:column;gap:10px;border:1px solid var(--rule-strong);
+  border-radius:4px;padding:20px;background:var(--surface);margin-top:14px}
+.gap .row{display:grid;grid-template-columns:150px 1fr auto;gap:12px;align-items:center}
+@media(max-width:600px){.gap .row{grid-template-columns:96px 1fr auto;font-size:12.5px}}
+.gap .k{font-size:13.5px;color:var(--ink-2)}
+.gap .track{height:14px;background:var(--sunk);border-radius:3px;overflow:hidden}
+.gap .fill{height:100%;border-radius:3px}
+.gap .v{font-family:var(--mono);font-size:12px;color:var(--ink-3);white-space:nowrap}
+
+.tblwrap{overflow-x:auto;border:1px solid var(--rule-strong);background:var(--surface);
+  border-radius:6px;margin-top:14px}
+table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:520px}
+th,td{text-align:left;padding:9px 14px;border-bottom:1px solid var(--rule)}
+thead th{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-3);background:var(--sunk)}
+tbody tr:last-child td{border-bottom:none}
+td.num{font-family:var(--mono);text-align:right}
+
+.mapping{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;
+  margin-top:14px}
+@media(max-width:600px){.mapping{grid-template-columns:1fr}}
+.map-l,.map-r{border:1px solid var(--rule-strong);background:var(--surface);border-radius:6px;
+  padding:12px 14px;font-size:13px}
+.map-l b,.map-r b{display:block;font-family:var(--serif);font-size:14px;margin-bottom:3px}
+.map-l span,.map-r span{color:var(--ink-2);font-size:12px}
+.map-arrow{text-align:center;color:var(--seal);font-size:16px}
+@media(max-width:600px){.map-arrow{transform:rotate(90deg)}}
+
+.stepline{display:flex;flex-direction:column;gap:0;border-left:2px solid var(--rule-strong);
+  padding-left:22px;margin:18px 0}
+.step{position:relative;padding-bottom:20px}
+.step:last-child{padding-bottom:0}
+.step::before{content:"";position:absolute;left:-28px;top:4px;width:9px;height:9px;
+  border-radius:50%;background:var(--rule-strong)}
+.step.hit::before{background:var(--seal)}
+.step b{font-family:var(--serif);font-size:14.5px}
+.step p{margin:4px 0 0;font-size:13px;color:var(--ink-2)}
+
+.protocol-box{border-left:3px solid var(--seal);padding:14px 18px;background:var(--surface);
+  border:1px solid var(--rule-strong);border-left:3px solid var(--seal);font-size:13.5px;
+  color:var(--ink-2);margin-top:14px}
+.protocol-box b{color:var(--ink)}
+
+.closing{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+@media(max-width:600px){.closing{grid-template-columns:1fr}}
+.closing div{border:1px solid var(--rule-strong);background:var(--surface);border-radius:6px;
+  padding:18px 20px}
+.closing div b{font-family:var(--serif);font-size:15.5px;color:var(--seal);display:block;
+  margin-bottom:4px}
+.closing div span{font-size:12.5px;color:var(--ink-2)}
+
+/* 複製指令區塊 */
+.cmdcard{border:1px solid var(--rule-strong);background:var(--surface);border-radius:6px;
+  overflow:hidden;margin-top:16px}
+.cmdcard-head{padding:10px 16px;font-size:13px;color:var(--ink-2);
+  border-bottom:1px solid var(--rule);display:flex;justify-content:space-between;
+  align-items:center;gap:10px;flex-wrap:wrap}
+.cmdcard-head b{font-family:var(--serif);font-size:14.5px;color:var(--ink)}
+.copy-btn{font-family:var(--mono);font-size:11.5px;padding:6px 14px;border-radius:16px;
+  border:1px solid var(--rule-strong);background:var(--sunk);color:var(--ink-2);cursor:pointer;
+  white-space:nowrap;min-height:32px}
+.copy-btn:active{background:var(--jade-bg);color:var(--jade);border-color:var(--jade)}
+.copy-btn.copied{background:var(--jade-bg);color:var(--jade);border-color:var(--jade)}
+.cmdcard pre{margin:0;padding:14px 16px;font-family:var(--mono);font-size:12.5px;
+  line-height:1.7;color:var(--ink);background:var(--sunk);overflow-x:auto;white-space:pre-wrap;
+  word-break:break-all}
+
+/* 回饋區塊 */
+.fb-form{display:flex;flex-direction:column;gap:12px;margin-top:8px;max-width:520px}
+.fb-form label{font-size:12.5px;color:var(--ink-3);font-family:var(--mono);
+  text-transform:uppercase;letter-spacing:.04em}
+.fb-form input,.fb-form textarea{font-family:var(--sans);font-size:14.5px;padding:10px 12px;
+  border:1px solid var(--rule-strong);border-radius:6px;background:var(--surface);color:var(--ink);
+  width:100%}
+.fb-form textarea{min-height:90px;resize:vertical}
+.fb-submit{font-family:var(--sans);font-weight:600;font-size:14px;padding:11px 20px;
+  border-radius:6px;border:none;background:var(--seal);color:#fff;cursor:pointer;
+  min-height:44px;align-self:flex-start}
+.fb-submit:disabled{opacity:.5;cursor:default}
+.fb-status{font-size:12.5px;color:var(--ink-3);min-height:18px}
+.fb-status.ok{color:var(--ok)}
+.fb-list{margin-top:22px;display:flex;flex-direction:column;gap:10px}
+.fb-item{border:1px solid var(--rule);background:var(--surface);border-radius:6px;
+  padding:12px 16px}
+.fb-item .who{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+  display:flex;justify-content:space-between;gap:10px}
+.fb-item .txt{margin-top:6px;font-size:13.5px;color:var(--ink);white-space:pre-wrap}
+.fb-empty{font-size:13px;color:var(--ink-3);font-style:italic}
+
+footer{padding:36px 0 0;font-size:12.5px;color:var(--ink-3)}
+footer p{max-width:70ch;margin:0 0 8px}
+footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;border-radius:3px}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">從數位筆記到數位思維 · 張哲維老師第二場配套學習單</p>
+  <h1>從手稿到永久筆記：卡片盒筆記法在史學研究上的落地</h1>
+  <p class="lede">這頁是哲維老師151張投影片的濃縮整理，順序跟著他的教學走：
+    Obsidian的基礎操作 → 手稿如何變成一則有結構的筆記 → 卡片盒筆記法四層
+    → 從筆記提煉出表格/資料庫 → 從永久筆記寫成一篇學術文章。範例全部用他
+    親自準備的教材（1954年台灣醫師名鑑、水經注）。手機、電腦都能開，最下面可以留言回饋。</p>
+  <div class="session-tag">📍 <b>13:30-15:00 第二場</b>「從數位筆記到數位思維」（張哲維老師，成大歷史系）</div>
+
+  <div class="qr-card">
+    <img id="qrImg" alt="掃描開啟本頁" width="96" height="96">
+    <div class="txt">
+      <b>手機掃這裡直接開</b>
+      <span>或直接輸入網址：<code>scatjay.github.io/zhewei-digital-notes/</code></span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <span class="sec-eyebrow">起點</span>
+  <h2>符合人文科學研究邏輯的數位筆記軟體特性</h2>
+  <p class="sec-lede">哲維老師開場點名 Obsidian 這套工具真正對研究有用的三個特性——
+    不是介面好看，是這三件事剛好對應史學研究本來就在做的事。</p>
+  <div class="flowline">
+    <div class="fnode"><b>雙向鏈結</b><span>寫下一則筆記時同時看得到「誰引用了它」，
+      不用自己記得</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>Markdown 語法</b><span>純文字就能表達結構（標題/清單/連結），
+      幾十年後任何軟體都讀得懂</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>跨文檔搜尋比較</b><span>史料解讀散落在幾百則筆記裡，
+      靠搜尋而不是靠記憶找回關聯</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">現場設置</span>
+  <h2>照著做，五分鐘內能開始記筆記</h2>
+  <p class="sec-lede">下面每個指令右上角都有複製按鈕，手機上長按貼上就好，不用自己打字。</p>
+
+  <div class="cmdcard">
+    <div class="cmdcard-head"><b>1. 下載 Obsidian</b>
+      <button class="copy-btn" data-copy="https://obsidian.md/download">複製連結</button></div>
+    <pre>https://obsidian.md/download</pre>
+  </div>
+
+  <div class="cmdcard">
+    <div class="cmdcard-head"><b>2. 新增筆記時，第一行貼這個開啟YAML區</b>
+      <button class="copy-btn" data-copy="---
+籍貫: &quot;&quot;
+出生年:
+出處: &quot;&quot;
+建檔人: &quot;&quot;
+---">複製範本</button></div>
+    <pre>---
+籍貫: ""
+出生年:
+出處: ""
+建檔人: ""
+---</pre>
+  </div>
+
+  <div class="cmdcard">
+    <div class="cmdcard-head"><b>3. Windows PowerShell：把整份範例資料抓到本機（唯讀，複製一份）</b>
+      <button class="copy-btn" data-copy="git clone https://github.com/scatjay/zhewei-digital-notes.git">複製指令</button></div>
+    <pre>git clone https://github.com/scatjay/zhewei-digital-notes.git</pre>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">01 — 從手稿到一則筆記</span>
+  <h2>史料進到 Obsidian 的實際流程</h2>
+  <p class="sec-lede">投影片第58-88頁示範的實際操作順序——這不是抽象講法，
+    是他真的一步步點給大家看的動作。</p>
+  <div class="stepline">
+    <div class="step hit"><b>1. 新增「手稿解讀」資料匣，把手稿資料匣拖拉進去</b>
+      <p>先建立容器，再把原始材料放進來——資料夾結構本身就是第一層分類。</p></div>
+    <div class="step"><b>2. 在資料匣中新增新筆記，為筆記命名</b>
+      <p>一則筆記對應一份史料（或史料的一個段落），命名要能讓自己半年後還認得。</p></div>
+    <div class="step hit"><b>3. 筆記第一行寫 <code style="font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px">---</code>，開啟YAML區</b>
+      <p>這是「正文前頁」，專門用來賦予這則筆記元資料（Metadata）——
+        人事時地物、出處、建檔人都寫在這裡，不混進正文。</p></div>
+    <div class="step"><b>4. YAML區裡也能用 <code style="font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px">[[ ]]</code> 連結其他筆記，再賦予同義字</b>
+      <p>同一個人事物在不同史料裡可能有不同寫法，同義字讓搜尋/鏈結不會斷掉。</p></div>
+    <div class="step hit"><b>5. 用 Transkribus 或直接用 ChatGPT 做手稿辨識</b>
+      <p>Transkribus 底層是卷積神經網絡（CNN），專門辨識手寫古文書；
+        ChatGPT 則是直接把手稿影像丟進去問。兩條路都示範過。</p></div>
+    <div class="step"><b>6. 「請根據你的判斷修改成正確的文章」——人工校對AI辨識結果</b>
+      <p>AI辨識不是終點，最後一定要人核對過——這句話是投影片原句，
+        是這整套流程裡唯一「不能交給AI」的一步。</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">02 — 真實範例：兩種YAML元資料</span>
+  <h2>同樣是「正文前頁YAML區」，用途不同、欄位設計就不同</h2>
+  <p class="sec-lede">哲維老師課程成果〈1954年台灣醫師名鑑〉是學生逐筆手key的真實筆記，
+    水經注則是他整理古籍用的另一套欄位——兩份都是他教材裡真正的檔案，不是示範用假資料。</p>
+  <div class="format-grid">
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">吳新榮.md</p>
+          <p class="doc-meta">1954年台灣醫師名鑑課程成果 · 建檔人：112-2第七組 林毓馨</p></div>
+        <span class="yaml-badge">傳記／表格型</span>
+      </div>
+      <pre><span class="k">籍貫</span>: <span class="v">"臺灣省"</span>
+<span class="k">性別</span>: <span class="v">"男"</span>
+<span class="k">出生年</span>: <span class="v">1907</span>
+<span class="k">出生地</span>: <span class="v">"臺南縣"</span>
+<span class="k">畢業學校</span>: <span class="v">"東京醫學專門學校"</span>
+<span class="k">經歷</span>: <span class="v">"臺南縣參議員 臺灣省醫師公會理事"</span>
+<span class="k">經度</span>: <span class="v">"120.17648462142948"</span>
+<span class="k">緯度</span>: <span class="v">"23.16059326236851"</span>
+<span class="k">出處</span>: <span class="v">"1954年臺灣醫師名鑑，241"</span></pre>
+      <p class="doc-note">每個欄位都是固定的「屬性」——經緯度甚至能直接餵進GIS地圖，
+        這種YAML之後最容易整批轉成表格/資料庫。</p>
+    </div>
+    <div class="doc-card">
+      <div class="doc-head">
+        <div><p class="doc-title">水經注.md</p>
+          <p class="doc-meta">酈道元，西元515-524年間 · 哲維老師整理</p></div>
+        <span class="yaml-badge">古籍／文獻型</span>
+      </div>
+      <pre><span class="k">作者</span>: <span class="v">"[[酈道元]]"</span>
+<span class="k">出版年</span>: <span class="v">"[[西元515年至524年間]]"</span>
+<span class="k">整理底本</span>: <span class="v">"維基文庫水經注繁體版"</span>
+<span class="k">校核參考</span>: <span class="v">"中國哲學書電子化計劃；</span>
+<span class="v">  Kanripo KR2k0058水經注"</span>
+<span class="k">標注方式</span>: <span class="v">"一級標題標示原序與卷次"</span></pre>
+      <p class="doc-note">注意「作者」「出版年」欄位本身就用<code style="font-family:var(--mono);font-size:11px">[[ ]]</code>
+        雙向鏈結——連元資料欄位裡都能鏈結，這是表格型YAML做不到的彈性。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">03 — 從筆記到數據</span>
+  <h2>歸納、分類、表格——這是投影片裡他自己出的範例</h2>
+  <p class="sec-lede">「歸納」是對事物性質分析後歸類；「分類」是照歸納結果整理成行與列——
+    任兩種以上的事物只要有相同「屬性」，就能組成一張表格。</p>
+  <div class="tblwrap">
+    <table>
+      <thead><tr><th>物種</th><th>出生年</th><th>死亡年</th><th>出生地</th>
+        <th class="num">經度</th><th class="num">緯度</th></tr></thead>
+      <tbody>
+        <tr><td>達爾文（人類）</td><td>1809</td><td>1882</td><td>Shrewsbury</td>
+          <td class="num">-2.75037</td><td class="num">52.71023</td></tr>
+        <tr><td>猴子A（靈長類）</td><td>1825</td><td>1860</td><td>非洲西部</td>
+          <td class="num">12.07543</td><td class="num">4.68322</td></tr>
+        <tr><td>哈麗（陸龜／爬蟲類）</td><td>1830</td><td>2006</td><td>加拉巴哥</td>
+          <td class="num">-90.35679</td><td class="num">-0.63375</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin:12px 0 0;font-size:13px;color:var(--ink-3)">
+    這張表跟上面吳新榮的YAML結構其實是同一件事——把「出生年/出生地/經緯度」這類
+    共同屬性抽出來，1954年台灣醫師名鑑那批筆記整批轉成表格，就會長這樣。</p>
+  <div class="gap">
+    <div class="row"><div class="k">CSV</div>
+      <div class="track"><div class="fill" style="width:60%;background:var(--jade)"></div></div>
+      <div class="v">逗號分隔值，Excel/試算表直接打開</div></div>
+    <div class="row"><div class="k">SQL資料庫</div>
+      <div class="track"><div class="fill" style="width:80%;background:var(--indigo)"></div></div>
+      <div class="v">資料整理→資料庫管理系統，條件查詢不用翻頁</div></div>
+    <div class="row"><div class="k">GIS/Gephi/文本探勘</div>
+      <div class="track"><div class="fill" style="width:45%;background:var(--seal)"></div></div>
+      <div class="v">表格有經緯度就能上地圖，有人物關係就能畫社會網絡</div></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">04 — 卡片盒筆記法（盧曼 Zettelkasten）</span>
+  <h2>四層筆記，從靈感到一篇完整文章</h2>
+  <p class="sec-lede">這是整場投影片份量最重的一段（p108-146）——把史料解讀的想法，
+    一步步沉澱成能寫進論文的完整論證。</p>
+  <div class="flowline">
+    <div class="fnode"><b>每日筆記</b><span>每日靈感紀錄，最原始、最零碎</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>文獻筆記</b><span>史料解讀／文書筆記／元資料，
+      讀一手或二手材料時的想法</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>永久筆記</b><span>凝聚出的具體想法，
+      用自己的話寫、不是抄</span></div>
+    <div class="farrow">→</div>
+    <div class="fnode"><b>專案筆記</b><span>寫文章前的內容安排，
+      定期審視永久筆記後確定題目</span></div>
+  </div>
+
+  <h2 style="margin-top:32px;font-size:17px">寫「永久筆記」的三個原則</h2>
+  <div class="principle">
+    <div class="prow"><span class="letter">A</span>
+      <p><b>用自己的話寫，不要抄。</b>每一則永久筆記都以最精簡的方式寫到最完整的短文。
+        如有引用，用雙向鏈結跟文獻筆記連在一起，不是複製貼上。</p></div>
+    <div class="prow"><span class="letter">B</span>
+      <p><b>思考與其他永久筆記的關聯性，用編號體系記下脈絡</b>——這是樹枝狀的體系，
+        不是流水帳。</p>
+      <div class="example-box">
+        <div class="tag">投影片p133原例</div>
+        1. 我中午要吃什麼好呢？<br>
+        <span class="num">1.1</span> 我想吃炒麵　　<span class="num">1.1a</span> 炒麵要吃沙茶口味（1.1的延伸）<br>
+        <span class="num">1.2</span> 或者可以吃炒飯（1.1和1.2是平行關係，都在探討同一個上層主題）
+      </div></div>
+    <div class="prow"><span class="letter">C</span>
+      <p><b>每次寫卡片都要前後左右看一看</b>，就能知道之前思考的脈絡是什麼——
+        永久筆記不是孤立存在，寫的當下就在跟舊筆記對話。</p></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">05 — 從永久筆記到一篇學術文章</span>
+  <h2>學術文章的每個部件，都對應一種筆記</h2>
+  <p class="sec-lede">確定題目後進到「專案筆記」構思大綱——哲維老師把論文結構直接對應回
+    卡片盒筆記法的產物，這個對照表是投影片p139的核心。</p>
+  <div class="mapping">
+    <div class="map-l"><b>題目</b><span>= 專案筆記之名稱</span></div>
+    <div class="map-arrow">=</div>
+    <div class="map-r"><b>專案筆記</b><span>定期審視永久筆記後確定的研究主題</span></div>
+  </div>
+  <div class="mapping">
+    <div class="map-l"><b>關鍵字</b><span>= 核心論點＝貫穿全文的主軸</span></div>
+    <div class="map-arrow">=</div>
+    <div class="map-r"><b>永久筆記的編號主幹</b><span>樹枝狀體系裡最上層的「1.」那條線</span></div>
+  </div>
+  <div class="mapping">
+    <div class="map-l"><b>各章節內容</b><span>= 連結與之相關的筆記</span></div>
+    <div class="map-arrow">=</div>
+    <div class="map-r"><b>永久筆記的分支</b><span>1.1／1.2／1.1a 這些延伸主題各自展開</span></div>
+  </div>
+  <div class="mapping">
+    <div class="map-l"><b>引用文獻</b><span>= 文獻筆記</span></div>
+    <div class="map-arrow">=</div>
+    <div class="map-r"><b>史料解讀筆記</b><span>回頭核對出處，引用要有所本</span></div>
+  </div>
+  <div class="protocol-box">
+    <b>AI輔助生成的具體做法（投影片原話）：</b>綱要＝文章的推論過程（線性）、摘要＝關鍵字＋綱要，
+    整理好這些之後丟給ChatGPT／Gemini協助書寫——<b>建議先餵給它整份專案筆記，再逐章生成</b>，
+    生成結果貼回Obsidian，最後「引用要有所本→文獻or史料」「請參照一般論文格式」——
+    這兩句是投影片對AI輔助寫作僅有的兩條紅線。
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">結語</span>
+  <h2>投影片最後四句話</h2>
+  <div class="closing">
+    <div><b>研究對象的個別性</b><span>每一則史料、每一個歷史人物都是獨特的個案，
+      表格化不等於抹平個別性。</span></div>
+    <div><b>研究者的自身經驗</b><span>永久筆記「用自己的話寫」這條規則，
+      根源就在這裡——研究者的解讀本身是史料的一部分。</span></div>
+    <div><b>意義來自鏈結</b><span>雙向鏈結不是軟體功能而已，是整套方法論的核心比喻：
+      單一筆記沒有意義，意義從關聯裡浮現。</span></div>
+    <div><b>主客合一的客觀精神</b><span>AI能協助辨識、協助生成，但史料解讀跟脈絡判斷
+      仍然是研究者主體性的展現。</span></div>
+  </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">留言 / 回饋</span>
+  <h2>給哲維老師（或彼此）留一句話</h2>
+  <p class="sec-lede">寫上名字跟一句回饋（例如哪個環節最有用、還想多講什麼），送出後大家都看得到。
+    不需要登入帳號，任何裝置都能填。</p>
+  <div class="fb-form">
+    <div>
+      <label for="fbName">姓名 / 稱呼</label>
+      <input id="fbName" type="text" maxlength="20" placeholder="例如：智傑">
+    </div>
+    <div>
+      <label for="fbComment">回饋內容</label>
+      <textarea id="fbComment" maxlength="500" placeholder="例如：手稿辨識那段示範很清楚，想多看幾個YAML欄位設計的案例"></textarea>
+    </div>
+    <button class="fb-submit" id="fbSubmit">送出回饋</button>
+    <div class="fb-status" id="fbStatus"></div>
+  </div>
+  <div class="fb-list" id="fbList">
+    <div class="fb-empty">讀取中…</div>
+  </div>
+</section>
+
+<footer>
+  <p><b style="color:var(--ink-2)">來源</b> 本頁全部內容整理自張哲維老師（國立成功大學
+    歷史學系助理教授）第二場投影片《從數位筆記到數位思維》（151張投影片，
+    2026年9月18日13:30-15:00，國立清華大學綜合二館8樓會議室），以及他提供的課程範例檔案
+    （1954年台灣醫師名鑑／水經注）。文字轉引自投影片原句處已盡量保留原文用詞。</p>
+  <p><b style="color:var(--ink-2)">用途</b> 這是聽課用的配套整理，不是投影片的替代品——
+    完整簡報請以哲維老師現場講解＋原始PDF為準。</p>
+  <p><b style="color:var(--ink-2)">回饋儲存</b> 留言存在獨立資料庫（<code>zhewei0918</code>命名空間，
+    30天內開放寫入），跟課程成績/個資系統完全無關，任何人都能讀取這裡看到的內容。</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  var PAGE_URL = 'https://scatjay.github.io/zhewei-digital-notes/';
+  var qr = document.getElementById('qrImg');
+  qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' + encodeURIComponent(PAGE_URL);
+
+  // 複製按鈕
+  document.querySelectorAll('.copy-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = btn.getAttribute('data-copy');
+      var done = function(){
+        var orig = btn.textContent;
+        btn.textContent = '已複製 ✓';
+        btn.classList.add('copied');
+        setTimeout(function(){ btn.textContent = orig; btn.classList.remove('copied'); }, 1600);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(function(){
+          fallbackCopy(text); done();
+        });
+      } else {
+        fallbackCopy(text); done();
+      }
+    });
+  });
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+
+/* ══════════════════════════════════════════════════════════
+   回饋同步（照寬欣0828那一套 REST 寫法，連踩過的坑一起帶過來：
+   規則沒生效時安靜吞掉，不在與會者面前亮紅燈）
+   ══════════════════════════════════════════════════════════ */
+var FB_DB = "https://gen-lang-client-0929530380-default-rtdb.asia-southeast1.firebasedatabase.app";
+var FB_NS = "zhewei0918";
+var FB_LIVE = null;
+function fbDead(s){ if(s===401||s===403){ FB_LIVE=false; return true; } return false; }
+function fbURL(p){ return FB_DB.replace(/\/+$/,'') + '/' + FB_NS + '/' + p + '.json'; }
+
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+  });
+}
+
+function loadFeedback(){
+  var list = document.getElementById('fbList');
+  fetch(fbURL('feedback'))
+    .then(function(r){ if(fbDead(r.status)) return null; return r.ok ? r.json() : null; })
+    .then(function(d){
+      if (d === null){ list.innerHTML = '<div class="fb-empty">目前還讀不到留言（資料庫規則可能還在生效中，稍後重新整理看看）。</div>'; return; }
+      FB_LIVE = true;
+      var items = [];
+      for (var k in d) items.push(d[k]);
+      items.sort(function(a,b){ return (b.t||0) - (a.t||0); });
+      if (!items.length){ list.innerHTML = '<div class="fb-empty">還沒有人留言，當第一個吧。</div>'; return; }
+      list.innerHTML = items.map(function(it){
+        var when = it.t ? new Date(it.t).toLocaleString('zh-TW', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
+        return '<div class="fb-item"><div class="who"><span>' + escapeHtml(it.name || '匿名') + '</span><span>' + when + '</span></div>' +
+               '<div class="txt">' + escapeHtml(it.comment || '') + '</div></div>';
+      }).join('');
+    })
+    .catch(function(){
+      list.innerHTML = '<div class="fb-empty">連不到資料庫，可能是網路問題，稍後再試。</div>';
+    });
+}
+loadFeedback();
+
+document.getElementById('fbSubmit').addEventListener('click', function(){
+  var nameEl = document.getElementById('fbName');
+  var commentEl = document.getElementById('fbComment');
+  var statusEl = document.getElementById('fbStatus');
+  var name = nameEl.value.trim();
+  var comment = commentEl.value.trim();
+  if (!name || !comment){
+    statusEl.textContent = '姓名跟回饋內容都要填喔。';
+    statusEl.className = 'fb-status';
+    return;
+  }
+  var btn = document.getElementById('fbSubmit');
+  btn.disabled = true;
+  statusEl.textContent = '送出中…';
+  statusEl.className = 'fb-status';
+  fetch(fbURL('feedback'), {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ name: name.slice(0,20), comment: comment.slice(0,500), t: Date.now() })
+  }).then(function(r){
+    btn.disabled = false;
+    if (fbDead(r.status)){
+      statusEl.textContent = '資料庫規則還沒生效，稍後再試一次。';
+      statusEl.className = 'fb-status';
+      return;
+    }
+    if (!r.ok){
+      statusEl.textContent = '送出失敗，稍後再試一次。';
+      statusEl.className = 'fb-status';
+      return;
+    }
+    FB_LIVE = true;
+    statusEl.textContent = '已送出，謝謝回饋！';
+    statusEl.className = 'fb-status ok';
+    commentEl.value = '';
+    loadFeedback();
+  }).catch(function(){
+    btn.disabled = false;
+    statusEl.textContent = '網路連不上，稍後再試一次。';
+    statusEl.className = 'fb-status';
+  });
+});
+</script>
+
+</body>
+</html>
