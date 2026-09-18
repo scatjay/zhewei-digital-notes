@@ -113,6 +113,14 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   background:var(--surface);margin-bottom:8px}
 .stub-note b{font-family:var(--serif);font-size:15px;display:block;margin-bottom:4px}
 .stub-note p{margin:0;font-size:13px;color:var(--ink-2)}
+.symlegend{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;
+  margin:14px 0 0}
+.symcard{border:1px solid var(--rule-strong);background:var(--surface);border-radius:8px;
+  padding:14px 16px;text-align:center}
+.symcard .sym{font-family:var(--mono);font-size:22px;font-weight:700;color:var(--seal);
+  margin-bottom:6px;letter-spacing:.02em}
+.symcard .meaning{font-family:var(--serif);font-size:13.5px;font-weight:700;margin-bottom:3px}
+.symcard .ex{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
 .live-quote{border-left:3px solid var(--seal);background:var(--seal-bg);border-radius:0 6px 6px 0;
   padding:16px 20px;margin-bottom:8px}
 .live-quote p{margin:0;font-family:var(--serif);font-size:16.5px;color:var(--ink);line-height:1.6}
@@ -276,9 +284,9 @@ td.num{font-family:var(--mono);text-align:right}
 .fb-form{display:flex;flex-direction:column;gap:12px;margin-top:8px;max-width:520px}
 .fb-form label{font-size:12.5px;color:var(--ink-3);font-family:var(--mono);
   text-transform:uppercase;letter-spacing:.04em}
-.fb-form input,.fb-form textarea{font-family:var(--sans);font-size:14.5px;padding:10px 12px;
-  border:1px solid var(--rule-strong);border-radius:6px;background:var(--surface);color:var(--ink);
-  width:100%}
+.fb-form input,.fb-form textarea,.fb-form select{font-family:var(--sans);font-size:14.5px;
+  padding:10px 12px;border:1px solid var(--rule-strong);border-radius:6px;background:var(--surface);
+  color:var(--ink);width:100%}
 .fb-form textarea{min-height:90px;resize:vertical}
 .fb-submit{font-family:var(--sans);font-weight:600;font-size:14px;padding:11px 20px;
   border-radius:6px;border:none;background:var(--seal);color:#fff;cursor:pointer;
@@ -468,6 +476,28 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
       <button class="copy-btn" data-copy="git clone https://github.com/scatjay/zhewei-digital-notes.git">複製指令</button></div>
     <pre>git clone https://github.com/scatjay/zhewei-digital-notes.git</pre>
   </div>
+</section>
+
+<section>
+  <span class="sec-eyebrow">符號速查</span>
+  <h2>Markdown筆記常用的五個符號，先認一遍再往下看</h2>
+  <p class="sec-lede">下面每個步驟都會用到這幾個符號——投影片裡符號密度很高，容易眼花，
+    先在這裡對照一次，之後看到就認得。</p>
+  <div class="symlegend">
+    <div class="symcard"><div class="sym">---</div><div class="meaning">YAML元資料區</div>
+      <div class="ex">筆記最上面，頭尾各一行</div></div>
+    <div class="symcard"><div class="sym"># </div><div class="meaning">標題（大綱）</div>
+      <div class="ex">井字號＋空格＋文字</div></div>
+    <div class="symcard"><div class="sym">##</div><div class="meaning">次標題</div>
+      <div class="ex">井字號數量＝階層深度</div></div>
+    <div class="symcard"><div class="sym">[[ ]]</div><div class="meaning">雙向鏈結</div>
+      <div class="ex">[[酈道元]]＝連到另一則筆記</div></div>
+    <div class="symcard"><div class="sym">#字</div><div class="meaning">標籤</div>
+      <div class="ex">井字號緊貼文字，沒有空格</div></div>
+  </div>
+  <p style="margin:12px 0 0;font-size:12.5px;color:var(--ink-3)">
+    分辨標題跟標籤只看一件事：<code style="font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px">#</code>後面有沒有空格——
+    有空格是標題，沒空格是標籤，這是投影片p53原話強調的唯一差別。</p>
 </section>
 
 <section>
@@ -791,6 +821,23 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
       <input id="fbName" type="text" maxlength="20" placeholder="例如：智傑">
     </div>
     <div>
+      <label for="fbSection">針對哪個單元</label>
+      <select id="fbSection">
+        <option value="純心得">純心得（不特別針對某一場）</option>
+        <option value="第一場">第一場・歷史研究的開端－寫筆記</option>
+        <option value="第二場">第二場・從數位筆記到數位思維</option>
+        <option value="第三場">第三場・學術倫理（林文源）</option>
+        <option value="第四場">第四場・提示詞工程與生成式AI</option>
+        <option value="第五場">第五場・打造AI史料對話機器人</option>
+        <option value="第六場">第六場・AI優化研究工作流程</option>
+        <option value="第七場">第七場・人社探索（王道維）</option>
+        <option value="開幕式">開幕式</option>
+        <option value="圓桌一">圓桌一（Day1）</option>
+        <option value="圓桌二（Day2）">圓桌二（Day2）</option>
+        <option value="未來展望">未來展望（哲維老師延伸材料）</option>
+      </select>
+    </div>
+    <div>
       <label for="fbComment">回饋內容</label>
       <textarea id="fbComment" maxlength="500" placeholder="例如：手稿辨識那段示範很清楚，想多看幾個YAML欄位設計的案例"></textarea>
     </div>
@@ -909,7 +956,8 @@ function loadFeedback(){
       if (!items.length){ list.innerHTML = '<div class="fb-empty">還沒有人留言，當第一個吧。</div>'; return; }
       list.innerHTML = items.map(function(it){
         var when = it.t ? new Date(it.t).toLocaleString('zh-TW', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
-        return '<div class="fb-item"><div class="who"><span>' + escapeHtml(it.name || '訪客') + '</span><span>' + when + '</span></div>' +
+        var sec = it.section ? '<span style="font-family:var(--mono);font-size:10px;background:var(--indigo-bg);color:var(--indigo);padding:1px 8px;border-radius:10px;margin-left:6px">' + escapeHtml(it.section) + '</span>' : '';
+        return '<div class="fb-item"><div class="who"><span>' + escapeHtml(it.name || '訪客') + sec + '</span><span>' + when + '</span></div>' +
                '<div class="txt">' + escapeHtml(it.comment || '') + '</div></div>';
       }).join('');
     })
@@ -929,9 +977,11 @@ loadFeedback();
 document.getElementById('fbSubmit').addEventListener('click', function(){
   var nameEl = document.getElementById('fbName');
   var commentEl = document.getElementById('fbComment');
+  var sectionEl = document.getElementById('fbSection');
   var statusEl = document.getElementById('fbStatus');
   var name = nameEl.value.trim();
   var comment = commentEl.value.trim();
+  var section = sectionEl.value;
   if (!name || !comment){
     statusEl.textContent = '稱呼跟內容都要填喔（可以是回饋，也可以是提問）。';
     statusEl.className = 'fb-status';
@@ -949,7 +999,7 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
         name: alias, comment: comment.slice(0,500), t: Date.now(),
-        authed: !!_googleUser
+        authed: !!_googleUser, section: section.slice(0,40)
       })
     });
   }).then(function(r){
