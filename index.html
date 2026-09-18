@@ -274,6 +274,19 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   <p class="sec-lede">下面每個指令右上角都有複製按鈕，手機上長按貼上就好，不用自己打字。</p>
 
   <div class="cmdcard">
+    <div class="cmdcard-head"><b>0. 哲維老師官方範例資料（投影片上的QR碼連結）</b>
+      <button class="copy-btn" data-copy="https://reurl.cc/bedGvd">複製連結</button></div>
+    <pre>https://reurl.cc/bedGvd</pre>
+  </div>
+
+  <div class="cmdcard" id="recordingSlot">
+    <div class="cmdcard-head"><b>📼 上課錄音 / 逐字稿</b>
+      <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">課後補上</span></div>
+    <pre style="color:var(--ink-3)">這堂課結束後會補上錄音檔連結與逐字稿（辨識處理中）——這個位置先保留，
+之後更新這頁時會直接把連結貼進這個框，不用重找。</pre>
+  </div>
+
+  <div class="cmdcard">
     <div class="cmdcard-head"><b>1. 下載 Obsidian</b>
       <button class="copy-btn" data-copy="https://obsidian.md/download">複製連結</button></div>
     <pre>https://obsidian.md/download</pre>
@@ -490,9 +503,10 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
 </section>
 
 <section>
-  <span class="sec-eyebrow">留言 / 回饋</span>
-  <h2>給哲維老師（或彼此）留一句話</h2>
-  <p class="sec-lede">寫上名字跟一句回饋（例如哪個環節最有用、還想多講什麼），送出後大家都看得到。
+  <span class="sec-eyebrow">回饋 / 提問區</span>
+  <h2>給哲維老師（或彼此）留言或提問</h2>
+  <p class="sec-lede">寫上稱呼跟一句回饋或提問（例如哪個環節最有用、還想多問什麼），送出後大家都看得到——
+    可以重複送出、想到什麼都能再補一則。公開列表只顯示去識別化的代號，不會顯示真實姓名或信箱。
     不需要登入帳號，任何裝置都能填。</p>
   <div class="fb-form">
     <div class="gwho" id="gwho"><span>已用Gmail登入：<b id="gwhoEmail"></b></span><button id="gsignout">登出</button></div>
@@ -524,7 +538,11 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   <p><b style="color:var(--ink-2)">用途</b> 這是聽課用的配套整理，不是投影片的替代品——
     完整簡報請以哲維老師現場講解＋原始PDF為準。</p>
   <p><b style="color:var(--ink-2)">回饋儲存</b> 留言存在獨立資料庫（<code>zhewei0918</code>命名空間，
-    30天內開放寫入），跟課程成績/個資系統完全無關，任何人都能讀取這裡看到的內容。</p>
+    30天內開放寫入），跟課程成績/個資系統完全無關。公開列表顯示的是雜湊去識別化代號
+    （同一人多次留言代號一致，但外人看不出真實身分），任何人都能讀取這裡看到的內容。</p>
+  <p><b style="color:var(--ink-2)">原始範例資料</b> 哲維老師投影片上的官方下載連結：
+    <a href="https://reurl.cc/bedGvd" target="_blank" rel="noopener">reurl.cc/bedGvd</a>（簡報、Colab筆記本、
+    完整範例檔案，比這頁的節選更完整）。</p>
 </footer>
 
 </div>
@@ -582,6 +600,28 @@ function escapeHtml(s){
   });
 }
 
+/* ── 匿名去識別化：公開的 name 欄位存的是雜湊代號,不是真名/信箱 ──
+   同一人（同瀏覽器,或同一個Google帳號）每次送出代號都一樣,方便認出
+   「這幾則都是同一位」,但外人看不出實際身分。 */
+function u8(s){ return new TextEncoder().encode(s); }
+function hex(buf){
+  return Array.prototype.map.call(new Uint8Array(buf), function(b){
+    return ('0'+b.toString(16)).slice(-2);
+  }).join('');
+}
+function pseudonym(seed){
+  if (!window.crypto || !crypto.subtle) return Promise.resolve('訪客-' + Math.random().toString(36).slice(2,6));
+  return crypto.subtle.digest('SHA-256', u8('zhewei0918-fb:' + seed)).then(function(d){
+    return '訪客-' + hex(d).slice(0,6);
+  });
+}
+function localSalt(){
+  var k = 'zhewei0918_salt';
+  var v = localStorage.getItem(k);
+  if (!v) { v = Math.random().toString(36).slice(2) + Date.now(); localStorage.setItem(k, v); }
+  return v;
+}
+
 function loadFeedback(){
   var list = document.getElementById('fbList');
   fetch(fbURL('feedback'))
@@ -595,7 +635,7 @@ function loadFeedback(){
       if (!items.length){ list.innerHTML = '<div class="fb-empty">還沒有人留言，當第一個吧。</div>'; return; }
       list.innerHTML = items.map(function(it){
         var when = it.t ? new Date(it.t).toLocaleString('zh-TW', {month:'numeric', day:'numeric', hour:'2-digit', minute:'2-digit'}) : '';
-        return '<div class="fb-item"><div class="who"><span>' + escapeHtml(it.name || '匿名') + '</span><span>' + when + '</span></div>' +
+        return '<div class="fb-item"><div class="who"><span>' + escapeHtml(it.name || '訪客') + '</span><span>' + when + '</span></div>' +
                '<div class="txt">' + escapeHtml(it.comment || '') + '</div></div>';
       }).join('');
     })
@@ -605,6 +645,13 @@ function loadFeedback(){
 }
 loadFeedback();
 
+/* 記住上次輸入的稱呼，下次自動帶入（純本機儲存，不影響公開顯示的去識別化代號） */
+(function(){
+  var nameEl = document.getElementById('fbName');
+  var saved = localStorage.getItem('zhewei0918_nickname');
+  if (saved && !nameEl.value) nameEl.value = saved;
+})();
+
 document.getElementById('fbSubmit').addEventListener('click', function(){
   var nameEl = document.getElementById('fbName');
   var commentEl = document.getElementById('fbComment');
@@ -612,22 +659,25 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
   var name = nameEl.value.trim();
   var comment = commentEl.value.trim();
   if (!name || !comment){
-    statusEl.textContent = '姓名跟回饋內容都要填喔。';
+    statusEl.textContent = '稱呼跟內容都要填喔（可以是回饋，也可以是提問）。';
     statusEl.className = 'fb-status';
     return;
   }
+  try { localStorage.setItem('zhewei0918_nickname', name.slice(0,20)); } catch(e){}
   var btn = document.getElementById('fbSubmit');
   btn.disabled = true;
   statusEl.textContent = '送出中…';
   statusEl.className = 'fb-status';
-  fetch(fbURL('feedback'), {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      name: name.slice(0,20), comment: comment.slice(0,500), t: Date.now(),
-      authed: !!_googleUser,
-      email: (_googleUser && _googleUser.email) ? _googleUser.email.slice(0,60) : ''
-    })
+  var seed = (_googleUser && _googleUser.email) ? _googleUser.email : localSalt();
+  pseudonym(seed).then(function(alias){
+    return fetch(fbURL('feedback'), {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name: alias, comment: comment.slice(0,500), t: Date.now(),
+        authed: !!_googleUser
+      })
+    });
   }).then(function(r){
     btn.disabled = false;
     if (fbDead(r.status)){
@@ -641,7 +691,7 @@ document.getElementById('fbSubmit').addEventListener('click', function(){
       return;
     }
     FB_LIVE = true;
-    statusEl.textContent = '已送出，謝謝回饋！';
+    statusEl.textContent = '已送出，謝謝！（想再補充可以直接再送一次）';
     statusEl.className = 'fb-status ok';
     commentEl.value = '';
     loadFeedback();
