@@ -124,6 +124,25 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   margin-bottom:6px;letter-spacing:.02em}
 .symcard .meaning{font-family:var(--serif);font-size:13.5px;font-weight:700;margin-bottom:3px}
 .symcard .ex{font-family:var(--mono);font-size:11px;color:var(--ink-3)}
+
+.transcript{max-height:60vh;overflow-y:auto;border:1px solid var(--rule-strong);
+  border-radius:8px;background:var(--surface);padding:4px}
+.ts-seg{display:grid;grid-template-columns:74px 1fr;gap:10px;padding:8px 12px;
+  border-bottom:1px solid var(--rule)}
+.ts-seg:last-child{border-bottom:none}
+.ts-time{font-family:var(--mono);font-size:11px;color:var(--indigo);white-space:nowrap;padding-top:1px}
+.ts-text{font-size:13.5px;color:var(--ink);line-height:1.75}
+.ts-seg[data-lowconf="1"]{background:var(--seal-bg)}
+.ts-seg[data-lowconf="1"] .ts-time::before{content:"⚠️ "}
+@media(max-width:560px){.ts-seg{grid-template-columns:1fr}.ts-time{font-weight:700}}
+.term-tbl{overflow-x:auto;border:1px solid var(--rule-strong);border-radius:8px;
+  background:var(--surface);margin-top:12px}
+.term-tbl table{width:100%;border-collapse:collapse;font-size:12px;min-width:480px}
+.term-tbl th,.term-tbl td{text-align:left;padding:7px 12px;border-bottom:1px solid var(--rule)}
+.term-tbl thead th{font-family:var(--mono);font-size:10px;text-transform:uppercase;
+  letter-spacing:.05em;color:var(--ink-3);background:var(--sunk)}
+.term-tbl td.wrong{color:var(--ink-3);text-decoration:line-through}
+.term-tbl td.right{color:var(--jade);font-weight:600}
 .live-quote{border-left:3px solid var(--seal);background:var(--seal-bg);border-radius:0 6px 6px 0;
   padding:16px 20px;margin-bottom:8px}
 .live-quote p{margin:0;font-family:var(--serif);font-size:16.5px;color:var(--ink);line-height:1.6}
@@ -143,6 +162,7 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .slidereader .body{border-top:1px solid var(--rule);padding:14px}
 .slidereader iframe{width:100%;height:70vh;min-height:420px;border:1px solid var(--rule);
   border-radius:6px;background:var(--sunk)}
+@media(max-width:820px){.pdf-transcript-grid{grid-template-columns:1fr !important}}
 .slidereader .fallback{margin:10px 0 0;font-size:12.5px;color:var(--ink-3)}
 
 .qr-card{display:flex;gap:18px;align-items:center;margin-top:24px;padding:16px 20px;
@@ -390,12 +410,193 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   </div>
   <div class="stub-note">
     <b>第一場：歷史研究的開端－寫筆記</b>
-    <p>配套整理製作中，稍後會補上——投影片已經可以先看。</p>
+    <p>投影片＋逐字稿已經整合在下面同一個框裡；深度配套整理製作中，稍後會補上。</p>
   </div>
-  <details class="slidereader">
-    <summary><span>📑 展開投影片<span class="hint">第一場</span></span><span class="chevron">▶</span></summary>
-    <div class="body"><iframe src="slides-session1.pdf" title="歷史研究的開端－寫筆記 投影片" loading="lazy"></iframe>
-      <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p></div>
+  <details class="slidereader" open>
+    <summary><span>📑 投影片 ＋ 逐字稿<span class="hint">faster-whisper large-v3，01:10:04，152段</span></span>
+      <span class="chevron">▶</span></summary>
+    <div class="body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px" class="pdf-transcript-grid">
+        <div>
+          <iframe src="slides-session1.pdf" title="歷史研究的開端－寫筆記 投影片" loading="lazy" style="height:60vh;min-height:420px"></iframe>
+          <p class="fallback">手機不顯示的話會改成下載，或<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟</a>。</p>
+        </div>
+        <div>
+          <div class="transcript">
+<div class="ts-seg"><span class="ts-time">00:00:00</span><span class="ts-text">它已經構成了如Thomas Kuhn所說的典範轉移所以我認為這也難可以稱之為一個歷史學的智慧人文的轉向所以這才是我們今天這個工作坊的主題的名稱的來源在這邊如果要面對這樣的問題以及就是在面對這樣的方式我個人的解方是我覺得我們要從一個寫筆記把筆記數位化從這個時間點開始做起對那明天呢我們會再帶入呢就是生成式的原理還有非常最近非常火紅的AI agent</span></div>
+<div class="ts-seg"><span class="ts-time">00:00:37</span><span class="ts-text">那大家請放心我們不會將大家非常困難已經很努力的把就是我們的整個操作呢簡化到只需要一根手指頭按下一步下一步下一步就好我們的目的呢是透過這個方式也許裡面的很多的細節的那些程式吧我們看不懂沒關係但是我們可以知道其實現在通過很多的方法即便是像我們歷史學家我們可以很快的很容易的了解跟知道它是怎麼樣去運作然後才進一步讓我們可以知道我們未來該怎麼去面對那如此一來</span></div>
+<div class="ts-seg"><span class="ts-time">00:01:10</span><span class="ts-text">我覺得我們才能夠撇除因為我們不了解AI的本質進而產生了很多的誤會以及過度的擔憂那如此一來呢我們才能夠真正的去反思就是AI對於歷史學在研究教學還有科普推廣方面的實際的影響從我們自己的實際需求出發來去定義AI時代之下的歷史學研究到底是什麼那為什麼要從我們自己的需求出發也很簡單因為AI就是一個我覺得啦對我來講</span></div>
+<div class="ts-seg"><span class="ts-time">00:01:42</span><span class="ts-text">它就像一個羅賴法一樣怎麼樣去使用它是因為使用者的問題而不是工具的問題而已我們不能夠過度的把工具放大到好像完全的取代使用者對這是我的個人的想法那等一下呢就是我們工作坊所有的職員呢簡報教材以及範例我都會提供給所有的老師然後希望所有老師如果有能可以的話呢可以把內容呢融入自己的歷史學的專業教學之中那我們的工作坊也都是以</span></div>
+<div class="ts-seg"><span class="ts-time">00:02:12</span><span class="ts-text">說明生成式AI為主要的目的那我過程中提出一些史料的範例都只是教材那史實上面有錯誤呢還請大家見諒因為我提的東西我拿的一些史料大部分都不是自己的研究那當然裡面也有關於一些我自己的個人收學的我的檔案如果對這些檔案有興趣的話也很歡迎跟我聯繫我可以很樂意的提供給大家未來去做研究那一開始要先講一下</span></div>
+<div class="ts-seg"><span class="ts-time">00:02:39</span><span class="ts-text">其實生成式AI第一次提供給大眾使用其實在2022年的11月30日是由當時候的OpenAI經營的ChatGPT那全文叫做聊天生成預訓練轉換器那從這時候開始我們可以發現一件事情就是AI開始取代了Copywriting成為大眾最熱門的話題尤其是最近的93年代以來還有從14897點檔到46000點兩倍之多那事實上呢人工智慧在1960年代70年代以來都是一直以來都在發展的技術</span></div>
+<div class="ts-seg"><span class="ts-time">00:03:15</span><span class="ts-text">只是因為受到演算法還有系統工程還有硬體的局限所以一直以來都很難以突破那直到Transformer出現那這個Transformer不是這個Transformer是這個TransformerTransformer的AI架構出來之後它開始產生非常大的一個突破跟改變當然與此關於硬體的設備上面的進步是一個很重要的一個關鍵說真的</span></div>
+<div class="ts-seg"><span class="ts-time">00:03:39</span><span class="ts-text">如果沒有台積電的這個晶片的這個樣子的一個工程技術其實是做不到的那關於這個架構是怎麼怎樣裡面的內容如何呢看不懂沒關係因為其實這是資工專家的事情這不是我們的工作那我們只要稍微了解一下的原理就可以了那簡單來講就是Transformer這個架構是2017年由Google的實驗室的八位的科學家聯合發表提出來了那全文叫做</span></div>
+<div class="ts-seg"><span class="ts-time">00:04:07</span><span class="ts-text">基於注意力機制的新型深度學習架構它的重點是在利用深度神經網絡的分析方法而發展而來的注意力機制然後進一步做出了一個架構從這個時候開始那AI就開始大量的很多人投入但是Google因為基於商業的考量還有內部的持續的優化它沒有立即將這項技術商業化大眾化給所有人使用所以只有當我們在用Google的那個關鍵字檢索的時候</span></div>
+<div class="ts-seg"><span class="ts-time">00:04:42</span><span class="ts-text">有時候會自動的文字補全其實就是它一開始的原理的開始那直到這GPD問世之後呢我們才會才開始的大眾還開始知道說哇原來這東西變得這麼的厲害這麼的好用因為以前呢跟AI跟電腦問問題它都很笨它現在好像慢慢越來越聰明那也因為這樣這三年多以來呢</span></div>
+<div class="ts-seg"><span class="ts-time">00:05:07</span><span class="ts-text">其實有很多的必然的大型語言模型然後呢開始在很快的在發展那你會發現一件事情最後呢目前這一兩年來最主要的就是這四家的語言模型的公司那它們基本上都各自有各自的特色而它們的內涵其實都是基於Transformer的架構持續的發展的一些新的技術以及變體那我覺得我第一次呢知道AI的時候我就去上網去看那個</span></div>
+<div class="ts-seg"><span class="ts-time">00:05:35</span><span class="ts-text">我很喜歡在網路上看YouTube的一些不管是台大或各個學校的一些課程然後那時候我就看了那個台大職工系李鴻毅教授的課程從他那個機器學習開始聽所以大部分都沒有聽得太懂但是我就是邊聽邊了解然後他曾經講過他說未來的人類歷史可能將於2022年11月30號以前稱之為死前時代然後從這個之後才叫死時代在某種程度上來講我覺得他細略的說法其實有道理的</span></div>
+<div class="ts-seg"><span class="ts-time">00:06:04</span><span class="ts-text">因為我們想想看我們這些資本的史料如果不以數位化的方式以及AI的方式進行分析那也許未來一兩百年後說不定呢我們一兩百年的歷史學家看到這些資本的史料就好像我們現在看甲骨人一樣所以這可能是一個蠻有可能的一個變化那又因為我們身為一個歷史學家常常因為我們不了解原理從表面的現象去找理由所以才會產生這樣子的誤解</span></div>
+<div class="ts-seg"><span class="ts-time">00:06:33</span><span class="ts-text">那其實呢我覺得歷史系或者是人文學科真正的生存危機從來都不是AI其實關鍵的危機其實我覺得是就業就我個人來講就我爸知道我讀歷史系就跟我講說以後工作怎麼辦不顧也有工作了嗎對不對其實這個危機其實在19世紀末以來或者是說現在歷史學出現以來</span></div>
+<div class="ts-seg"><span class="ts-time">00:06:53</span><span class="ts-text">一直以來都被討論的一直以來都被這樣子問的其實不是從現在開始問的我二三十年前我那時候還是當學生我還修過登武老師的中國通史的時候那個時候我就很我也很擔憂啊我相信各位老師們以前在當學生也很擔憂自己的未來的就業吧這才是真正關鍵的原因那即便如此每天都很危機</span></div>
+<div class="ts-seg"><span class="ts-time">00:07:16</span><span class="ts-text">但是呢我們依然在危機之中直到現在還是屹立不搖所以基本上不是因為AI的問題那其實原因很簡單也是我們今天的一個我覺得今天的活動一個核心理念就是我一直認為這城市AI只不過就是一種技術它提供給我們一種新型態的工具讓我們可以藉由這樣子的一個工具來推進歷史學研究方法的進步然而工具進步的本身並不會改變歷史學</span></div>
+<div class="ts-seg"><span class="ts-time">00:07:43</span><span class="ts-text">作為一個科學的根本精神相反的它反而會促使歷史學利用AI來推進我們的研究方法的進一步的現代化那關鍵其實是在於未來的歷史學家必須具備這樣子的數位思維以及未來基於這樣子的我們自己的研究流程的這樣子的方式去設計我們所想要的AI工具然後進一步才能夠強調我們歷史學的根本</span></div>
+<div class="ts-seg"><span class="ts-time">00:08:07</span><span class="ts-text">那我個人一直認為歷史學的根本是在於史料上面的可驗證性可追溯性跟可糾錯性那如此一來歷史學才有辦法從一個很多重複性的工作中解脫出來把更多的精力放在未來能夠拓展歷史學可研究的範圍甚至進一步可以思考更宏觀或更大的一些歷史的問題那我覺得如同這篇報導說其實這則也蠻有名的這篇報導就是說我覺得歷史學可以說是一種透過史料來探究時代脈絡的學問</span></div>
+<div class="ts-seg"><span class="ts-time">00:08:41</span><span class="ts-text">它就稱之為歷史系是培養AI脈絡建構時的一個科系而這才是我們真正要思考的是如何讓AI為歷史學說用而不是去擔憂我們的歷史學會被AI取代其實應該反過來但字以縫字以不算大家有空可以去看一下黃仁勳的演講我這部展開用的時間有限黃爸爸都說了AI時代之下無法取代的能力有三個第一個是判斷力</span></div>
+<div class="ts-seg"><span class="ts-time">00:09:10</span><span class="ts-text">第二個是創造力第三個是敘事力請問哪一個科系是同時培養這三個能力的科系就是我們歷史系嗎對不對所以呢大家不用擔心不用氣餒有一次我去陽明交通大學演講我盧老師沒有來我就跟盧正恆老師說我覺得20年後歷史系會超越一學系變成全台灣第一高分的科系</span></div>
+<div class="ts-seg"><span class="ts-time">00:09:34</span><span class="ts-text">但是開玩笑啦也許20年後真的我們都看得到也說不定那言歸正傳其實關鍵在於如何讓AI為歷史學所用或者是說我們應該要盡早的去思考跟培養下一代的歷史學家對那也很感謝就是歷史學門老師陳老師跟李老師來幫助我們來這樣子的做這件事情那其實在這個問題呢早在數位人文發展的時代裡面其實我們就已經開始在做了</span></div>
+<div class="ts-seg"><span class="ts-time">00:10:02</span><span class="ts-text">像我個人讀博士的時候在德國讀博士學位的時候其實我都是透過youtube看到博齊瑞老師在網路上教數位人文的一些影片然後從中也學到了不少然後也一直有所接觸只是一直以來數位人文在推廣的過程中都遇到了很多很多的困難那其實我們在教學上也可以知道那個困難在哪裡如果GIS還好如果其他的人際網路分析的工具也還好</span></div>
+<div class="ts-seg"><span class="ts-time">00:10:27</span><span class="ts-text">最困難的其實是無本分析工具沒有學生願意一個一個去標註那些詞語那這就是一個很大的關鍵就是說我們如何把工具變得更容易的為我們使用或者更容易的從我們自己的角度去看待這個工具的開發當然我們不可能自己投入工具的開發但是我們必須一定要跟會開發工具的人怎麼樣跟他們講說我們需要什麼但是呢隨著2025年的年底</span></div>
+<div class="ts-seg"><span class="ts-time">00:10:54</span><span class="ts-text">出現了一個非常重要的東西就是AI agent的快速發展我發現過去很難以入門的數位人文工具已經變得越來越容易去使用它了因為你是那個標註你就不用自己標那個AI人都幫我標好一樣就是說在人工智慧的應用裡面從以前的單一內容的生成以前都是一個一個對話它正朝向一個能夠具備有知識的整合任務的協作還有流程管理</span></div>
+<div class="ts-seg"><span class="ts-time">00:11:20</span><span class="ts-text">以及決策支援能力的智慧系統的演進那一樣的就是目前許多的AI的工具其實還是以通用型為主他們其實並沒有去寵物人物的視角跟人物的需求裡面去做開發但是呢這反而變成是一個我們很重要的一個契機那我覺得就是在於一個像歷史學一個比較大的問題就是我們資料很多很分散然後研究脈絡不容易保存而工具之間彼此獨立</span></div>
+<div class="ts-seg"><span class="ts-time">00:11:48</span><span class="ts-text">那AI在幫我們看文章的時候有時候呢比如說好我們用Nobu KLM或單純的像前一陣子很常有的新聞就是說某某某人的論文裡面又生產出一個不曾存在的論文那其實AI出現之後這個東西是很有可能已經進行了一個改變那這個前提條件就是說我覺得我們必須要做一件事情就是把長期以來學界比較缺乏的統一的資料的儲存的架構或者是說</span></div>
+<div class="ts-seg"><span class="ts-time">00:12:18</span><span class="ts-text">其實歷史學所需要的一個數位方式的一些有需求來進行設計然後進一步的去結合一些數位檢查以及一些研究的基礎的建設這個基礎的建設反而是最重要的那可是我們的一些人文的知識以及研究資料如果它沒有辦法進一步轉化成電腦能夠讀取或交換以及驗證的數據格式的時候那基本上就很難的去嫁接以量化數據運算為原理的深層視野的工具那自然而然就不容易的去剪接人文的研究的需求那簡單來講說</span></div>
+<div class="ts-seg"><span class="ts-time">00:12:56</span><span class="ts-text">如果我們沒有數據那何來的運算那沒有運算又何來的內涵所以我們會發現一個現象無論是中央研究院或者是台大他們在做一些數位人文的最基礎的時候我們其實最重要的一件事情就是做OCR因為很簡單嘛因為OCR才是什麼才是把那些以前的文字轉化成電腦可以看得懂的東西嘛那你沒有辦法運算當然不會有AI就算我們今天講的再多什麼</span></div>
+<div class="ts-seg"><span class="ts-time">00:13:24</span><span class="ts-text">很多很多的一些功能但是你就沒有數據當然做不了可是如果今天我們已經有數據了或者說我們數據之間其實你回歸到數據本身數據之間如果進行交換跟嫁接的關鍵的核心就在於我們如何賦予它的metadata能夠把整個很龐大的數據全部結合起來這我打破一件事情就像我自己在做研究的時候我常常想一個問題</span></div>
+<div class="ts-seg"><span class="ts-time">00:13:46</span><span class="ts-text">我讀這些東西比如說我自己讀自己的檔案材料我大概80%讀過的東西不會用在論文裡面去可是不代表這80%對其他的研究者沒有用可是如果我有一種共同的數據交換的架構的話那也許某一個研究者他等於研究中國近代史或研究台灣史的時候在德國的檔案裡面透過這個數據的交換在德國檔案裡面看到說</span></div>
+<div class="ts-seg"><span class="ts-time">00:14:08</span><span class="ts-text">原來張哲瑋老師曾經有寫過有看過這個檔案那他可能就覺得這東西到底是什麼其實對他可能就有幫助他可能就可以寫他自己的論文裡面去這種共同共享開源的史料其實我覺得是有蠻重要的其實我一直覺得探究一個很深層的原因就是說我們人文學者在很多的專業的養成以及之後的研究深層上面</span></div>
+<div class="ts-seg"><span class="ts-time">00:14:31</span><span class="ts-text">經過已經投入很多大家的精力其實我們很難有餘裕的時間去了解職工的技術的基礎然後進一步的將自己的研究能夠轉化為那些職工專家能夠理解的技術的語言同樣的職工專家也未必能夠了解人文研究的議題還有史料的脈絡以及研究的方法我相信楊志傑老師在跟我們合作的時候應該有感覺到那樣子的落差那我們如何去比比這樣的落差</span></div>
+<div class="ts-seg"><span class="ts-time">00:14:57</span><span class="ts-text">其實AI已經是有一個很好很好的契機隨著這樣的發展我們就可以進一步去思考說我們未來該怎麼樣我們應該要怎麼做所以你可以看到一個這樣子的現象為了接下來的課程方便剛剛已經在上課之前就是工作坊開始之前應該已經讓大家去做一些簡單的一些環境上的設置有教過數位的老師一定知道其實最困難的不是內容</span></div>
+<div class="ts-seg"><span class="ts-time">00:15:29</span><span class="ts-text">而是那個一開始的環境設置所以接下來我們會一步一步的操作如果各位有任何的問題都會舉手然後也希望左右鄰居比較厲害的能夠互相幫忙首先我們要做一件事情就是下載範例的資料我們為了要讓大家能夠好好的去操作所以我先準備一些死掉的東西或者是一些我已經先做好的一些資料大家就有辦法去透過這個資料去進行使用所以請大家先掃描這個QR Code或打入這個網址</span></div>
+<div class="ts-seg"><span class="ts-time">00:16:01</span><span class="ts-text">或者是說你舉手的時候助教門都有USB裡面已經有檔案了然後放進電腦裡面就可以去抓取其實先掃描這個QR Code或者有USB都可以我先跳完下一頁等一下再把它移回來就是你掃描進去之後或者是你拿到USB之後你會看到一個這樣子的資料夾叫做2026年歷史學本主管會議的教學資料請先幫我把整個資料夾把整個資料夾全部都放到你的電腦的桌面上</span></div>
+<div class="ts-seg"><span class="ts-time">00:16:32</span><span class="ts-text">整個複製貼到你的電腦桌面上可以嗎請我們助理來幫忙一下幫忙一下大家可以先掃這個QR Code</span></div>
+<div class="ts-seg"><span class="ts-time">00:16:46</span><span class="ts-text">大家一邊做然後可能一邊慢慢地進行因為我們時間比較有限我的這個PPT我教給豐兆去run過一遍之後他說我可能教不完所以我們要趕快我們要趕快喔有嗎可以把連結存過來或者是打這個它這個是縮短的連結或直接打這個USB是最快的</span></div>
+<div class="ts-seg"><span class="ts-time">00:17:15</span><span class="ts-text">USB是最快的下載可能要一點點的時間那大家先慢慢地去下載那在這個過程中我也慢慢地跟大家講一下下一步要做什麼因為我們有很多的時間可以讓大家慢慢操作那我可以稍微講一下裡面的資料有哪些點開來之後有五個資料夾第一個資料夾是我們明天要用的CodeLab的AI原理的教學的程式這個就先下來就好</span></div>
+<div class="ts-seg"><span class="ts-time">00:18:01</span><span class="ts-text">不用理它那第二個呢是我就寫的一個AI的一個AIAgent skill的一個程式的一個基本的框架那也先下來下來就可以了然後另外呢有簡報就是我們這兩天的課程所有的簡報我都已經放上去了大家可以回去如果你在操作上有問題或做不夠好的時候你可以回去自己再通過這個簡報一步一步的操作一步一步的操作</span></div>
+<div class="ts-seg"><span class="ts-time">00:18:25</span><span class="ts-text">那除此之外就是範例的資料裡面有很多的一些史料跟我們已經以前在課堂上教同學們幫忙做好的一些基本的Mundown的筆記的檔案然後呢最重要的是我們中間有個安裝檔安裝檔所以請先幫我就是把它下載下來對如果你下載好了如果有老師比較快的話下載好的時候呢就點入這個安裝檔裡面去找到這兩個東西</span></div>
+<div class="ts-seg"><span class="ts-time">00:18:53</span><span class="ts-text">這兩個東西那我們先到這一步那我再跳回去這個地方老師操作上有問題嗎問題都可以舉手問或是隔壁的USB稍等一下USB這個好了老師用USB線的比較快他就不用連網路了他有那個對</span></div>
+<div class="ts-seg"><span class="ts-time">00:19:25</span><span class="ts-text">他有Type-C的他會轉方向這個可以轉方向</span></div>
+<div class="ts-seg"><span class="ts-time">00:19:49</span><span class="ts-text">要先安裝下去我們的USB是有兩個不同的接口的如果是用Mac的話呢就是轉到那個比較小的那個USB3.0的接口去接OK嗎有都下載好了嗎好慢慢來裡面的資料呢因為我們有一些資料比較多一點我會慢一點點慢一點點還有老師需要</span></div>
+<div class="ts-seg"><span class="ts-time">00:21:00</span><span class="ts-text">應該沒有對應吧應該沒有對應許多的都不會有OKOKOKOKOKOKOKOKOKOKOK</span></div>
+<div class="ts-seg"><span class="ts-time">00:21:24</span><span class="ts-text">OKOKOKOKOKOKOKOKOKOKOKOKOKOK</span></div>
+<div class="ts-seg"><span class="ts-time">00:21:40</span><span class="ts-text">OKOKOKOKOKOKOKOKOKOKOKOKOKOK</span></div>
+<div class="ts-seg"><span class="ts-time">00:21:56</span><span class="ts-text">OKOKOKOKOKOKOKOKOKOKOKOKOKOK</span></div>
+<div class="ts-seg"><span class="ts-time">00:22:14</span><span class="ts-text">OKObsidian的一個安裝檔這個也是Obsidian的安裝檔這個是給Mac的如果你的電腦是蘋果電腦的話就是按這個然後就會安裝稍微講一下其實數位筆記軟體有非常非常多種大家有空都可以去自己去試看看哪一個比較符合自己的需求那我們今天選Obsidian的原因其實只有一個最主要的原因是它免費不用錢</span></div>
+<div class="ts-seg"><span class="ts-time">00:22:43</span><span class="ts-text">因為其他的可能都需要付費可能需要付費Obsidian還有一個大的原因就是因為它是使用Markdown的筆記的這樣的格式去儲存資料Markdown的資料比較好的地方在於它就是一個成文字檔而且現在我們在用AI的時候大部分的AI的一些基本的腳本也都是用Markdown這個格式所寫那Markdown格式其實我們等一下會稍微跟大家講一下大概會是什麼</span></div>
+<div class="ts-seg"><span class="ts-time">00:23:11</span><span class="ts-text">那其實那個關鍵就是因為使用Obsidian你的筆記呢不是存在那個服務商的雲端而是存在自己的電腦裡面這個很重要它才是存在你的本地端你的資料才不會因此外洩它只是一個閱讀的工具而已閱讀的工具而已那如果各位回去的時候沒有這個檔案你可以直接上網到這個Obsidian的網址上面就可以找得到下載的檔案這樣子</span></div>
+<div class="ts-seg"><span class="ts-time">00:23:39</span><span class="ts-text">你就可以找得到這很容易搜尋喔你都已經幫大家下載好了所以呢這個地方就不需要可是呢如果你需要一些比較特殊的版本比如說你的電腦是Linux的話它下面也有不同的版本可以讓你安裝比如說下面有Linux我知道有一些我剛老師可能用過Linux可能用Linux也可以使用不過你的手機啊或者是你的IOS的一些平板也是可以用的也是可以用的</span></div>
+<div class="ts-seg"><span class="ts-time">00:24:07</span><span class="ts-text">那它大概就是一個這樣一個流程那如果是Mac的話就是安裝有問題的話就可以問我們的助理做安裝會比較快安裝好之後呢我們就會進入到這樣子的一個畫面然後呢下面這邊呢可以選擇不同的語言那請大家幫我選擇英文或者至少選擇中文喔這樣的話我們操作跟學習上比較方便如果選日文我看不懂的就沒有辦法</span></div>
+<div class="ts-seg"><span class="ts-time">00:24:35</span><span class="ts-text">就比較麻煩一點所以請大家選擇語言那通常你的系統會默認那選擇好了之後呢幫我按下一步這邊按建立建立的時候跟最重要的兩件事情第一個為你的筆記的儲存庫取一個名字第一個為你的筆記的儲存庫取一個名字比如說你用今天的會議的名稱或者是說比如說張哲偉的筆記都可以你隨便一個名稱都可以</span></div>
+<div class="ts-seg"><span class="ts-time">00:25:03</span><span class="ts-text">重點是在這個位置你按瀏覽的時候呢請幫我選擇今天請幫我選擇把它放在桌面上面就是說你的很多資料都放在USB裡面你也可以選擇你插入的USB的硬碟來當作你儲存你的筆記的地方來當作你儲存你的筆記的地方也就是說你的筆記不見得要跟著電腦而是可以跟著你的硬碟這樣的話呢它比較不容易不見那當然我們大概都知道嘛所有的資料備份要321</span></div>
+<div class="ts-seg"><span class="ts-time">00:25:31</span><span class="ts-text">就是必須要有三份備份兩個1D那這很重要喔或者是說可以存在你的Google的雲端硬碟上那Google雲端硬碟的路徑怎麼設置呢因為我們時間比較有限所以我們就不特別的展開我怕時間會來不及那大家回去可以看著這個PVT的內容然後去做設置去做設置這邊應該沒有問題吧大家有設置好你們自己的</span></div>
+<div class="ts-seg"><span class="ts-time">00:25:59</span><span class="ts-text">的那個了嗎有齁它會跳出一個作業畫面那你先不理它喔我們先再往下一步第二個就是做Google的帳號那這個年代應該大家都有Google的帳號吧有吧如果Google的帳號沒有關係沒有的話請大家務必要註冊一個Google的帳號那等一下有問題的話</span></div>
+<div class="ts-seg"><span class="ts-time">00:26:27</span><span class="ts-text">或是你沒有Google的帳號我們助理也會下去協助你去註冊一個帳號那這個路徑怎麼樣設置呢回去再一步一步跟著看就可以了跟著看就可以了我們先跳過好筆記建立好的時候應該會進入這樣的畫面有沒有有沒有進入這樣的畫面好這個就是Obsidian這個數位筆記軟體的一個最基本的一個畫面的樣子齁</span></div>
+<div class="ts-seg"><span class="ts-time">00:26:55</span><span class="ts-text">那大家可以看到齁左上角這個地方寫一個觀影這邊就是你的筆記的列表你可以寫很多很多的數位筆記列表然後這是你讀筆記的一個一個空間你可以在這邊編輯在這邊做很多進一步的處理那這個呢就是關聯圖裡面會告訴你說你的筆記之間有沒有相互的連結它會呈現一個圖給你看那通常你要叫出這個觀念圖都是比較之後的事情其實真正真正最大的關鍵是什麼在AI史上的關鍵就是</span></div>
+<div class="ts-seg"><span class="ts-time">00:27:23</span><span class="ts-text">我們如何記錄自己日常生活中的想法跟創建這才是最重要的一件事情然後透過這樣子的界面我們就能夠進一步的去處理跟把自己的以前手寫的筆記變成一個數位化的處理的方式齁處理的方式好那第二步呢很簡單齁請幫我在這個歡迎這個這一則筆記的這個列表上面按右鍵之後呢點選這個下面的在資料夾中顯示</span></div>
+<div class="ts-seg"><span class="ts-time">00:27:51</span><span class="ts-text">可以嗎這個時候要一步一步做喔點下去之後呢它就會出現什麼它就會出現這樣子的一個資料夾就是你筆記儲存的地方這邊一個歡迎點MD有沒有你可能沒有給MD因為你這個還沒有就是它有一些設定問題它會出現一個叫做歡迎的這樣子的筆記這樣子的一個檔案也就是說它每一則筆記比如說你一則筆記是上中國近代史的</span></div>
+<div class="ts-seg"><span class="ts-time">00:28:19</span><span class="ts-text">那個第一堂課然後第二堂課它就會第一堂課那你要怎麼去安排都可以齁都可以這個時候呢幫我做一件事情齁幫我做一件事情回到我們剛剛下載的2026年歷史主管會議的教學資料裡面有一個叫做範例資料的資料夾請幫我把這個資料夾整個複製起來之後貼到剛剛跑出來這個它筆記儲存的那個地方直接把它複製之後</span></div>
+<div class="ts-seg"><span class="ts-time">00:28:49</span><span class="ts-text">貼上打開裡面之後把這個所有的資料複製起來貼上去這是我們等一下課程的時候會教大家的一些範例資料可以嗎寫到這裡最好是把裡面的內容移過去不要把整個資料夾移過去OK嗎這個很需要一點時間OK大家大概三分鐘三五分鐘的時間那在大家抓的過程中我稍微講解像我們有哪些資料齁</span></div>
+<div class="ts-seg"><span class="ts-time">00:29:19</span><span class="ts-text">第一個呢是我以前的數位相關課程裡面帶領學生建立的大概有一千三四百位的台灣醫師民間的台灣醫師的資料對就是學生一個字一個字打出來的齁它每一個筆記就是一個一個醫生齁第二份的資料呢它是德國外交部所儲存的關於台灣的外交的檔案對那這也是我在那個這是我在德國</span></div>
+<div class="ts-seg"><span class="ts-time">00:29:47</span><span class="ts-text">找到的檔案齁然後第四個呢是法肯豪森將軍的手稿的檔案這個楊老師那個楊偉珍老師應該知道法肯豪森檔對這是近代史就是民國史非常重要的一位德國將軍齁德國將軍會軍事顧問然後呢另外一個檔案呢就是另外兩個檔案是我先弄好的一個是水晶柱跟洛陽潔蘭紀齁那選擇洛陽潔蘭紀的原因就是因為以前上次不是老師的課所以我就把它拿來當作這次的範例齁</span></div>
+<div class="ts-seg"><span class="ts-time">00:30:15</span><span class="ts-text">我們今天這兩天呢會一直出現那個洛陽潔蘭紀的資料齁洛陽潔蘭紀的資料齁然後我會帶大家透過這個文本資料去訓練嘿啊到底怎麼跑的那最後一個是因為我自己的論文啦那只是為了跟大家講說以後如果透過Obsidian這樣的數位筆記去讀論文會比較方便OK嗎大家有抓好嗎如果有抓好的話它會變這樣然後呢你回到你的Obsidian的檔案裡面去的時候</span></div>
+<div class="ts-seg"><span class="ts-time">00:30:43</span><span class="ts-text">Obsidian這個作業系統裡面去的時候你會看到很有趣齁你的觀念圖有沒有變成很多一個點一個點一個點的齁這每一個點都是一個單獨的筆記那每一則筆記都是以人名為命名齁對那這些就是以前1954年的時候台灣的這個地方的醫生齁這個地方的醫生的名字應該我記得有一兩千筆齁一兩千筆到這邊了嗎哦</span></div>
+<div class="ts-seg"><span class="ts-time">00:31:11</span><span class="ts-text">OK到嗎可以吧可以齁沒問題沒問題我們下一步齁接下來呢要做一個比較蠻重要的一個東西齁請幫我搜尋叫做Hugging Face在Google的那個Google Chrome直接搜尋Hugging Face進去之後呢請務必一定要註冊這個東西這個網站齁Hugging Face是一個開源模型的</span></div>
+<div class="ts-seg"><span class="ts-time">00:31:39</span><span class="ts-text">不管網站它同時也提供使用者AI的算力免費的算力讓使用者能夠去免費的去使用跟測試它齁使用測試它齁進去之後呢請幫我註冊齁請幫我註冊這註冊很需要一點時間那大家麻煩一下要先註冊一下齁先註冊一下那當然如果我們有經費也可以去買它的算力但是那個主要是拿來大家教學使用</span></div>
+<div class="ts-seg"><span class="ts-time">00:32:07</span><span class="ts-text">你在教學上面就可以用這個來做免費的算力的資源免費的當然算力不會很多但是最起碼教學上是沒有問題的齁沒有問題的齁那進去之後呢你就在這邊輸入你的email然後呢就是你要你的那個密碼然後按下一步然後去註冊你註冊完之後務必一定要做一件事情齁註冊完之後一定要回到你註冊給他的email裡面要按一個開封的鍵按下</span></div>
+<div class="ts-seg"><span class="ts-time">00:32:35</span><span class="ts-text">之後才能夠使用齁那麻煩助理要幫我們看一下老師有沒有做到這一步因為我們通常教學的時候有時候遇到問題就是因為沒有按開通所以會遇到很多的問題齁那我給大家大概五分鐘的三五分鐘的時間來做這一步好不好</span></div>
+<div class="ts-seg"><span class="ts-time">00:33:34</span><span class="ts-text">柯老師有問題一定要舉手一定要舉手我們助理會去幫嘛我們助理會去幫嘛效務系統推動推動以後就是還是要保存要保存會直接到那個然後然後所以</span></div>
+<div class="ts-seg"><span class="ts-time">00:34:22</span><span class="ts-text">所以這個我直接我先好厲害喔</span></div>
+<div class="ts-seg"><span class="ts-time">00:36:32</span><span class="ts-text">有吉他他會收到一個設定都是用的說他會收到就是用的不然就是都是用的都是用的真的耶這個不是用的直接點他的那個連結直接點他的連結然後有了簡單就好簡單就好</span></div>
+<div class="ts-seg"><span class="ts-time">00:37:00</span><span class="ts-text">他就有一個使用的他只需要點那個連結然後這邊再刷什麼對,對對對OK對,然後老師可以去看一看大家想要來工作的就是他這邊有很多開源的一些像什麼都有畫畫的然後</span></div>
+<div class="ts-seg"><span class="ts-time">00:37:32</span><span class="ts-text">好像是</span></div>
+<div class="ts-seg"><span class="ts-time">00:37:56</span><span class="ts-text">好,各位老師開通的如何啊我覺得他現在開通越來越複雜,越來越麻煩他原來那個小遊戲要通過在這裡那我稍微稍微講一下Hugging Face不過就是一個開源的模型的拖廣網站他只做了這樣子的一個基本算力的提供跟模型的拖廣而已但是呢,前一陣子,前幾天9月3號的時候NVIDIA宣布呢</span></div>
+<div class="ts-seg"><span class="ts-time">00:38:24</span><span class="ts-text">以1300億美金收購Hugging Face這個平台並且承諾為時開放1300億的台幣就只為了收購這個平台可見的他的重要性基本上呢,現在很多開源的模型都滿大部分在做測試實驗的時候都透過這個平台進行測試跟實驗所以呢這個平台未來可能會越來越重要很多人做不同的原模型但是做拖廣的這個平台</span></div>
+<div class="ts-seg"><span class="ts-time">00:38:52</span><span class="ts-text">只有一兩家在弄OK嗎那接下來要做的東西可能有些老師已經處理好了我會讓大家能夠大概稍微知道然後同時又能夠把大家的就是能夠把環境設置好接下來呢要安裝的是ChatGPT的桌面板那如果有弄好的老師呢可能就稍微聽一下如果沒有弄好的老師,趕快舉手助理去幫忙跟協助你就再打ChatGPT</span></div>
+<div class="ts-seg"><span class="ts-time">00:39:20</span><span class="ts-text">然後呢搜尋搜尋之後呢,你要嘛就從這個與ChatGPT對話的一個桌就是網頁板或者是說你直接打ChatGPT下載之後去下載它的桌面板那桌面板的話怎麼下載呢你進去之後呢到這個頁面大家應該很常用吧然後按工作,點下去之後它下面這邊有一個叫做開啟桌面應用程式,如果你的電腦沒有,如果你的電腦有它就會跳轉過去</span></div>
+<div class="ts-seg"><span class="ts-time">00:39:48</span><span class="ts-text">如果沒有的話呢它會進入一個這樣子的畫面就是下載ChatGPT的桌面板那下載的時候如果你今天是Mac的電腦它會自動抓取一個是Mac的版本還是你是其他的版本它會自動抓取如果不是的話又是Windows它就是這個樣子點下去之後呢會下載一個一個執行檔,然後讓你進行安裝這個安裝會比較花一點時間,所以呢希望大家能夠把這批地方</span></div>
+<div class="ts-seg"><span class="ts-time">00:40:16</span><span class="ts-text">弄好,那安裝好之後就會進入一個不同的畫面不同的畫面,OK嗎那我們先大概到這邊如果都沒有問題的話再往下一步再往下一步對然後就拆下來對,直接辨識就好所以就是一個時候是把圖像它就這樣照圖比如說我現在拍</span></div>
+<div class="ts-seg"><span class="ts-time">00:40:48</span><span class="ts-text">我現在是用手機把這個頁面拍下來OK嗎它會辨識,把這些東西從成像變成相那然後它會再做一個還有一個然後再把然後再把</span></div>
+<div class="ts-seg"><span class="ts-time">00:41:34</span><span class="ts-text">讓大家可以跟我一起來跟我一起來稍微思考一下所謂一邊安裝的過程中我另一邊進行內容我覺得就是在討論AI對歷史學重提之前我們其實必須要思考的就是說歷史學成為科學的核心精神是什麼這是我自己個人的一些想法提供給大家去思考大家都知道從笛卡爾開始它提出了科學的萬能論笛卡爾的科學其實非常的偏向</span></div>
+<div class="ts-seg"><span class="ts-time">00:42:06</span><span class="ts-text">數理化的一種科學的方法它強調的是一個邏輯是強調的是一個統整然後進行量化統計的一種方式的科學這是值得我們去思考的可是它這樣子的想法其實與此同時並不見得成為整個西方學界的一個核心的理論大家都覺得要對並不是其實在這個過程中有很多人提出了一些不同的想法比如說一個義大利非常有名的哲學家說</span></div>
+<div class="ts-seg"><span class="ts-time">00:42:33</span><span class="ts-text">他曾經提出過一個問題就是說他認為除了笛卡爾所說的這種數理化的科學性的研究方法之外照理說應該還有另外一種詩性的邏輯這個邏輯呢他的目標的目的是在於說他認為並不是數萬事萬物並不是都能夠純粹的完全的客觀的用數據的方式</span></div>
+<div class="ts-seg"><span class="ts-time">00:42:58</span><span class="ts-text">就有辦法去解釋跟詮釋他這樣子的思考的方法思考的理論他的想法裡面其實一直以來都比較沒有被強調但是呢直到呢大概是由世紀晚期到二世紀初期都開始有人去反思物理數學化學這種方式的這種所謂的純物質性的這樣子的一個理論它到底能不能解釋萬事萬物的事情</span></div>
+<div class="ts-seg"><span class="ts-time">00:43:22</span><span class="ts-text">尤其是在二戰結束之後其實很多人都在檢討說比如說原子彈的發明其實這種所謂非常純物理的東西裡面其實反而造成人類的悲劇人類反而沒有那麼的細那就有再進一步的去思考那到底人文或是說到底除了物理的話邏輯之外還有什麼樣的東西的存在我們回歸到康德的視角康德認為呢只有數學跟哲學</span></div>
+<div class="ts-seg"><span class="ts-time">00:43:49</span><span class="ts-text">因為他是哲學家嘛才具有所謂的絕對的科學性他認為其餘的學科都只是基於某種假設前提所推演出來的結果也就是一種相對的科學性所以他認為物理學的假設前提是數學是絕對正確的所以才推演出了物理學然後進一步推演了化學生物 工程 醫學等等我們所認為的自然科學的各種不同的學科那他認為這些東西</span></div>
+<div class="ts-seg"><span class="ts-time">00:44:18</span><span class="ts-text">都只是一個相對的科學性因為他認為只有數學跟哲學才有絕對的確定性進而才有所謂的科學性在這種思考的框架之下呢新康德主義的這幾位學者比如說像狄泰爾或者是文德爾班或者是說李凱爾特當然最有名的是卡西勒他們認為說必須回歸到康德的號召來去思考跟維護</span></div>
+<div class="ts-seg"><span class="ts-time">00:44:44</span><span class="ts-text">人文科學的獨特性他們進而去思考說人文科學的研究到底跟自然科學有什麼樣的不同有什麼樣的不同所以呢他們就提出一個人文科學的研究邏輯他們歸納出了主要有四點的這樣子的科學性那這個自然科學我花了蠻多時間讀他們的原點去統合起來的第一點他們認為人文科學更強調的是</span></div>
+<div class="ts-seg"><span class="ts-time">00:45:07</span><span class="ts-text">研究對象的個別性比如說我常常跟學生講說假設我研究蔣介石如果以自然科學的邏輯是他要有一千個蔣介石之後呢去統計分析之後呢結果跑出來的結果那個數據叫做蔣介石可是我們都知道全世界只有一個蔣介石所以我們研究對象都是個別的它不可能重複的出現跟存在這是第一點第二點</span></div>
+<div class="ts-seg"><span class="ts-time">00:45:30</span><span class="ts-text">他非常強調的人文科學非常強調是研究者的自身經驗也就是說我們必然的一定要透過自己的經驗以及透過我們所擁有的文化脈絡導致的我們對於詞語概念的邏輯去解釋過去那這種解釋過去的過程中難免都一定會有自己的自身經驗比如說我們對於民主這個概念的想法台灣可能跟中國大陸就不太一樣嘛</span></div>
+<div class="ts-seg"><span class="ts-time">00:45:55</span><span class="ts-text">是不是那我們在描述這個民主的時候我們看到中國大陸寫民主這兩個字台灣人寫的就是兩個字它的核心概念一定不同也就是說我們詞語本身文化脈絡的本身就已經必然的會涵蓋自己的自身經驗第三個點是他認為說人文研究之所以有意義來自於我的研究能夠跟別人產生共鳴</span></div>
+<div class="ts-seg"><span class="ts-time">00:46:15</span><span class="ts-text">然後進而產生進一步的鏈結對不對比如說像我研究的比較是近代史的研究那我的研究我必然一定是更常看到可能是楊惠珍老師的研究對不對因為他也是跟我做比較相關的時代的他的東西對我來講可能就更有鏈結對我來講可能就更有意義對那當然這不代表說沒有跟我鏈結就沒有意義只是對於個人來講有沒有意義而已像我可能去讀台灣比較荷蘭時代的東西</span></div>
+<div class="ts-seg"><span class="ts-time">00:46:41</span><span class="ts-text">對我來講可能我就比較少會去接觸它因為我沒有研究這方面嘛那第四個點他認為人文研究要追求的不是一個客觀的東西而是一個主客合一的客觀見證那基於這四個點之下呢就是我們必然的一定會產生一個問題就是說因為我們只能用自己的語言來分析過去的研究對象所以我們不可能去超脫自己文化脈絡所編製的所謂的意義之網那也因此呢</span></div>
+<div class="ts-seg"><span class="ts-time">00:47:10</span><span class="ts-text">我們必然一定要用自己的自然語言中曾經的意義去描述這些東西那這些意義其實很難用所謂統計方法來概括它的普遍性這意味著人文科學的研究追求的並不是簡單的客觀性而是人的主觀涉入的客觀精神所以呢人文科學的研究追求的並不是簡單的客觀性而是人的主觀涉入的客觀精神人文科本來就不是資料的堆砌也不是模型的分析這個跟AI的根質的原理是有很大的不同的那人文科學的核心其實在於理解人了解價值</span></div>
+<div class="ts-seg"><span class="ts-time">00:47:42</span><span class="ts-text">了解意義甚至創造意義我們研究歷史並不只是要還原世界而是要透過理解人歷史人物的所思所想以及分析他背後的動機一樣像是語言的教學也不是只有所謂的文字跟語言跟文法而是更重要的在於如何溝通 如何理解不同的文化如何去傳達自己的不同的情感的傳遞這才是關鍵簡單來講就是說人文其實是一種人與人之間的共鳴歷史學也一樣</span></div>
+<div class="ts-seg"><span class="ts-time">00:48:10</span><span class="ts-text">我們只是透過過去的發生的事物來讓自己與當代的人產生共鳴那過去的 我一直覺得歷史學好像都是困在那種後現代主義的批判但是其實我一直認為其實這是一種張飛打岳飛的想法我的意思是說事實上 後現代批判的從來不是歷史 探究歷史事實的歷史學它其實批判的是自黑格爾哲學以來對於單一主體性的霸權的宰制那儘管黑格爾的晚年都有他的學說進行檢討但是因為我們不是哲學系</span></div>
+<div class="ts-seg"><span class="ts-time">00:48:42</span><span class="ts-text">我們就不展開了所以從前面的康德的視角我們可以知道基於史料辯證為前提的歷史學它本身就具有科學性如果基於史料辯證它辯證為前提的歷史學不被認為是科學的話那麼從康德的視角來看的話從物理學以降的所有的科學都不具備有科學性嘛對不對所以我一直覺得要強化歷史學</span></div>
+<div class="ts-seg"><span class="ts-time">00:49:09</span><span class="ts-text">科學性的根本還是在回到史料因此我們要回歸到像傅斯年我建議傅斯年的說法就是說他認為就是說利用社會科學的理論和方法來處理史料但今天我們就必須要去思考我們如何在處理史料的基礎上我們雖然有數位人文的數位典範的發展但是呢直到目前為止我們好像都很少人利用資料科學以及數位人文或者是AI的這樣的技術來進一步的強調</span></div>
+<div class="ts-seg"><span class="ts-time">00:49:39</span><span class="ts-text">用這些AI的新方法來進一步的處理史料來強化史料的這樣子的可驗證性那麼我就一直在思考一個問題比如說好了我有時候可能會跟別人聊到就是說我總覺得比如說我們的期刊論文裡面都有引用的註解可是我們註解呢我們都必須要老師或者是研究者要去圖書館把這個註解找出來到底在哪裡呢要不然驗證它嘛對不對</span></div>
+<div class="ts-seg"><span class="ts-time">00:50:06</span><span class="ts-text">可是這個東西要曠日廢時但是如果對於一個研究的專業人來講他可能容易找得到可是如果對學生來講他就很不容易找得到這導致一個現象是當我們在審查的時候其實審查費都很少兩三千一兩千塊嘛對不對可是我們必須要花很大量的精神去做這件事情可是我們沒有辦法透過AI以及現在的網路以及現在的數位工具讓那個期刊論文出來的時候</span></div>
+<div class="ts-seg"><span class="ts-time">00:50:30</span><span class="ts-text">我的滑鼠只要一到那個引用的註解的時候一點下去就有辦法超連接到死掉的原文這樣子有沒有辦法進一步的強化它的可追溯性強化它的這樣子的就甚至於我覺得有時候我們難免解讀會有錯誤那透過這個過程的時候你都做錯了我這邊做錯了那怎麼樣去更改然後能強化它的驗證性我覺得這樣子的時候</span></div>
+<div class="ts-seg"><span class="ts-time">00:50:56</span><span class="ts-text">我們只要的基礎建設是非常重要的一件事情就是說當然這只是一個點我的意思是說我們如果透過這樣子的基礎建設然後讓AI的工具能夠大量的進行分析的時候同時也能夠具有保有這樣特殊性因為我們透過這個方式我們能夠好好的把這些材料好好的有一個共同的可能然後這樣進一步來看的話可以發現一件事情就是說以前我們看似總是對立的量化以及質性研究或者是</span></div>
+<div class="ts-seg"><span class="ts-time">00:51:24</span><span class="ts-text">我們希望透過量化裝飾來實在的普遍性或者是個體的特殊性這兩個東西好像以前都被認為是一種割裂的不同的研究方法但是透過AI的新的技術你沒有辦法讓我們可以進一步的變成是兩者之間是可以統合在一起的可以統合在一起的所以我一直就是有時候就可以去思考這樣的問題來跟大家討論我覺得未來可能是一個非常重要的一個趨勢那既然深層式AI是透過電腦為主體</span></div>
+<div class="ts-seg"><span class="ts-time">00:51:56</span><span class="ts-text">為載體才能夠進行運算所以我們可能就是必須要了解一下其實電腦的本質是什麼其實電腦本質很簡單就是這個東西而已就是0跟1的基本的邏輯單元的運算的電路而已它基本上都是一種電路只是那個電路現在做的很多做的很小大量的運算那透過這個方式的時候我們可以把AI其實就是這樣把一些問題變成一種複雜的數學運算</span></div>
+<div class="ts-seg"><span class="ts-time">00:52:22</span><span class="ts-text">進而把任何複雜的數學運算都有辦法拆解完以為簡單的數學運算簡單的數學運算都可以進一步變成一種二進制的運算方式進而給邏輯單元進行運算也就是說它是一個這樣子的一個流程這樣流程無論我們問AI什麼問題它都必然要跑過這樣的流程之後只要有辦法跟電腦溝通電腦呢是反過來從一個邏輯的單元的運算然後一步一步的推演出去最後給你答案它就是一個反向的一個過程</span></div>
+<div class="ts-seg"><span class="ts-time">00:52:52</span><span class="ts-text">反向的一個過程也就是說我們知道電腦的本質就跟我們以前用這個東西是一樣的道理它就是一種計算機它可以算得很快很會算但是它只會算它一個口令一個動作但是它基本上不太容易的舉一反三然後它不太體貼它只有它沒有溫景只有散熱的問題但它也沒有感受</span></div>
+<div class="ts-seg"><span class="ts-time">00:53:14</span><span class="ts-text">也沒有感受它展現出來的看似人一般的智慧其實都是用計算模擬出來的結果那因為時間有限我們就不從硬體展開了我們只要記得無論AI有多厲害它都在電腦的載體之中它必然也受到電腦有既有的限制之中必然有限制之中那在一個好像電腦什麼都贏人類的情況之下那我們要如何有什麼特殊呢很簡單因為它不會擁有創造性的思考</span></div>
+<div class="ts-seg"><span class="ts-time">00:53:43</span><span class="ts-text">你想它本質就是一個大量的運算如果大家知道數學運算的那個過程你就知道如果沒有新的東西給它它一算一算之後只會趨近於什麼它只會在自己的框架裡面繞它不會那個突破突破只能由人所創造出來的新的資料給它或者是人不同的思考的想法給它它才有辦法突破它既有運算的演算法的框框之中那關鍵就是在於什麼關鍵就是在於兩個</span></div>
+<div class="ts-seg"><span class="ts-time">00:54:12</span><span class="ts-text">第一個要有新的資料就像是富士田也告訴我們要等找到新的材料要上班下來找很多的資料另外一個東西就是它會去記錄自己的想法因為只有人會思考只有人會思考也是基於這樣的點就是說我們可以有發現AI無法取代的其實是第一個靈感跟創建</span></div>
+<div class="ts-seg"><span class="ts-time">00:54:34</span><span class="ts-text">第二個共鳴也就是說我們寫作的東西如何跟別人產生共情這東西是AI其實是做不到的第三個點就是從脈絡化的去理解所有的文本這東西也是電腦無法做到的因為我們只有我們個人才有辦法從個人的基礎觸發去進行脈絡化的理解從個人自己觸發對於一個研究題目的理解進而轉譯給當代的人這才是能夠讓這個題目</span></div>
+<div class="ts-seg"><span class="ts-time">00:54:59</span><span class="ts-text">產生共鳴一個很大的因素我一直認為AI反而是一個人文再興的可能因為它讓過去我們很多我們接下來幾堂課就會跟大家講到我們過去很多困難的資工技術比如說以前我們如果要寫個網頁可能要找很多找那些會寫網頁前端的的工讀生物或者是專家來幫我們寫一個一次寫完可能要十幾萬的錢只要辦法更新你們的戲網</span></div>
+<div class="ts-seg"><span class="ts-time">00:55:26</span><span class="ts-text">對不對或者是說以前過去我們要做遊戲我要做一個歷史遊戲要花多少的時間跟精力現在不用我們明天跟大家講你可以很快的只要把自己想法描述出來之後它就可以變成一款一個簡單的歷史的遊戲進而可以讓比如說我們在通識課或其他的展覽這邊可以讓大家去使用也就是說這些過去很多困難的</span></div>
+<div class="ts-seg"><span class="ts-time">00:55:50</span><span class="ts-text">資工技術其實對我們來講變得很容易掌握可是很有趣的是那種資工的人其實還是很難理解我們對不對我們能夠拿到他們東西變得很簡單他們能夠用東西還是一樣的困難所以這反而變成人文越來越重要但是最重要的東西就是思考就是思考所以我覺得我們必須還是要回歸到人文的核心</span></div>
+<div class="ts-seg"><span class="ts-time">00:56:10</span><span class="ts-text">那人文核心就是從自己的自身去不斷的去思考如何去理解人的人如何跟別人產生共鳴如何跟別人產生共鳴所以我才會這樣子去跟大家講一件事情為什麼要從筆記開始做起其實這個東西從一開始是這樣我有一次我那時候還是進史所的博士後來有一個應該已經過世的老先生老研究員的研究室裡面然後我們去整理他我們就發現一件事情</span></div>
+<div class="ts-seg"><span class="ts-time">00:56:39</span><span class="ts-text">就發現這些老前輩的研究室裡面他們都有一種小小小小的櫃子鋤錠可以打開然後你們就一張一張的筆記然後我們就打開說一張一張一張的這樣小小的筆記然後我說我還知道原來以前老一輩的學者在做研究就是他把他的資料或他的讀東西拿出來之後然後先去拿那個卡片去寫然後寫寫寫的時候他裡面可能會基本的編碼或基本的方式</span></div>
+<div class="ts-seg"><span class="ts-time">00:57:04</span><span class="ts-text">等他寫一篇文章然後再把它抽出來然後把它排一排排一排之後然後去寫文章對我就想原來以前是這麼做研究的所以我覺得很有趣也就是說我們人文研究無論如何我們都從第一個點開始這個點就是說我們都是從閱讀寫筆記開始那這個東西才是歷史學</span></div>
+<div class="ts-seg"><span class="ts-time">00:57:24</span><span class="ts-text">一開始的一個研究流程當然我記得我以前寫文章史學方法的時候就是剛才我講說余英時曾經在史學評論的那個發刊子裡面說寫到就是說史無定法那我們進步史上真的沒有定法嗎寫筆記不就是一開始的所有的方法的開端嗎對當然我沒有說那余英時老師啊不可能啊</span></div>
+<div class="ts-seg"><span class="ts-time">00:57:44</span><span class="ts-text">那個就是說我自己思考說那如果我們歷史學家在現在這個時代裡面我要如何把自己的筆記用數位的方式去呈現出來那因為你看喔這些的手寫我要重新再翻找其實是很困難的可是如果用數位筆記就跟大家剛剛所安裝的數位筆記一樣它裡面的功能很簡單</span></div>
+<div class="ts-seg"><span class="ts-time">00:58:04</span><span class="ts-text">直接按搜尋就可以找到你過去曾經做的研究就是我在讀博士的時候我遇到最大的一個困難不是因為我讀得不夠多而是因為我讀過的時候我就忘記了然後我在寫文章的時候發生一件事情就是說我好像還過好像還沒有應該要那麼寫但是我忘記我放哪裡了</span></div>
+<div class="ts-seg"><span class="ts-time">00:58:20</span><span class="ts-text">然後這個時候怎麼辦呢好像是某一本書然後書你不可能每一本書都買嘛你也不可能每一本書借完都放在家裡嘛又有期限嘛想到了人家圖書館哪裡你又再跑回去圖書館把書借回來再看我們其實很多時候我們在研究的時候很多的時間其實是放在反覆的查找跟打磨文字上面</span></div>
+<div class="ts-seg"><span class="ts-time">00:58:41</span><span class="ts-text">而不是放在當然打磨文字也是思考的過程就是反覆查找的過程中能不能透過數位的方法來減少了這樣子的一個時間的浪費時間的浪費所以我在這樣思考之下我就覺得那如果我們筆記用數位方式去呈現那會變成怎麼樣所以我後來也是學就是學一些東西這樣子</span></div>
+<div class="ts-seg"><span class="ts-time">00:59:00</span><span class="ts-text">然後呢隨著上世紀90年代開始呢高級值的軟體出現之後我相信很多很多老師跟我一樣我們電腦永遠存在存在一堆的Word檔跟Excel檔然後放在電腦上面非常非常多這是我寫博士論的時候開的然後很麻煩的點是在於滿滿的PDF 滿滿的Word檔但是我每一次要去要去找我要的東西</span></div>
+<div class="ts-seg"><span class="ts-time">00:59:22</span><span class="ts-text">反而都找不到因為我明明有做筆記但是我還是找不到因為它往往會讓你會讓你忘記你把東西放在哪裡去然後呢就是不斷的再去做反覆查找的過程這東西也就變得很麻煩變得很麻煩所以呢再加上這個也是德國也是用這種卡片</span></div>
+<div class="ts-seg"><span class="ts-time">00:59:41</span><span class="ts-text">這德國的那個商店也會看到這個卡片才發現他們也都跟我一樣這樣做學問所以有一個很有名的一個社會學家就說尼克拉斯·魯曼他呢曾經呢他是一個就是在一個有卡片化的德國社會出來他曾經發明了一種方式</span></div>
+<div class="ts-seg"><span class="ts-time">00:59:57</span><span class="ts-text">叫做魯曼的卡片和筆記法那當然對我們讀歷史來講他最有名的是他跟哈伯瑪斯的大辯論但是我要講的其實他的研究方法其實他在短他曾經是公務員他很晚很晚四十五六歲才拿到博士學位進入學界他在短短的二三十年的學術生涯裡面寫了二十幾本</span></div>
+<div class="ts-seg"><span class="ts-time">01:00:16</span><span class="ts-text">社會學的著作而且每一本都是非常偉大的著作對我來講寫一兩本我就很滿足了那魯曼曾經說過他的研究方法要歸功於卡片和筆記法也就是說當我們大部分人在提起他都會形容他的社會學理論</span></div>
+<div class="ts-seg"><span class="ts-time">01:00:32</span><span class="ts-text">卻忽略了他這個卡片和筆記法他就也是用前面的老師一樣他也就是把那個卡片寫好之後進行編碼需要的時候再拿出來排那他這個東西已經變成是世界文化遺產就是這個比特培大學裡面有專門展示他當年寫的</span></div>
+<div class="ts-seg"><span class="ts-time">01:00:48</span><span class="ts-text">這些卡片和謎記然後他寫了三萬多張的卡片和謎每一張都非常有趣有專門在做這個研究那一樣的觀點從卡片圖版的觀點像日本的人類學家叫梅道宗夫在他1969年的一本書裡面叫做《自治的生產技術》中也有寫到說能夠將閱讀時以及思考時的筆記</span></div>
+<div class="ts-seg"><span class="ts-time">01:01:09</span><span class="ts-text">寫在卡片上面這是一個做筆記的最根本的一開始的方法那更有趣的是無論是過去的圖書館我知道有些老師們也是要翻卡片才找那個索引資料或者是電腦剛發明的時候所以1950年代40年代的時候電腦剛發明的時候他們記錄電腦的數據也是用卡片的方式去記錄的</span></div>
+<div class="ts-seg"><span class="ts-time">01:01:30</span><span class="ts-text">也是用卡片的方式記錄的那這樣子的方式你就想說那卡片很像是一個關鍵那近年也不斷的出現很多的如何藉由筆記的方法來應付現在資訊爆炸的數位年代來減少大腦的記憶負擔以前我們過去不斷的去寫書不斷的去學習不斷的去記憶我們要背誦背誦背誦可是問題是</span></div>
+<div class="ts-seg"><span class="ts-time">01:01:52</span><span class="ts-text">在現在這個年代裡面我們每天能夠接收的訊息是非常非常多的那如何去減少大腦的一些負擔然後進而把某一些的知識能夠拿另外一個比如說用卡片的方式去儲存起來或者創造所謂的有第二大腦的這樣的概念第二大腦的概念那這個東西就變成是非常重要的所以我覺得有時候在思考一件事情就是學習的目的</span></div>
+<div class="ts-seg"><span class="ts-time">01:02:17</span><span class="ts-text">是為了要解決這個問題而不是只是單純的背誦或記憶某種知識可是我們我好像我自己好像也很少教學生或是自己根本不知道自己是如何學習的所以有時候讓我自己反思說那我應該怎麼教學生如何學習當然這會引起另外一個問題比如說未來沒有網路</span></div>
+<div class="ts-seg"><span class="ts-time">01:02:34</span><span class="ts-text">沒有電腦假如電腦被駭客都弄壞了那我們人又該怎麼辦以後我們所以說有時候年代越來越發展其實自己會擔憂說如果有一天它突然壞掉了那我們每個人都不會寫作了那也是很可怕的一件事情這值得思考那回歸到魯曼他其實在過世之前的1998年曾經在一篇叫做學習閱讀的文章之後</span></div>
+<div class="ts-seg"><span class="ts-time">01:02:55</span><span class="ts-text">有做一個預言式的寫道他認為他那個年代剛好個人電腦出現他認為呢他這個一套的卡片和筆記法可能電腦可以提供一個可能性把他的卡片用電腦的方式去記錄的話那未來有可能會讓書寫變成一種自我運作的工作他某種程度上好像也運作了就是預言的生成式AI以及這種AI寫作這樣子的時代的出現</span></div>
+<div class="ts-seg"><span class="ts-time">01:03:24</span><span class="ts-text">可是無論如何不管我們要如何用電腦用AI的技術還是要回歸人的根本他的所謂每一個筆記都是自己閱讀手寫下來的閱讀跟思考永遠都不會被取代閱讀跟思考永遠都是最重要的一件事情所以有時候我們系上老師或李老師也跟我討論過就是說在這個時代之下也許對我們這種</span></div>
+<div class="ts-seg"><span class="ts-time">01:03:47</span><span class="ts-text">曾經已經用過去的這種方式做研究的人來講我們已經很習慣閱讀跟思考閱讀跟寫筆記可是未來的學生呢而且現在的學生還好如果現在的小朋友他從小到大都有AI的時候他已經慢慢的去失去那個最一開始就是人類大腦在逐漸成長的過程中的最紮實最紮實的這樣子的訓練就是他的訓練我對於這個</span></div>
+<div class="ts-seg"><span class="ts-time">01:04:12</span><span class="ts-text">我現在不知道要講到死了我每次講到這種東西我就會想到一件事情我想到我大學的時候我大學的時候讀最多史料的課就是沈德烏老師教我們讀那個史料的時候他帶我們讀那個念二死雜記我印象深刻是因為透過雖然我未來也不是研究這方面的領域但是透過這個過程中我就知道說哇</span></div>
+<div class="ts-seg"><span class="ts-time">01:04:36</span><span class="ts-text">就是其實很多的歷史的論述很多歷史的不同的觀點其實都從這個史料中不斷的閱讀閱讀然後那些學者不斷不斷累積出來的結果這個閱讀這個過程中會讓學生們也許他未來會忘記內容但他會讓學生造成一個印象就是說歷史學的根本核心其實就在這上面其實就在這上面所以呢我們才會讓大家去思考</span></div>
+<div class="ts-seg"><span class="ts-time">01:04:59</span><span class="ts-text">那去做數位筆記因為數位筆記很簡單就是我們就只是把以前過去閱讀跟書寫這個過程變成是在電腦上面自己打字打出來所以我在上課的時候都跟學生講一件事你今天就是現在裝好CM之後你之後你每天上課或是每天家裡你在自己生活中的所思所想你都把它記錄下來你就先把它東西記錄下來你要先習慣每天記錄自己的想法</span></div>
+<div class="ts-seg"><span class="ts-time">01:05:25</span><span class="ts-text">每天記錄自己的閱讀每天記錄自己的思考即便它不是你讀書你也只是去台南吃個滷肉飯進行評價也好對不對說不定累積久了你就可以寫一本叫做《台灣滷肉飯的歷史演變》之類的都有可能吧就是他們要從自己的關懷中出發我們的研究我們的歷史學的研究其實大部分</span></div>
+<div class="ts-seg"><span class="ts-time">01:05:46</span><span class="ts-text">那後來其實說真的靠的其實是自己對某東西的熱情那問題關鍵是在於如何找到自己的熱情所在其實我像我自己在德國念書其實大部分能夠最後讀到畢業的都有一個點就是因為他知道自己喜歡跟想要什麼有那個熱情才能走得遠也就是在AS但另外一個非常重要的東西就是動機是什麼你有了動機之後學生自己會去</span></div>
+<div class="ts-seg"><span class="ts-time">01:06:09</span><span class="ts-text">找到自己適合的方式跟自己適合的方法那怎麼找到動機很簡單就是像我剛剛講的寄了筆記的過程中他慢慢慢慢的其實像我看了很多的學生的他們寫的筆記會來給我看我看完之後會發現這個學生會這個取向喜歡做這件事情其實他有他的脈絡他自己的生命經驗跟脈絡</span></div>
+<div class="ts-seg"><span class="ts-time">01:06:28</span><span class="ts-text">所以這變得很重要好那我們回歸到歷史學的研究流程就是說因為思考那我們拆解一下我們歷史研究的流程無外乎就是這樣嘛就是第一個進行知識的分類第二個快速的記錄自己的想法第三個就是什麼凝聚跟思考對這些東西裡面的內容到底是什麼那第四步有時候不見得一定會有</span></div>
+<div class="ts-seg"><span class="ts-time">01:06:49</span><span class="ts-text">就是數位的分析方法那有了這個東西之後第四步不見得因為有些老師可能不見得用數位分析方法用指針分析的這種詮釋方式也是很平常的所以第五步就是最後是書寫第六步可能就是把自己書寫的東西給知識的共享就是我們投稿的這個過程無外乎就是這幾個步驟這幾個步驟那無論兩個步驟</span></div>
+<div class="ts-seg"><span class="ts-time">01:07:09</span><span class="ts-text">都還是會回到寫筆記上面寫筆記上面那當我們拆解的步驟之後我們才有辦法怎麼樣把這個步驟進一步的流程化系統化甚至未來透過AI agent的方式進行自動化都變成是有可能的變成是有可能的也在這樣的思路之下呢其實我很早就是在鑑識所的時候也就有開過這樣子的一個小小的工作坊跟老師們跟同學們進行分享</span></div>
+<div class="ts-seg"><span class="ts-time">01:07:35</span><span class="ts-text">進行分享好那我們呢這個第一堂課的講解的部分就到這邊接下來我們要做一件很重要的事情就是繼續是操作的部分對時間有點非常的剛好就讓我們有更多的操作的部分好我們大家已經安裝好我們的這個所謂的ChatGPT的網頁不是網頁那個桌面板</span></div>
+<div class="ts-seg"><span class="ts-time">01:07:57</span><span class="ts-text">這桌面板之後我們要做一件事情我們把ChatGPT的這樣子的一個AI的這個平台它如果去讀取我們寫數位筆記的時候的內容所以接下來呢大家先打開這個平台之後進一步進去這邊有一個我沒有標示出來喔你把你的滑鼠移到專案這邊的時候它會有一個加號小小的加號那個助理們幫忙一下喔點進去這個加號的時候呢它會跑出一個這樣子的一個畫面</span></div>
+<div class="ts-seg"><span class="ts-time">01:08:30</span><span class="ts-text">這樣子的一個畫面喔這樣的畫面我可以也可以操作給大家看喔這邊有一個專案這邊有一個加號這裡有一個加號點下去然後你可以給它拿稱然後呢這邊呢你可以給它資料夾對點進去之後呢點到這個資料夾之後它要你選擇一個資料夾這個時候你就選擇你剛剛用Obsidian</span></div>
+<div class="ts-seg"><span class="ts-time">01:08:57</span><span class="ts-text">所創建的那個資料夾這樣子的話你在Obsidian裡面做的所有東西都有辦法在AI裡面去讀到然後幫你進一步的處理幫你進一步的處理大家可以試看看喔好你就選擇比如說我是以這個名稱為伴侶你可以選擇你選擇你剛剛所用的那個自己創建出來的一個桌面放在桌面的一個筆記的自己的筆記庫喔筆記庫</span></div>
+<div class="ts-seg"><span class="ts-time">01:09:28</span><span class="ts-text">然後按建立專案建立專案可以嗎那個助理幫忙一下那個Obsidian都會建立建立都不行剛剛是放在桌面上對那現在這邊就是一樣的</span></div>
+          </div>
+          <p class="fallback">⚠️底色標記的兩段（00:34:32-00:36:32、00:41:04-00:41:34）是ASR低信心段落；
+            00:42:30附近「一位義大利哲學家」的人名被完全漏辨識（對照投影片應為維柯），沒有代填，
+            這裡誠實標出來——逐字稿是ASR＋術語校正，不是逐字聽打核實稿，重要引用請回聽原始錄音。</p>
+        </div>
+      </div>
+      <div class="term-tbl">
+        <table>
+          <thead><tr><th>ASR原始辨識</th><th>校正為</th><th>出現次數</th><th>依據</th></tr></thead>
+          <tbody>
+            <tr><td class="wrong">第一卡／迪卡爾</td><td class="right">笛卡爾</td><td>3</td><td>投影片p60</td></tr>
+            <tr><td class="wrong">私性的邏輯</td><td class="right">詩性的邏輯</td><td>1</td><td>投影片p61（維柯）</td></tr>
+            <tr><td class="wrong">以太爾</td><td class="right">狄泰爾</td><td>1</td><td>投影片p63</td></tr>
+            <tr><td class="wrong">李泰爾特</td><td class="right">李凱爾特</td><td>1</td><td>投影片p63</td></tr>
+            <tr><td class="wrong">尼克勒斯魯曼</td><td class="right">尼克拉斯·魯曼</td><td>1</td><td>投影片p81</td></tr>
+            <tr><td class="wrong">ChurchGPT／CheerGPT／CureGPT</td><td class="right">ChatGPT</td><td>8</td><td>投影片p3</td></tr>
+            <tr><td class="wrong">深層次</td><td class="right">生成式（AI）</td><td>3</td><td>投影片多處</td></tr>
+            <tr><td class="wrong">黑戈爾／哈佛馬斯基</td><td class="right">黑格爾／哈伯瑪斯</td><td>3</td><td>學界標準譯名（非投影片直接文字）</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </details>
 </div>
 
