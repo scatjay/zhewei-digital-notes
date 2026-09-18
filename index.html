@@ -111,6 +111,21 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .tab-legend .i-hands{background:var(--jade)}
 .tab-legend .i-lecture{background:var(--indigo)}
 .tab-legend .i-other{background:var(--ink-3)}
+
+.now-card{display:flex;align-items:center;gap:14px;margin-top:16px;padding:14px 18px;
+  border-radius:10px;flex-wrap:wrap}
+.now-card.is-live{border:2px solid var(--seal);background:var(--seal-bg)}
+.now-card.is-soon{border:2px solid var(--indigo);background:var(--indigo-bg)}
+.now-badge{font-family:var(--mono);font-weight:700;font-size:13px;white-space:nowrap}
+.now-card.is-live .now-badge{color:var(--seal)}
+.now-card.is-soon .now-badge{color:var(--indigo)}
+.now-body{flex:1 1 200px;min-width:0}
+.now-body b{font-family:var(--serif);font-size:15.5px;display:block}
+.now-body span{font-size:12px;color:var(--ink-2)}
+.now-jump{font-family:var(--sans);font-weight:600;font-size:13px;padding:8px 16px;
+  border-radius:6px;border:none;cursor:pointer;white-space:nowrap;min-height:38px}
+.now-card.is-live .now-jump{background:var(--seal);color:#fff}
+.now-card.is-soon .now-jump{background:var(--indigo);color:#fff}
 .tabpanel{border-top:1px solid var(--rule-strong);padding-top:8px}
 .stub-note{border:1px dashed var(--rule-strong);border-radius:6px;padding:16px 20px;
   background:var(--surface);margin-bottom:8px}
@@ -386,6 +401,15 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     <span><i class="i-hands"></i>實機操作</span>
     <span><i class="i-lecture"></i>演講</span>
     <span><i class="i-other"></i>開幕・圓桌・其他</span>
+  </div>
+
+  <div class="now-card" id="nowCard" hidden>
+    <div class="now-badge" id="nowBadge"></div>
+    <div class="now-body">
+      <b id="nowTitle"></b>
+      <span id="nowMeta"></span>
+    </div>
+    <button class="now-jump" id="nowJump">看這場 →</button>
   </div>
 
   <nav class="tabbar" id="tabbar" role="tablist">
@@ -1415,20 +1439,62 @@ initGoogleAuth();
     return new Date(s);
   }
   function pad(n){ return (n<10?'0':'')+n; }
+  var TITLES = {
+    open: '開幕式・陳登武・李卓穎', s1: '第一場・歷史研究的開端－寫筆記',
+    s2: '第二場・從數位筆記到數位思維', ethics: '第三場・學術倫理・林文源',
+    panel1: '圓桌一（Day1）・林文源等', s4: '第四場・提示詞工程與生成式AI',
+    s5: '第五場・打造AI史料對話機器人', s6: '第六場・AI優化研究工作流程',
+    explore: '第七場・人社探索・王道維', panel2: '圓桌二（Day2）・王道維等'
+  };
+  var UPCOMING_WINDOW_MIN = 20;   // 開始前20分鐘內顯示「快開始」
+  function toMinutes(hhmm){ return parseInt(hhmm.slice(0,2),10)*60 + parseInt(hhmm.slice(2),10); }
   function markLive(){
     var now = taipeiNow();
     var dateStr = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate());
     var hhmm = pad(now.getHours()) + pad(now.getMinutes());
-    var liveTab = null;
+    var nowMin = toMinutes(hhmm);
+    var liveTab = null, upcoming = null;   // upcoming = {tab, mins}
     SCHEDULE.forEach(function(row){
-      if (row[0] === dateStr && hhmm >= row[1] && hhmm < row[2]) liveTab = row[3];
+      if (row[0] !== dateStr) return;
+      if (hhmm >= row[1] && hhmm < row[2]){ liveTab = row[3]; return; }
+      var startMin = toMinutes(row[1]);
+      var diff = startMin - nowMin;
+      if (diff > 0 && diff <= UPCOMING_WINDOW_MIN && (!upcoming || diff < upcoming.mins)){
+        upcoming = {tab: row[3], mins: diff};
+      }
     });
     document.querySelectorAll('.tabbtn').forEach(function(b){
       b.classList.toggle('is-live', b.getAttribute('data-tab') === liveTab);
     });
+
+    var card = document.getElementById('nowCard');
+    var badge = document.getElementById('nowBadge');
+    var title = document.getElementById('nowTitle');
+    var meta = document.getElementById('nowMeta');
+    var jump = document.getElementById('nowJump');
+    if (liveTab){
+      card.hidden = false; card.className = 'now-card is-live';
+      badge.textContent = '🔴 進行中';
+      title.textContent = TITLES[liveTab] || liveTab;
+      meta.textContent = '現在正在進行，點右邊直接看這場的筆記';
+      jump.setAttribute('data-jump', liveTab);
+    } else if (upcoming){
+      card.hidden = false; card.className = 'now-card is-soon';
+      badge.textContent = '⏱ ' + upcoming.mins + '分鐘後開始';
+      title.textContent = TITLES[upcoming.tab] || upcoming.tab;
+      meta.textContent = '快開始了，先預覽一下這場的內容';
+      jump.setAttribute('data-jump', upcoming.tab);
+    } else {
+      card.hidden = true;
+    }
   }
   markLive();
-  setInterval(markLive, 60 * 1000);
+  setInterval(markLive, 30 * 1000);
+  document.getElementById('nowJump').addEventListener('click', function(){
+    var tab = this.getAttribute('data-jump');
+    var btn = document.querySelector('.tabbtn[data-tab="' + tab + '"]');
+    if (btn) btn.click();
+  });
 })();
 
 /* ── 分頁切換 ── */
