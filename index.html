@@ -228,6 +228,9 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
   color:var(--ink);cursor:pointer;min-height:36px}
 .pdfjs-btn:disabled{opacity:.4;cursor:default}
 .pdfjs-btn.pdfjs-jump{font-size:12px;padding:7px 9px;color:var(--ink-2)}
+.pdfjs-skip{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--ink-2);
+  margin-left:4px;cursor:pointer;user-select:none}
+.pdfjs-skip input{cursor:pointer}
 .pdfjs-pagenum{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);white-space:nowrap}
 .pdfjs-status{padding:30px;text-align:center;color:var(--ink-3);font-size:13px}
 .slidereader .fallback{margin:10px 0 0;font-size:12.5px;color:var(--ink-3)}
@@ -497,6 +500,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
               <button class="pdfjs-btn" data-act="next" title="下一頁">+1</button>
               <button class="pdfjs-btn pdfjs-jump" data-act="fwd10" title="往後跳10頁">+10</button>
               <button class="pdfjs-btn pdfjs-jump" data-act="last" title="跳到最後一頁">最後 ⏭</button>
+              <label class="pdfjs-skip"><input type="checkbox" data-act="skipempty"> 隱藏無逐字稿頁面</label>
             </div>
           </div>
           <p class="fallback">載入不出來的話<a href="slides-session1.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟原始PDF</a>。</p>
@@ -824,6 +828,7 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
               <button class="pdfjs-btn" data-act="next" title="下一頁">+1</button>
               <button class="pdfjs-btn pdfjs-jump" data-act="fwd10" title="往後跳10頁">+10</button>
               <button class="pdfjs-btn pdfjs-jump" data-act="last" title="跳到最後一頁">最後 ⏭</button>
+              <label class="pdfjs-skip"><input type="checkbox" data-act="skipempty"> 隱藏無逐字稿頁面</label>
             </div>
           </div>
           <p class="fallback">載入不出來的話<a href="slides-session2.pdf" target="_blank" rel="noopener">點這裡在新分頁開啟原始PDF</a>。</p>
@@ -2082,8 +2087,26 @@ function initPdfjsViewer(containerId){
     canvasWrap.innerHTML = '<div class="pdfjs-status">投影片載入失敗，請用下面的連結開原始檔。</div>';
   });
 
-  prevBtn.addEventListener('click', function(){ if (state.page > 1) renderPage(state.page - 1); });
-  nextBtn.addEventListener('click', function(){ if (state.pdf && state.page < state.pdf.numPages) renderPage(state.page + 1); });
+  var skipChk = box.querySelector('[data-act="skipempty"]');
+
+  function hasContent(n){ return !!(tmap && tmap[n]); }
+  function findStep(from, dir){
+    if (!state.pdf) return from;
+    if (!skipChk || !skipChk.checked || !tmap) return from + dir;
+    var n = from + dir;
+    while (n >= 1 && n <= state.pdf.numPages && !hasContent(n)) n += dir;
+    if (n < 1 || n > state.pdf.numPages) return from; // 找不到更多有內容的頁，留在原地
+    return n;
+  }
+
+  prevBtn.addEventListener('click', function(){
+    var n = findStep(state.page, -1);
+    if (n !== state.page && n >= 1) renderPage(n);
+  });
+  nextBtn.addEventListener('click', function(){
+    var n = findStep(state.page, 1);
+    if (n !== state.page && state.pdf && n <= state.pdf.numPages) renderPage(n);
+  });
 
   function goClamped(n){
     if (!state.pdf) return;
