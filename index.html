@@ -98,6 +98,9 @@ h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,6vw,40px);
 .tabbtn span{display:block;font-size:10.5px;color:var(--ink-3);margin-top:2px;font-family:var(--mono)}
 .tabbtn.active{background:var(--surface);color:var(--ink);font-weight:700;
   border-bottom:2px solid var(--surface);margin-bottom:-1px;position:relative;z-index:1}
+.tabbtn .live{display:none;color:var(--seal);font-family:var(--mono);font-weight:700}
+.tabbtn.is-live .live{display:inline}
+.tabbtn.is-live{box-shadow:0 0 0 2px var(--seal-bg) inset}
 .tabbtn{border-top:3px solid var(--rule-strong)}
 .tabbtn[data-type="hands"]{border-top-color:var(--jade)}
 .tabbtn[data-type="lecture"]{border-top-color:var(--indigo)}
@@ -366,16 +369,16 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
   </div>
 
   <nav class="tabbar" id="tabbar" role="tablist">
-    <button class="tabbtn" data-tab="s1" data-type="hands" role="tab">第一場<span>歷史研究的開端－寫筆記</span></button>
-    <button class="tabbtn active" data-tab="s2" data-type="hands" role="tab">第二場<span>從數位筆記到數位思維</span></button>
-    <button class="tabbtn" data-tab="s4" data-type="hands" role="tab">第四場<span>提示詞工程與生成式AI</span></button>
-    <button class="tabbtn" data-tab="s5" data-type="hands" role="tab">第五場<span>打造AI史料對話機器人</span></button>
-    <button class="tabbtn" data-tab="ethics" data-type="lecture" role="tab">第三場<span>學術倫理・林文源</span></button>
-    <button class="tabbtn" data-tab="s6" data-type="lecture" role="tab">第六場<span>AI優化研究工作流程</span></button>
-    <button class="tabbtn" data-tab="explore" data-type="lecture" role="tab">第七場<span>人社探索・王道維</span></button>
-    <button class="tabbtn" data-tab="open" data-type="other" role="tab">開幕式<span>陳登武・李卓穎</span></button>
-    <button class="tabbtn" data-tab="panel1" data-type="other" role="tab">圓桌一<span>Day1・林文源等</span></button>
-    <button class="tabbtn" data-tab="panel2" data-type="other" role="tab">圓桌二<span>Day2・王道維等</span></button>
+    <button class="tabbtn" data-tab="s1" data-type="hands" role="tab">第一場 <span class="live">🔴進行中</span><span>歷史研究的開端－寫筆記</span></button>
+    <button class="tabbtn active" data-tab="s2" data-type="hands" role="tab">第二場 <span class="live">🔴進行中</span><span>從數位筆記到數位思維</span></button>
+    <button class="tabbtn" data-tab="s4" data-type="hands" role="tab">第四場 <span class="live">🔴進行中</span><span>提示詞工程與生成式AI</span></button>
+    <button class="tabbtn" data-tab="s5" data-type="hands" role="tab">第五場 <span class="live">🔴進行中</span><span>打造AI史料對話機器人</span></button>
+    <button class="tabbtn" data-tab="ethics" data-type="lecture" role="tab">第三場 <span class="live">🔴進行中</span><span>學術倫理・林文源</span></button>
+    <button class="tabbtn" data-tab="s6" data-type="lecture" role="tab">第六場 <span class="live">🔴進行中</span><span>AI優化研究工作流程</span></button>
+    <button class="tabbtn" data-tab="explore" data-type="lecture" role="tab">第七場 <span class="live">🔴進行中</span><span>人社探索・王道維</span></button>
+    <button class="tabbtn" data-tab="open" data-type="other" role="tab">開幕式 <span class="live">🔴進行中</span><span>陳登武・李卓穎</span></button>
+    <button class="tabbtn" data-tab="panel1" data-type="other" role="tab">圓桌一 <span class="live">🔴進行中</span><span>Day1・林文源等</span></button>
+    <button class="tabbtn" data-tab="panel2" data-type="other" role="tab">圓桌二 <span class="live">🔴進行中</span><span>Day2・王道維等</span></button>
     <button class="tabbtn" data-tab="s8" data-type="other" role="tab">未來展望<span>哲維老師延伸材料</span></button>
   </nav>
 </header>
@@ -1190,6 +1193,42 @@ function initGoogleAuth(){
   });
 }
 initGoogleAuth();
+
+/* ── 目前進行中標記（照官方行前手冊的時段表，台北時區）── */
+(function(){
+  // [date 'YYYY-MM-DD', startHHMM, endHHMM, tab]
+  var SCHEDULE = [
+    ['2026-09-18', '0950', '1015', 'open'],
+    ['2026-09-18', '1030', '1200', 's1'],
+    ['2026-09-18', '1330', '1500', 's2'],
+    ['2026-09-18', '1520', '1550', 'ethics'],
+    ['2026-09-18', '1550', '1650', 'panel1'],
+    ['2026-09-19', '0900', '1030', 's4'],
+    ['2026-09-19', '1040', '1210', 's5'],
+    ['2026-09-19', '1310', '1440', 's6'],
+    ['2026-09-19', '1500', '1530', 'explore'],
+    ['2026-09-19', '1540', '1650', 'panel2']
+  ];
+  function taipeiNow(){
+    var s = new Date().toLocaleString('en-US', {timeZone: 'Asia/Taipei'});
+    return new Date(s);
+  }
+  function pad(n){ return (n<10?'0':'')+n; }
+  function markLive(){
+    var now = taipeiNow();
+    var dateStr = now.getFullYear() + '-' + pad(now.getMonth()+1) + '-' + pad(now.getDate());
+    var hhmm = pad(now.getHours()) + pad(now.getMinutes());
+    var liveTab = null;
+    SCHEDULE.forEach(function(row){
+      if (row[0] === dateStr && hhmm >= row[1] && hhmm < row[2]) liveTab = row[3];
+    });
+    document.querySelectorAll('.tabbtn').forEach(function(b){
+      b.classList.toggle('is-live', b.getAttribute('data-tab') === liveTab);
+    });
+  }
+  markLive();
+  setInterval(markLive, 60 * 1000);
+})();
 
 /* ── 分頁切換 ── */
 (function(){
