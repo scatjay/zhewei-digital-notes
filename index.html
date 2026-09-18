@@ -440,15 +440,6 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     <span><i class="i-other"></i>開幕・圓桌・其他</span>
   </div>
 
-  <div class="now-card" id="nowCard" hidden>
-    <div class="now-badge" id="nowBadge"></div>
-    <div class="now-body">
-      <b id="nowTitle"></b>
-      <span id="nowMeta"></span>
-    </div>
-    <button class="now-jump" id="nowJump">看這場 →</button>
-  </div>
-
   <nav class="tabbar" id="tabbar" role="tablist">
     <button class="tabbtn" data-tab="s1" data-type="hands" role="tab">第一場 <span class="live">🔴進行中</span><span>歷史研究的開端－寫筆記</span></button>
     <button class="tabbtn active" data-tab="s2" data-type="hands" role="tab">第二場 <span class="live">🔴進行中</span><span>從數位筆記到數位思維</span></button>
@@ -1343,34 +1334,9 @@ initGoogleAuth();
       b.classList.toggle('is-live', b.getAttribute('data-tab') === liveTab);
     });
 
-    var card = document.getElementById('nowCard');
-    var badge = document.getElementById('nowBadge');
-    var title = document.getElementById('nowTitle');
-    var meta = document.getElementById('nowMeta');
-    var jump = document.getElementById('nowJump');
-    if (liveTab){
-      card.hidden = false; card.className = 'now-card is-live';
-      badge.textContent = '🔴 進行中';
-      title.textContent = TITLES[liveTab] || liveTab;
-      meta.textContent = '現在正在進行，點右邊直接看這場的筆記';
-      jump.setAttribute('data-jump', liveTab);
-    } else if (upcoming){
-      card.hidden = false; card.className = 'now-card is-soon';
-      badge.textContent = '⏱ ' + upcoming.mins + '分鐘後開始';
-      title.textContent = TITLES[upcoming.tab] || upcoming.tab;
-      meta.textContent = '快開始了，先預覽一下這場的內容';
-      jump.setAttribute('data-jump', upcoming.tab);
-    } else {
-      card.hidden = true;
-    }
   }
   markLive();
   setInterval(markLive, 30 * 1000);
-  document.getElementById('nowJump').addEventListener('click', function(){
-    var tab = this.getAttribute('data-jump');
-    var btn = document.querySelector('.tabbtn[data-tab="' + tab + '"]');
-    if (btn) btn.click();
-  });
 })();
 
 /* ── PDF.js 單頁投影片瀏覽器 ──
