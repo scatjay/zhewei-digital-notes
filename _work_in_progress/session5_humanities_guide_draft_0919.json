@@ -1,0 +1,411 @@
+{
+ "draft": {
+  "sections": [
+   {
+    "id": "s5-start",
+    "eyebrow": "起點",
+    "h2": "議程說的是「資料對話機器人」，投影片後半場卻在教別的東西——先把這件事講清楚",
+    "sec_lede": "官方議程只有一個名字：「打造AI史料／資料對話機器人」。但95頁投影片攤開來看，第55頁之後整整31分鐘，講的其實是另一件事——怎麼用Codex這款AI coding agent寫程式、控制電腦。這個落差不是誰漏教了什麼，是老師在現場自己做的取捨，而且他當場就講清楚了。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">起點</span>\n  <h2>議程說的是「資料對話機器人」，投影片後半場卻在教別的東西——先把這件事講清楚</h2>\n  <p class=\"sec-lede\">官方議程只有一個名字：「打造AI史料／資料對話機器人」。但95頁投影片攤開來看，第55頁之後整整31分鐘，講的其實是另一件事——怎麼用Codex這款AI coding agent寫程式、控制電腦。這個落差不是誰漏教了什麼，是老師在現場自己做的取捨，而且他當場就講清楚了。</p>\n\n  <div class=\"protocol-box\">\n    <b>落差先攤開：</b>投影片實際分成清楚的兩段——第1-54頁（時間軸0:00-54:07，佔全部頁數57%）在講RAG：為什麼AI會產生幻覺、什麼是檢索增強生成、怎麼手把手做出一個屬於自己的史料對話機器人；第55-95頁（時間軸54:07-85:12，佔全部頁數43%、全場最後31分鐘）完全轉向，變成一堂獨立的「Codex操作入門」課，直到最後約13分鐘（第84-95頁）才又拉回來，用Agent Skills處理老師自己收集的德國外交部檔案——這時候「史料」兩個字才又回到畫面正中央。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這不是課程規劃出了差錯，是老師自己在53:22當場宣布的決定：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">現場逐字稿原話，約53:22（投影片第50頁附近）</div>\n    那我們的RAG的部分大概到這邊，那其他的一些詳細的內容呢，基本上我們就可以先簡單的繞過。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師跳過的，是RAG流程裡最技術性的10頁細節——提問澄清、問題衍生、召回的正式定義、餘弦相似度／歐式距離／點積這些向量比對公式、重排機制，還有「RAG使用場景」「RAG對歷史研究的助益／限制」這幾頁收尾投影片（第13、14、19-23、50、52、53頁）。這些投影片文字其實都還留著，下面的投影片區塊裡可以自己翻，只是現場沒有口頭展開——時間有限，優先讓大家把手上的Colab實作跑完。這是一個現場的、誠實的取捨，不是遺漏，第04節會把這幾頁的內容也一併整理進來。</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">那後半場的Codex又是怎麼接上去的？兩段路線背後其實是同一個問題的兩半：<b>RAG講的是怎麼讓AI「查得到」你的史料，Codex講的是怎麼讓AI「動手處理」你的史料</b>——查得到是第一步，動手做完OCR、翻譯、把人名地名連結起來，是下一步。老師最後用自己十幾萬張德國外交部檔案的真實案例，把這兩步接在一起。下面幾節，就照「先查到、再動手」這個順序整理。</p>\n</section>",
+    "grounding": [
+     {
+      "claim": "官方議程標題「打造AI史料／資料對話機器人」",
+      "source": "任務素材已知事實；投影片p1標題頁",
+      "verbatim": "第五場 打造AI史料/資料對話機器人"
+     },
+     {
+      "claim": "投影片55-95頁佔全場43%、後半場31分鐘、脫離RAG主題",
+      "source": "任務素材已知關鍵事實（第一輪頁碼對齊agent查證）；第五場逐字稿_頁碼對齊與潤飾_0919.json generated_note"
+     },
+     {
+      "claim": "53:22逐字稿原話「那我們的RAG的部分大概到這邊…基本上我們就可以先簡單的繞過」",
+      "source": "第五場逐字稿_完整校對去口語化_0919.json page_transcript P50/P54之間的時間點；第五場逐字稿_頁碼對齊與潤飾_0919.json pages_empty_reason P50條目引用同一句",
+      "verbatim": "那我們的RAG的部分大概到這邊，那其他的一些詳細的內容呢，基本上我們就可以先簡單的繞過。"
+     },
+     {
+      "claim": "老師口頭跳過的RAG細節投影片為P13、14、19-23、50、52、53共10頁",
+      "source": "第五場逐字稿_頁碼對齊與潤飾_0919.json pages_empty_reason 逐條核對（P82、83另為外掛相關、不計入RAG細節，本節已排除）"
+     },
+     {
+      "claim": "P55「那我們接下來要回到Codex的部分」",
+      "source": "page_transcript P55"
+     }
+    ]
+   },
+   {
+    "id": "s5-01",
+    "eyebrow": "01 — 為什麼要用RAG",
+    "h2": "AI為什麼會「腦補」，還有為什麼要先給它一份小抄",
+    "sec_lede": "上一場已經講過Token、向量化的基礎。這一場老師從「幻覺」這個大家最有感的問題切入，帶出RAG要解決的正是這件事。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">01 — 為什麼要用RAG</span>\n  <h2>AI為什麼會「腦補」，還有為什麼要先給它一份小抄</h2>\n  <p class=\"sec-lede\">上一場已經講過Token、向量化的基礎。這一場老師從「幻覺」這個大家最有感的問題切入，帶出RAG要解決的正是這件事。</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">先回到一個常被誤會的前提：我們平常用ChatGPT問問題，AI並沒有在「當場學習」，它只是在「推論」——把先前訓練好的結果拿出來用。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P2）</div>\n    語言模型訓練完成之後，那就是一個訓練的最後結果，我們使用ChatGPT其實都是在用推論……訓練需要非常高的成本，雖然有節省訓練成本的方式，但訓練也需要大量晶片與時間，不可能在你使用介面的當下就算出來。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">幻覺不是電腦故障，是它知識的邊界</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片p4列了五個造成幻覺的原因，老師逐一講過：</p>\n\n  <div class=\"symlegend\">\n    <div class=\"symcard\"><div class=\"sym\">知識侷限性</div><div class=\"meaning\">停在訓練那一刻</div><div class=\"ex\">用2025年的ChatGPT問不到2026年才發生的事</div></div>\n    <div class=\"symcard\"><div class=\"sym\">知識實時性</div><div class=\"meaning\">只讀公開資料</div><div class=\"ex\">很多專業資料沒公開，它不可能知道</div></div>\n    <div class=\"symcard\"><div class=\"sym\">上下文窗口限制</div><div class=\"meaning\">一次能讀的量有上限</div><div class=\"ex\">超過範圍的東西它讀不到</div></div>\n    <div class=\"symcard\"><div class=\"sym\">推理成本極高</div><div class=\"meaning\">算得越多越貴</div><div class=\"ex\">成本會限制它願意算多久</div></div>\n    <div class=\"symcard\"><div class=\"sym\">推理速度變慢</div><div class=\"meaning\">上下文越長越慢</div><div class=\"ex\">越慢也越容易出錯</div></div>\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>老師自己的但書：</b>「我始終覺得，這不是電腦本身的幻覺，而是人們對它有過分期待所產生的幻覺——我認為幻覺其實是人們對這項技術有過分期待，這才是根本問題。」（第五場P4原話）把幻覺講成AI的原理性侷限，而不是「它壞了」，這個框架決定了整節課、以至於下一節RAG要怎麼解的方向。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">解法很直白：先給它看小抄</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這是老師自己在課堂上的講法，沒有比喻兩個字都不用加：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P6）</div>\n    我們出現了一個東西叫做RAG，叫做「檢索增強生成」的技術。這個東西很簡單，就是給AI小抄——讓它在回答問題之前先看小抄，知道答案之後再進行生成。簡單來講就是這樣。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片p7把好處講得很具體：因為先精準找到需要的內容再生成，可以減少上下文限制、節省Token、加快回應速度——但前提是「要告訴它什麼是正確的文字」（第五場P7）。這份「正確的文字」怎麼準備出來，就是下一節的六個步驟。</p>\n</section>",
+    "grounding": [
+     {
+      "claim": "推論≠訓練，ChatGPT使用時是推論而非訓練",
+      "source": "page_transcript P2",
+      "verbatim": "語言模型訓練完成之後，那就是一個訓練的最後結果，我們使用ChatGPT其實都是在用推論"
+     },
+     {
+      "claim": "LLM五個侷限：知識侷限性/知識實時性/上下文窗口限制/推理成本極高/推理速度變慢->幻覺",
+      "source": "投影片p4文字層",
+      "verbatim": "知識侷限性、知識實時性、上下文窗口限制、推理成本極高、推理速度變慢、->容易產生幻覺問題"
+     },
+     {
+      "claim": "幻覺成因逐字稿口語說明（知識時效性、專業資料未公開、上下文視窗侷限、推理成本與速度）",
+      "source": "page_transcript P4"
+     },
+     {
+      "claim": "「這不是電腦本身的幻覺，而是人們對它有過分期待所產生的幻覺」",
+      "source": "page_transcript P4",
+      "verbatim": "我始終覺得，這不是電腦本身的幻覺，而是人們對它有過分期待所產生的幻覺"
+     },
+     {
+      "claim": "RAG＝給AI小抄的比喻，老師原話",
+      "source": "page_transcript P6",
+      "verbatim": "這個東西很簡單，就是給AI小抄——讓它在回答問題之前先看小抄，知道答案之後再進行生成"
+     },
+     {
+      "claim": "RAG好處：減少上下文限制/節省Token/提升回應速度，前提是先告訴它正確的文字",
+      "source": "page_transcript P7；投影片p7文字層"
+     }
+    ]
+   },
+   {
+    "id": "s5-02",
+    "eyebrow": "02 — RAG怎麼做出來",
+    "h2": "打開這份小抄的六個步驟：從切分到追溯出處",
+    "sec_lede": "老師在P9把RAG拆成兩段：提問前的資料準備，跟提問後的召回、重排、生成。這一節照他自己的順序走一遍，中間穿插「爾朱榮」和「蔣中正喜歡吃水果」兩個他自己在課堂上用的例子。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">02 — RAG怎麼做出來</span>\n  <h2>打開這份小抄的六個步驟：從切分到追溯出處</h2>\n  <p class=\"sec-lede\">老師在P9把RAG拆成兩段：提問前的資料準備，跟提問後的召回、重排、生成。這一節照他自己的順序走一遍，中間穿插「爾朱榮」和「蔣中正喜歡吃水果」兩個他自己在課堂上用的例子。</p>\n\n  <div class=\"flowline\">\n    <div class=\"fnode\"><b>① 分片 Chunking</b><span>把整份文本切成小段。投影片p10：按字數／段落／章節／頁碼皆可，「歷史學適合頁碼，如果是日記，可以按日期」</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>② Embedding／索引</b><span>把每個片段轉成向量，存進資料庫。第五場P11：向量化的結果會存起來，「變成類似一個地址、或是一個數值向量的概念」</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>③ 向量資料庫</b><span>第五場P17：較常用的有FAISS這類，「傳統資料庫（如SQL資料庫）也開始研發向量資料庫功能」</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>④ 召回 Top-N</b><span>提問後，找出向量最接近的幾十筆片段。第五場P18：「不會只有一兩筆，可能會有幾十筆」</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>⑤ 重排／生成</b><span>排序、篩選後交給LLM生成回答，並附上出處</span></div>\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">「蔣中正喜歡吃水果」：向量化在比對什麼</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這是老師在P12反覆用的例子，直接照他的說法走一遍：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P12）</div>\n    比如問「蔣中正喜歡吃水果」跟「蔣中正愛吃水果」，這樣兩句話在向量化後應該是相近的，因為「喜歡」跟「愛吃」語意相似；而這兩句話跟「1937年12月1日南京天氣晴」這種內容，向量距離就會比較遠。所以當我問「蔣中正喜歡吃什麼」的時候，它就會回答「他喜歡吃水果」。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">意思不是AI「讀懂」了蔣中正喜不喜歡吃水果，而是「喜歡吃水果」跟「愛吃水果」這兩句話的向量距離很近，「1937年12月1日南京天氣晴」離得很遠——找的是語意上的鄰居，不是關鍵字。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">實際問一次：爾朱榮是誰</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">P18是老師示範「召回」怎麼運作最完整的一段，把排序、Top-K、可追溯性一次講完：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P18）</div>\n    比如說我問「爾朱榮是誰」，系統就會去比對前面已經切分好的內容，找出跟「爾朱榮」向量最接近的段落並調出來；通常不會只有一兩筆，可能會有幾十筆，接著會對這幾十筆結果進行排名……這樣一來，調出來的資料就能明確指出是從哪個地方出來的，比如《洛陽伽藍記》第一頁第二段、第二頁第三段——因為我們事先做了切分，才有辦法知道結果的可追溯位置在哪裡。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">實際跑出來的回答（第五場P46）：「爾朱榮在《洛陽伽藍記》中被記載入洛後背叛魏國，導致元氏家族幾乎滅絕，並圖謀魏祚」，並附有引註可以點開查看出處。老師這句話點出RAG對歷史學最有意義的地方——「它能替我們解決歷史學家最關心的一個問題……因為我們已經先給它『小抄』了……系統就知道答案到底是從哪一頁出來的」（第五場P18）。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">排序之後還有一關：重排</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片p23講的是召回之後的「重排」，這是老師當場宣布跳過的細節頁之一（見起點節），但投影片文字上本來就寫了一個他自己的比喻，這裡照實引用、標明未經口頭展開：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p23原文（老師口頭未展開，屬起點節提到跳過的10頁之一）</div>\n    召回->計算向量相似度Bi-Encoders->成本低耗時短、準確率低，可以用來初步篩選<br>\n    重排->Cross-Encoder模型->成本高、耗時長準確率高，可以用於精挑細選<br>\n    類似公司選人才第一階段初選、第二階段面試。\n  </div>\n\n  <p style=\"margin:12px 0 0;font-size:13px;color:var(--ink-3)\">（這個「初選／面試」的比喻是投影片上本來就有的文字，不是我們替老師想的——只是課堂上因為時間有限沒有口頭展開，所以老師的聲音檔裡聽不到這段。）</p>\n\n  <div class=\"protocol-box\">\n    <b>切分方式決定了RAG的天花板：</b>逐字稿P15老師自己點出這一點——「所以第一個問題在於：除了Embedding、向量化之外，更重要的是『切分』——切分方式往往決定了它的侷限性。」第04節會具體講切得不好時會出什麼問題。\n  </div>\n</section>",
+    "grounding": [
+     {
+      "claim": "分片方式：按字數/段落/章節/頁碼，歷史學適合頁碼、日記按日期",
+      "source": "投影片p10文字層",
+      "verbatim": "歷史學適合頁碼，如果是日記，可以按日期"
+     },
+     {
+      "claim": "向量化結果存起來變成「地址」的概念",
+      "source": "page_transcript P11",
+      "verbatim": "再把切分出來的結果做Embedding，也就是向量化。做向量化時，會把向量化的結果儲存起來，變成類似一個地址、或是一個數值向量的概念"
+     },
+     {
+      "claim": "向量資料庫如FAISS、SQL資料庫也開始研發向量功能",
+      "source": "page_transcript P17"
+     },
+     {
+      "claim": "蔣中正喜歡吃水果／愛吃水果 向量相近示例",
+      "source": "page_transcript P12",
+      "verbatim": "比如問「蔣中正喜歡吃水果」跟「蔣中正愛吃水果」，這樣兩句話在向量化後應該是相近的"
+     },
+     {
+      "claim": "爾朱榮召回示範完整段落＋可追溯性說明",
+      "source": "page_transcript P18",
+      "verbatim": "比如說我問「爾朱榮是誰」，系統就會去比對前面已經切分好的內容……才有辦法知道結果的可追溯位置在哪裡"
+     },
+     {
+      "claim": "爾朱榮實際回答內容附引註",
+      "source": "page_transcript P46",
+      "verbatim": "爾朱榮在《洛陽伽藍記》中被記載入洛後背叛魏國，導致元氏家族幾乎滅絕，並圖謀魏祚"
+     },
+     {
+      "claim": "重排Bi-Encoder/Cross-Encoder＋「公司選人才初選/面試」比喻",
+      "source": "投影片p23文字層（老師口頭未展開，見pages_empty_reason P23條目）",
+      "verbatim": "類似公司選人才第一階段初選、第二階段面試。"
+     },
+     {
+      "claim": "切分方式決定RAG侷限",
+      "source": "page_transcript P15",
+      "verbatim": "所以第一個問題在於：除了Embedding、向量化之外，更重要的是「切分」——切分方式往往決定了它的侷限性"
+     }
+    ]
+   },
+   {
+    "id": "s5-03",
+    "eyebrow": "03 — 自己動手做一次",
+    "h2": "手把手做一台自己的史料對話機器人",
+    "sec_lede": "理論講完，老師說「接下來這兩個實作，會比剛剛的理論更簡單」（第五場P25）。這一節把Colab操作走一遍，重點放在Hugging Face Token這一步——這是全場唯一需要另外申請的東西。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">03 — 自己動手做一次</span>\n  <h2>手把手做一台自己的史料對話機器人</h2>\n  <p class=\"sec-lede\">理論講完，老師說「接下來這兩個實作，會比剛剛的理論更簡單」（第五場P25）。這一節把Colab操作走一遍，重點放在Hugging Face Token這一步——這是全場唯一需要另外申請的東西。</p>\n\n  <div class=\"stepline\" style=\"margin-top:20px\">\n    <div class=\"step hit\"><b>開啟「清大歷史RAG」Colab</b><p>與範例資料夾裡另一個「AI原理教學程式」不同份，第五場P26：「請把它匯入進去」。</p></div>\n    <div class=\"step\"><b>安裝函式庫＋連上Google雲端硬碟</b><p>第五場P29-31，跑完會在Google Drive自動產生一個「清大歷史RAG」資料夾。</p></div>\n    <div class=\"step\"><b>把史料放進「原始資料」夾</b><p>第五場P33-34：把《洛陽伽藍記》《水經注》PDF移進去，「等一下我們就會用這兩份不同的文件，去製作你的對話機器人」。</p></div>\n    <div class=\"step\"><b>視需要加自己的資料</b><p>第五場P35-36：可以新增「個人筆記」跟「1954年臺灣醫師名鑑」兩個資料夾。老師特別提醒：範例裡完整的醫師名鑑有兩千多筆，不要整包移進去，「請幫我新增一個『臺灣醫師名鑑』資料夾，然後到範例筆記裡面挑選十幾、二十筆放進去做測試就好」。</p></div>\n    <div class=\"step\"><b>執行轉檔與Embedding</b><p>第五場P37-39：PDF轉成Markdown跟JSON，「JSON檔就是儲存向量、以及RAG系統裡各種數字的最基本格式」。跑完會產生一個網址。</p></div>\n    <div class=\"step hit\"><b>設定Hugging Face Token</b><p>第五場P42-45：這是唯一要離開Colab去外部網站辦的手續——因為要呼叫Hugging Face上「開源、免費的雲端模型」來運算，需要一組Access Token（性質上就是一組API Key），複製貼到Gradio介面的欄位裡。</p></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">成功之後就可以直接問問題，第五場P46的示範是「爾朱榮在《洛陽伽藍記》中有何作為？」，回答附有引註可以點開查看出處——這一步做完，第02節講的那整套「切分→索引→召回→生成」流程，就變成了一個真的可以打字互動的畫面。</p>\n\n  <div class=\"protocol-box\">\n    <b>速度看資料量：</b>老師舉自己的範例作對照——「我這個範例放了479筆資料，算是比較多的，所以跑起來相對久一點」（第五場P41）。放的資料越多，Embedding要跑的時間就越長，這跟第02節「切分」的顆粒度是同一件事：片段越多，要算的向量也越多。\n  </div>\n</section>",
+    "grounding": [
+     {
+      "claim": "開啟「清大歷史RAG」Colab，跟AI原理教學程式是不同份",
+      "source": "page_transcript P26"
+     },
+     {
+      "claim": "安裝函式庫、連結Google雲端硬碟自動建立「清大歷史RAG」資料夾",
+      "source": "page_transcript P29-31"
+     },
+     {
+      "claim": "把《洛陽伽藍記》《水經注》PDF移進「原始資料」夾",
+      "source": "page_transcript P33-34",
+      "verbatim": "請在範例資料裡面，把《洛陽伽藍記》的PDF檔跟《水經注》這兩份檔案移進去"
+     },
+     {
+      "claim": "新增個人筆記／1954年臺灣醫師名鑑資料夾，提醒不要整包搬完整範例（兩千多筆）",
+      "source": "page_transcript P36",
+      "verbatim": "請不要把我們範例裡面已經有的「臺灣醫師名鑑」資料夾整個移進去，因為裡面有兩千多筆資料，讀取會很久"
+     },
+     {
+      "claim": "執行轉檔，PDF轉Markdown/JSON，JSON是RAG儲存向量的基本格式",
+      "source": "page_transcript P37"
+     },
+     {
+      "claim": "Hugging Face Token申請流程：登入、Access Token、Fine-grained類型、複製貼上",
+      "source": "page_transcript P42-45"
+     },
+     {
+      "claim": "爾朱榮示範回答＋引註",
+      "source": "page_transcript P46"
+     },
+     {
+      "claim": "老師範例放了479筆資料，跑起來較久",
+      "source": "page_transcript P41",
+      "verbatim": "像我這個範例放了479筆資料，算是比較多的，所以跑起來相對久一點"
+     }
+    ]
+   },
+   {
+    "id": "s5-04",
+    "eyebrow": "04 — RAG的邊界",
+    "h2": "RAG不是萬靈丹：它幫得上忙的地方，跟它幫不上忙的地方",
+    "sec_lede": "老師在P51親口說「RAG技術的出現，基本上還是AI技術的一種衍生應用」——這句話定了調：它是輔助，不是替代。這一節把起點節提到「口頭跳過」的那幾頁內容補回來，一起收在這裡。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">04 — RAG的邊界</span>\n  <h2>RAG不是萬靈丹：它幫得上忙的地方，跟它幫不上忙的地方</h2>\n  <p class=\"sec-lede\">老師在P51親口說「RAG技術的出現，基本上還是AI技術的一種衍生應用」——這句話定了調：它是輔助，不是替代。這一節把起點節提到「口頭跳過」的那幾頁內容補回來，一起收在這裡。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P51）</div>\n    RAG也有它的缺陷，我剛剛有提到過。RAG技術的出現，基本上還是AI技術的一種衍生應用，它能夠輔助我們的研究與材料整理；如果你的文字內容很明確，其實可以搭配一個簡單的RAG系統來輔助研究。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片p51文字層上還有一個具體例子，講的正是第02節提到「切分」會出問題的地方——<b>指代流失</b>：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p51原文</div>\n    這會導致文章關鍵內容會被切斷、流失。例如：指代流失<br>\n    我是蔣中正，我愛吃水果。→ 我是蔣中正 ｜ 我愛吃水果。<br>\n    這會導致「我＝蔣中正」這樣的指代關係流失。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">一刀切在句子中間，AI就不知道後面那句「我愛吃水果」的「我」是誰了。投影片上給的改進方向是「必須依據文本類型進行預處理」，並舉了一個歷史學的例子：「將蔣中正日記中提到我時，應可以假設為蔣中正本人的指代關係」——這正是第02節P10「歷史學適合按頁碼分片」背後在處理的同一個問題。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">助益跟限制，各三條</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">P52、P53這兩頁也是起點節提到老師口頭跳過的細節頁，但投影片文字寫得很完整，照樣整理進來：</p>\n\n  <div class=\"mapping\">\n    <div class=\"map-l\"><b>對歷史研究的助益（投影片p52原文）</b><span>①協助研究者在長時段材料中迅速定位相關文本，降低搜尋整理成本　②把散落在不同年份、不同脈絡的零散記錄重新聚合，讓觀念變化的線索較容易浮現　③回答與原始材料之間保有清楚的連結，讓研究者能返回文本本身檢查與詮釋</span></div>\n    <div class=\"map-arrow\">↔</div>\n    <div class=\"map-r\"><b>對歷史研究的限制（投影片p53原文）</b><span>高度依賴資料品質、切分方式、嵌入模型、索引策略與提示設計——任何一個環節出錯都可能導致檢索偏差或生成失真；歷史文獻長篇、跨段、跨卷、高度脈絡依賴，單靠技術流程不足以取代研究者的細讀與判斷</span></div>\n  </div>\n\n  <p style=\"margin:12px 0 0;font-size:13px;color:var(--ink-3)\">（P50、52、53三頁投影片文字都完整，但屬於起點節提到老師因時間有限而口頭跳過的頁面——這裡引用的是投影片本身的文字，不是逐字稿裡的口語內容。）</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">收在同一個地方：可驗證、可回溯、可糾錯</h2>\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P54）</div>\n    但最終問題意識的提出、證據的權衡、脈絡的辨識與歷史的詮釋，仍然必須由研究者自己負責。我們剛才思考的是：這項AI技術是否能強化我們的可驗證性、可追溯性與可糾錯性，這正是RAG技術對我們歷史學研究相當有幫助的地方——但它仍有其侷限。\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>回到第一場的那三個詞：</b>「可驗證性、可追溯性、可糾錯性」是老師在第一場就提過的史學研究根本標準，投影片p54把它原封不動搬過來當作RAG這一整段的結論——判斷這套系統值不值得用，標準是這三個詞，不是「查資料方不方便」。\n  </div>\n</section>",
+    "grounding": [
+     {
+      "claim": "RAG是AI技術的衍生應用，輔助而非替代",
+      "source": "page_transcript P51",
+      "verbatim": "RAG技術的出現，基本上還是AI技術的一種衍生應用，它能夠輔助我們的研究與材料整理"
+     },
+     {
+      "claim": "指代流失範例：我是蔣中正，我愛吃水果 切分後失去指代",
+      "source": "投影片p51文字層",
+      "verbatim": "我是蔣中正，我愛吃水果。->我是蔣中正 | 我愛吃水果。這會導致\"我=蔣中正\"這樣的指代關係流失"
+     },
+     {
+      "claim": "改進方式：依文本類型預處理，蔣中正日記裡的我可假設為本人",
+      "source": "投影片p51文字層",
+      "verbatim": "將蔣中正日記中提到我時，應可以假設為 蔣中正本人的指代關係"
+     },
+     {
+      "claim": "RAG對歷史研究助益三條",
+      "source": "投影片p52文字層（老師口頭跳過，見pages_empty_reason P52條目）"
+     },
+     {
+      "claim": "RAG對歷史研究限制內容",
+      "source": "投影片p53文字層（老師口頭跳過，見pages_empty_reason P53條目）"
+     },
+     {
+      "claim": "P54結論：問題意識/證據權衡/脈絡辨識/歷史詮釋仍由研究者負責，強化可驗證可追溯可糾錯",
+      "source": "page_transcript P54",
+      "verbatim": "但最終問題意識的提出、證據的權衡、脈絡的辨識與歷史的詮釋，仍然必須由研究者自己負責……這正是RAG技術對我們歷史學研究相當有幫助的地方——但它仍有其侷限"
+     }
+    ]
+   },
+   {
+    "id": "s5-05",
+    "eyebrow": "05 — 轉場：Codex是什麼",
+    "h2": "半場過後，畫風忽然一轉：AI開始會「動手」了",
+    "sec_lede": "從P55開始，老師說「那我們接下來要回到Codex的部分——剛剛其實已經先提過一次了」。這句「回到」很關鍵：對老師來說這不是全新的話題，是把上午稍微提過的東西正式攤開來教。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">05 — 轉場：Codex是什麼</span>\n  <h2>半場過後，畫風忽然一轉：AI開始會「動手」了</h2>\n  <p class=\"sec-lede\">從P55開始，老師說「那我們接下來要回到Codex的部分——剛剛其實已經先提過一次了」。這句「回到」很關鍵：對老師來說這不是全新的話題，是把上午稍微提過的東西正式攤開來教。</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">Codex是ChatGPT底下的一項功能，屬於「AI coding agent」——不只回答問題，還能真的去讀寫檔案、執行程式。第一步不是打字問問題，是先讓它認識你是誰。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">第一件事：寫一份「AGENTS」筆記，告訴它你是誰</h2>\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P59）</div>\n    回到Obsidian，在根目錄底下建立一則新筆記，標題就叫「AGENTS」，下面可以寫你自己的描述，比如「我是某某某，是一名歷史學家，專攻什麼什麼歷史研究」之類的都可以。這個AGENTS筆記的作用，基本上就是預設你的人設，也就是預設一段基本的提示詞。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片畫面上，老師自己示範的那則筆記寫的是：「我是張哲維，一位歷史學家，專攻德國對華關係史」。設定好之後回到Codex問它「我是誰？」，它會自己去筆記庫裡找到這則AGENTS筆記，回答出正確的身分——第五場P62把這個操作定性為「上下文工程」的一部分：「AI就是透過我們的agents.md這個檔案，知道你的背景設定，回過頭來告訴你答案」，並預告「這都是上下文工程的一部分，我們下午才會講上下文工程的基本原理，現在先教大家怎麼操作」。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">它能動手了，所以要先講清楚能動多少</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">P62接著講的是一個「核准」機制——這是Codex跟前面RAG機器人最大的不同：RAG只會回答問題，Codex可以真的去改檔案。</p>\n\n  <div class=\"term-tbl\">\n    <table>\n      <thead><tr><th>核准層級</th><th>投影片／逐字稿原意</th></tr></thead>\n      <tbody>\n        <tr><td>要求核准</td><td class=\"right\">每一步執行前都先問過你才動作（第五場P62）</td></tr>\n        <tr><td>代我核准</td><td class=\"right\">「只要不會導致系統崩潰、或造成權限外洩之類的情況，它就會自動幫你核准」——老師建議的預設選項（第五場P62）</td></tr>\n        <tr><td>完整存取權</td><td class=\"right\">完全自主執行，「甚至有可能把你整台電腦搞當機，所以基本上我們用不到這個選項」（第五場P62）</td></tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>為什麼要有這一關：</b>「因為安裝了Codex（ChatGPT的這項功能）之後，理論上AI可以呼叫你電腦裡所有的資源，這是相當危險的一件事。」（第五場P62）核准機制就是這套風險的煞車。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">模型選最便宜的，額度有上限</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第五場P63提醒大家「不要選擇最好、最新的模型，選擇最簡單的那個就好，因為選擇最新的模型，Token消耗非常昂貴」。免費額度是分5小時一個週期計算，用完可以按「重置」，但「只能重置三次」，三次用完就只能等下一個週期——「這就是『有沒有花錢』的差別」。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">先試一件最簡單的事：Vibe Coding</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第五場P65讓大家在Codex裡打一句話：「幫我寫一個簡單的井字遊戲」。投影片上實際錄下的回應寫著：「我會做成一個可直接在瀏覽器玩的簡潔網頁版，先確認目前資料夾結構，再依網站製作流程完成並測試」，下方還顯示一行小字「正在讀取 Sites Building 技能」——這正是後面第06、結語節會正式介紹的「Skill」，這裡先讓大家看它在背景被叫用的樣子，不用先懂。</p>\n</section>",
+    "grounding": [
+     {
+      "claim": "P55轉場「回到Codex的部分」",
+      "source": "page_transcript P55",
+      "verbatim": "那我們接下來要回到Codex的部分——剛剛其實已經先提過一次了"
+     },
+     {
+      "claim": "建立AGENTS筆記告訴Codex你是誰，作用是預設人設/提示詞",
+      "source": "page_transcript P59",
+      "verbatim": "這個AGENTS筆記的作用，基本上就是預設你的人設，也就是預設一段基本的提示詞"
+     },
+     {
+      "claim": "老師示範的AGENTS筆記實際內容「我是張哲維，一位歷史學家，專攻德國對華關係史」",
+      "source": "投影片p58視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）"
+     },
+     {
+      "claim": "P62定性為上下文工程，透過agents.md知道背景設定",
+      "source": "page_transcript P62",
+      "verbatim": "AI就是透過我們的agents.md這個檔案，知道你的背景設定，回過頭來告訴你答案——這都是上下文工程的一部分"
+     },
+     {
+      "claim": "三種核准層級：要求核准/代我核准/完整存取權",
+      "source": "page_transcript P62"
+     },
+     {
+      "claim": "為什麼要有核准機制：AI理論上可呼叫電腦所有資源",
+      "source": "page_transcript P62",
+      "verbatim": "因為安裝了Codex（ChatGPT的這項功能）之後，理論上AI可以呼叫你電腦裡所有的資源，這是相當危險的一件事"
+     },
+     {
+      "claim": "模型選最簡單的、額度5小時週期、只能重置三次",
+      "source": "page_transcript P63"
+     },
+     {
+      "claim": "井字遊戲Vibe Coding demo提示詞「幫我寫一個簡單的井字遊戲」",
+      "source": "page_transcript P65"
+     },
+     {
+      "claim": "投影片p65實際錄下的AI回應內容與「正在讀取Sites Building技能」",
+      "source": "投影片p65視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）",
+      "verbatim": "我會做成一個可直接在瀏覽器玩的簡潔網頁版，先確認目前資料夾結構，再依網站製作流程完成並測試。正在讀取 Sites Building 技能"
+     }
+    ]
+   },
+   {
+    "id": "s5-06",
+    "eyebrow": "06 — Codex長出手腳之後",
+    "h2": "從「幫你寫程式」到「長出手腳」：故事地圖、Computer Use跟MCP的未來",
+    "sec_lede": "井字遊戲只是暖身。P70開始，老師秀出他跟系上一位老師合作、用一批人權檔案做的「故事地圖」網站——這才是Codex真正要展示的東西：史料經過AI處理之後，可以變成什麼樣子。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">06 — Codex長出手腳之後</span>\n  <h2>從「幫你寫程式」到「長出手腳」：故事地圖、Computer Use跟MCP的未來</h2>\n  <p class=\"sec-lede\">井字遊戲只是暖身。P70開始，老師秀出他跟系上一位老師合作、用一批人權檔案做的「故事地圖」網站——這才是Codex真正要展示的東西：史料經過AI處理之後，可以變成什麼樣子。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P70）</div>\n    大家可以看一下，這是Codex先幫我做好的一個網頁——這其實是我跟系上一位老師合作、暑假開的課程裡做的一個範例，用我提供的一批人權檔案，丟給AI全部跑完，從頭到尾都用Codex處理：先把檔案做OCR，分析完之後的結果，我請它幫我做成一個「故事地圖」。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片畫面上，這個網站的實際標題是「一張身分證走了十四年｜黃祖銓檔案人權故事地圖」，網址列印著清楚的網站連結。<b>「黃祖銓」是這批人權檔案裡的故事主角，不是跟老師合作開課的那位系上同事</b>——那位同事的名字，逐字稿全程沒有點出，這裡刻意不猜。老師自己的Skill清單裡（見結語節）也確實有一個獨立項目叫「白色恐怖故事地圖」，可以對照確認這個demo的史料性質。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">網站做得好不好，有兩個前提</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師沒有把Codex講成萬能，P71、P72反而先講限制：</p>\n\n  <div class=\"principle\">\n    <div class=\"prow\"><span class=\"letter\">1</span>\n      <p><b>史料要你自己先讀過。</b>「你的史料在讓AI辨識的過程中，你必須自己重新看過、解讀過一遍……這也是為什麼我一開始要請大家先連上Obsidian，就是要在Obsidian裡面先做史料的辯證與解釋、把這些內容記錄下來，再讓AI做出網站，這樣結果才會比較正確」（第五場P71-72）。</p></div>\n    <div class=\"prow\"><span class=\"letter\">2</span>\n      <p><b>要求要講清楚。</b>「你在描述想要的網站內容時，必須非常明確、精確地告訴AI你想要的樣子，它才會做出你想要的成果；如果沒有講清楚，它就會隨機生成」（第五場P72）。</p></div>\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">除了寫網站，它還能排程、還能動你的電腦</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第五場P73講自動化排程：「比如你每天早上起來想知道新竹今天的天氣，只要事先設定好時間，它每天到了那個時間，就會呼叫氣象局及網路上的資料，寄一封信告訴你今天出門可能會下雨」。P74-78講的是更進一步的「Computer Use」——把整台電腦的操作權限開放給它。投影片畫面上實際的設定介面寫著：「Computer use——管理ChatGPT如何使用你電腦上的其他應用程式」，可以個別開關Google Chrome、Microsoft Edge、Microsoft Excel的控制權，「任何應用程式」則是總開關。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P76、P78）</div>\n    這個功能真的要小心使用——如果不小心開放太多權限，可能會出問題；但如果是有限度地開放，它就能幫你呼叫相應的資源。比如說，我把瀏覽器的權限全部開放給它……這其實是一個很厲害的功能，大家可以回去自己試試看：如果給它電腦的操作權限，告訴它「打開Chrome搜尋」，AI就會自動幫你打開Chrome、把這段話貼進去搜尋。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">上下文用超過一半，最好重開</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第五場P79給了一個實用的經驗值：「隨著對話量增加，一旦接近某個百分比，我認為大概在60%到70%左右，就容易開始出錯……所以我建議大家在使用到50%以前都還算安全；超過50%之後，最好的做法是把這個對話關掉，讓上下文重置」。老師特別區分：這種因上下文過長導致的出錯，跟第01節講的「幻覺」性質不一樣——因為「它現在已經有『手腳』了」，出錯可能是呼叫錯應用程式，不只是回答錯內容。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">「長出手腳」跟MCP的未來</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第五場P80是老師對這一年變化下的最重的一句評語：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P80）</div>\n    Codex最厲害的地方，也是2025年年底才出現的：它「長出手腳」，能夠去控制很多不同的東西，這是一個非常大的突破，我甚至覺得這個衝擊可能比ChatGPT剛出來的時候還要大。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">同一頁也提到MCP（模型情境協定），老師舉的是一個史學研究者會遇到的具體情境：「假設近史所裡蔣中正的相關檔案都已經做完OCR，它甚至可以幫你整合裡面的內容、依照時間順序統整出來」——只要檔案資料庫開放MCP協定，未來研究者的Codex或其他AI工具就能直接串接進去查詢，不用再一筆一筆自己登入查詢。投影片P82的畫面上，老師實際示範了連接一個自訂MCP伺服器的表單，啟動指令欄位裡填的是<code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">openai-dev-mcp serve-sqlite</code>——這一頁老師只用一句話帶過（「Codex有很多很多的外掛」，第五場P81），沒有展開細講，這裡補上畫面上看得到的內容。</p>\n</section>",
+    "grounding": [
+     {
+      "claim": "故事地圖demo介紹，用系上一位老師合作、暑假課程人權檔案、OCR+故事地圖",
+      "source": "page_transcript P70",
+      "verbatim": "這其實是我跟系上一位老師合作、暑假開的課程裡做的一個範例，用我提供的一批人權檔案，丟給AI全部跑完，從頭到尾都用Codex處理"
+     },
+     {
+      "claim": "故事地圖實際網站標題「一張身分證走了十四年｜黃祖銓檔案人權故事地圖」",
+      "source": "投影片p70視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）",
+      "verbatim": "一張身分證走了十四年｜黃祖銓檔案人權故事地圖"
+     },
+     {
+      "claim": "黃祖銓是故事主角而非合作老師本人，需與合作老師身分區分——合作老師姓名全程未點出",
+      "source": "延伸推論：對照page_transcript P70原話「系上一位老師」（未具名）與投影片p70故事地圖標題人物「黃祖銓」；第五場逐字稿_完整校對去口語化_0919.json notes欄也確認「繫上縣市院老師」一詞查證未果、仍保留泛稱處理"
+     },
+     {
+      "claim": "史料要自己先讀過、要求要精確講清楚兩個前提",
+      "source": "page_transcript P71-72",
+      "verbatim": "你的史料在讓AI辨識的過程中，你必須自己重新看過、解讀過一遍……你在描述想要的網站內容時，必須非常明確、精確地告訴AI你想要的樣子"
+     },
+     {
+      "claim": "自動化排程天氣提醒範例",
+      "source": "page_transcript P73"
+     },
+     {
+      "claim": "Computer Use設定介面：管理ChatGPT如何使用電腦應用程式、可個別開關Chrome/Edge/Excel控制權",
+      "source": "投影片p75視覺判讀（本輪PyMuPDF渲染後親眼確認）",
+      "verbatim": "Computer use 管理 ChatGPT 如何使用你電腦上的其他應用程式"
+     },
+     {
+      "claim": "開放瀏覽器權限示範，Computer Use風險提醒",
+      "source": "page_transcript P76、P78"
+     },
+     {
+      "claim": "上下文使用超過50%建議重開對話，60-70%容易出錯",
+      "source": "page_transcript P79"
+     },
+     {
+      "claim": "「長出手腳」評語，比ChatGPT剛出來衝擊更大",
+      "source": "page_transcript P80",
+      "verbatim": "Codex最厲害的地方，也是2025年年底才出現的：它「長出手腳」，能夠去控制很多不同的東西……我甚至覺得這個衝擊可能比ChatGPT剛出來的時候還要大"
+     },
+     {
+      "claim": "MCP近史所蔣中正檔案整合範例",
+      "source": "page_transcript P80"
+     },
+     {
+      "claim": "P81「Codex有很多很多的外掛」，時間有限帶過",
+      "source": "page_transcript P81",
+      "verbatim": "另外，Codex也有很多外掛功能，因為時間有限，這部分先簡單帶過"
+     },
+     {
+      "claim": "P82自訂MCP伺服器表單，啟動指令openai-dev-mcp serve-sqlite",
+      "source": "投影片p82視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）",
+      "verbatim": "啟動指令 openai-dev-mcp serve-sqlite"
+     }
+    ]
+   },
+   {
+    "id": "s5-closing",
+    "eyebrow": "結語",
+    "h2": "兩條路殊途同歸：十幾萬張德國外交部檔案",
+    "sec_lede": "最後13分鐘，老師把RAG跟Codex兩條路線收回同一個地方——他自己的研究。Agent Skills，就是把「查得到」跟「動手做」接在一起的那個東西。",
+    "body_html": "<section>\n  <span class=\"sec-eyebrow\">結語</span>\n  <h2>兩條路殊途同歸：十幾萬張德國外交部檔案</h2>\n  <p class=\"sec-lede\">最後13分鐘，老師把RAG跟Codex兩條路線收回同一個地方——他自己的研究。Agent Skills，就是把「查得到」跟「動手做」接在一起的那個東西。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P84-85）</div>\n    接下來還有一個叫做「Agent Skills」的東西……它就是用一個Markdown檔案來書寫你的研究流程，透過這個流程來分析你自己工作中會用到的那些史料。我用自己的研究為例，先幫大家寫一個Skill——寫Skill需要花一點時間，寫好Skill之後，接下來的工作方式就是：我把Skill寫好，把AI的使用權限交給每一位工讀生，他們接下來只需要幫我做一件事——把我收集的那些外交部檔案丟進AI（丟進Codex），叫它照著這個Skill去處理。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片畫面上，老師實際打開的Skill清單裡，除了系統內建的幾個，個人項目有：<b>PA AA Dossier Markdown</b>（整理外交檔案為Obsidian Markdown筆記）、<b>白色恐怖故事地圖</b>（把白色恐怖檔案筆記整理成故事地圖腳本與視覺簡報流程）、<b>人權故事地圖繪製</b>、<b>Historian Research Notes</b>（產生citation-ready的史學筆記與草稿）。「PA AA」正是德國聯邦外交部檔案館（Politisches Archiv des Auswärtigen Amts）的縮寫——證實了P70故事地圖跟這裡的德國外交部檔案，是老師研究裡兩條並行的史料線。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">Skill實際處理一份檔案，長什麼樣子</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師接著描述Skill實際會做的事：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P86-87）</div>\n    處理完之後，這個Skill的作用，就是讓AI針對我的每一份檔案，各自產出一份Markdown筆記，裡面進行簡單的OCR辨識與翻譯，如果是人名、地名等實體，就用雙重括號把它括起來，變成可以互相連結的條目——這一整套流程完全都是自動化的。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片畫面上剛好留下一次實際執行的完整紀錄，處理的是一份代號「RZ 208_86377 Formosa」的檔案夾，處理了3分30秒後，Codex回報：</p>\n\n  <div class=\"protocol-box\">\n    <b>投影片p94實際輸出紀錄（視覺判讀）：</b>產出3份文件——「卷宗封面 Formosa 1934–1935」「1935-04-17 帝國國防部致外交部伴送函」「Fürst Urach：Formosa，1935年1-2月九頁報告」。驗證結果寫著：11張原始JPG完整保留、建立raw_images/與images/兩份來源追溯清單、3份Markdown均具中文YAML與六個規定章節、共11個唯一圖檔嵌入且失效連結為0、檔號判定為「PA AA RZ 208/86377」（舊檔號R 86377）——同時老實列出「保留 Metadata有缺失、OCR不完全、翻譯待校對 等不確定狀態；未使用外部OCR服務」。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這最後一句最值得注意：AI沒有把不確定的地方填滿、也沒有假裝OCR做完了，而是老實標記「不完全」跟「待校對」。投影片p90上還有另一段紀錄——老師後來回頭要求這個Skill補強：「在沒有OCR請調用或在環境中安裝OCR後，再跑一次。其中最重要的是德文OCR」，更新後的Skill規則寫明「德文件強制優先使用德文模型，如Tesseract deu」「僅使用英文eng模型不算完成德文OCR」「安裝／設定模型後，必須對校正後影像重新跑OCR，不沿用舊結果」——這套「不確定就誠實標記、不能用湊合的結果充數」的紀律，跟這整個網站在記錄逐字稿時遵守的原則是同一件事。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">量的變化：從兩三天一份，到工讀生一個月做完三四成</h2>\n  <div class=\"example-box\">\n    <div class=\"tag\">逐字稿原話（第五場P88-89）</div>\n    我原本以為，因為我自己收集了大概十幾萬張的德國外交部檔案，以前的做法是每一份檔案交給工讀生處理，一份檔案大概有兩、三百頁，處理起來可能要花兩三天時間，而且不見得做得好、也不見得做得完；但用Skill寫完、讓AI幫忙處理之後，雖然還是有些地方需要微調，但工讀生們現在已經幫我整理了——我估計大概整理了三成到四成的量，而且他們只花了一個月的時間、用電腦持續在跑。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師接著提到「法肯豪森手稿」——就是這場工作坊前一天讓大家實際練習過的那份材料——如果同樣整合進Codex這套工程流程，「以前光是編排資料可能就要花一個禮拜，解讀可能要花半年甚至一年的時間，現在透過這個方式，再讓工讀生分工處理，速度會變得非常快」（第五場P89-92）。</p>\n\n  <div class=\"protocol-box\">\n    <b>收在第一場那三個詞上：</b>RAG小節結尾用的是「可驗證性、可追溯性、可糾錯性」；德國外交部檔案這個demo展示的，正是這三個詞在Codex／Agent Skill這一側具體長什麼樣子——每一份輸出都留原始影像、留追溯清單、留未確定狀態的清單，可以被檢查、可以被推翻。查資料靠RAG，動手處理靠Skill，兩條路線最後要對齊的是同一個標準。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">全場最後一句話，老師留給在場的人：「井字遊戲寫得怎麼樣了吧？有出來嗎？」（第五場P94）——兩小時的RAG理論、Colab實作、Codex操作，最後收在一句很輕的、確認大家真的動手做過的提問。</p>\n</section>",
+    "grounding": [
+     {
+      "claim": "Agent Skills定義：用Markdown寫研究流程，交給工讀生用同一個Skill處理外交部檔案",
+      "source": "page_transcript P84-85",
+      "verbatim": "它就是用一個Markdown檔案來書寫你的研究流程……叫它照著這個Skill去處理"
+     },
+     {
+      "claim": "Skill清單實際項目：PA AA Dossier Markdown/白色恐怖故事地圖/人權故事地圖繪製/Historian Research Notes",
+      "source": "投影片p86視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）",
+      "verbatim": "PA AA Dossier Markdown 整理外交檔案為Obsidian Markdown筆記；白色恐怖故事地圖 把白色恐怖檔案筆記整理成故事地圖腳本與視覺簡報流程；人權故事地圖繪製 將史料轉為可追溯、可排版與驗證的插畫人權故事地圖；Historian Research Notes Create citation-ready history notes and drafts"
+     },
+     {
+      "claim": "PA AA為德國聯邦外交部檔案館縮寫，對應p87資料夾「德國檔案館藏台灣史料」等",
+      "source": "投影片p87視覺判讀（本輪PyMuPDF渲染後親眼確認）＋延伸推論：PA AA=Politisches Archiv des Auswärtigen Amts為公開可查的德國外交部檔案館官方縮寫，非老師逐字稿原話解釋"
+     },
+     {
+      "claim": "Skill實際產出：每份檔案一份Markdown筆記，含OCR、翻譯、雙重括號實體連結",
+      "source": "page_transcript P86-87",
+      "verbatim": "讓AI針對我的每一份檔案，各自產出一份Markdown筆記，裡面進行簡單的OCR辨識與翻譯，如果是人名、地名等實體，就用雙重括號把它括起來"
+     },
+     {
+      "claim": "Formosa RZ 208_86377檔案實際處理輸出：3份文件、驗證結果、誠實標記不確定狀態",
+      "source": "投影片p94視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字，逐字稿P85-93區間為ASR幻覺或空白）",
+      "verbatim": "已依 pa-aa-dossier-markdown 完成文件級整理……檔號判定為 PA AA RZ 208/86377，舊檔號 R 86377。保留 Metadata有缺失、OCR不完全、翻譯待校對 等不確定狀態；未使用外部OCR服務"
+     },
+     {
+      "claim": "Skill Creator更新記錄：要求強制德文OCR模型、不可沿用舊結果",
+      "source": "投影片p90視覺判讀（本輪PyMuPDF渲染後親眼確認，非逐字稿文字）",
+      "verbatim": "德文件強制優先使用德文模型，如Tesseract deu。僅使用英文eng模型不算完成德文OCR。安裝/設定模型後，必須對校正後影像重新跑OCR，不沿用舊結果"
+     },
+     {
+      "claim": "十幾萬張檔案，以往兩三天一份，Skill化後工讀生一個月整理三四成",
+      "source": "page_transcript P88-89",
+      "verbatim": "我自己收集了大概十幾萬張的德國外交部檔案……一份檔案大概有兩、三百頁，處理起來可能要花兩三天時間……我估計大概整理了三成到四成的量，而且他們只花了一個月的時間"
+     },
+     {
+      "claim": "法肯豪森手稿若整合Codex流程：編排一週、解讀半年到一年",
+      "source": "page_transcript P89-92",
+      "verbatim": "光是編排資料可能就要花一個禮拜，解讀可能要花半年甚至一年的時間"
+     },
+     {
+      "claim": "全場最後一句：井字遊戲寫得怎麼樣了吧？",
+      "source": "page_transcript P94",
+      "verbatim": "井字遊戲寫得怎麼樣了吧？有出來嗎？"
+     }
+    ]
+   }
+  ],
+  "analogies_rejected": [
+   {
+    "analogy": "RAG = 圖書館員幫你先查好資料再回答",
+    "why_rejected": "人設化的助理型比喻，會暗示RAG有判斷力、會主動幫你篩選——但老師在RAG講解裡刻意沒有賦予它主體性。老師自己的講法「給AI小抄」（P6原話）沒有人物角色、只有一個道具，更準確也更貼近他反覆強調的「AI只是文字接龍」立場（呼應第四場AI Agent一節「LLM是一顆關在盒子裡只會算機率的腦」）。本稿全程只用「小抄」。"
+   },
+   {
+    "analogy": "MCP = USB插座/轉接頭",
+    "why_rejected": "矽谷科技圈的標準比喻，任務明令禁止。第五場投影片本身沒有給MCP下比喻性定義（這一頁老師只用「Codex有很多很多的外掛」一句帶過），本稿選擇不硬加一個外借比喻，改為直接引用投影片p80、p82的具體操作畫面（近史所檔案查詢情境、自訂MCP伺服器表單）讓讀者從實例理解，而不是套一個罐頭比喻。"
+   },
+   {
+    "analogy": "AI Agent／Codex = 研究助理、實習生",
+    "why_rejected": "最好懂也最危險的比喻，第四場draft已經因同樣理由拒絕過一次。它會讓讀者把判斷力和責任感投射到AI身上，直接牴觸P71-72老師自己講的兩個前提——史料要研究者自己先讀過、要求要精確講清楚，否則「它就會隨機生成」。這句話等於老師自己在說：Codex沒有判斷力，只有照著做的能力。本稿用「長出手腳」（老師自己P80的原話）取代擬人化的助理／實習生說法。"
+   },
+   {
+    "analogy": "Agent Skill = SOP標準作業流程／公司教育訓練手冊",
+    "why_rejected": "方向不算錯，但屬於企業管理的外借詞彙，且會暗示Skill有彈性、使用者會「理解精神再變通」——但P84-85老師的說法是「將工作流程……以文本的方式書寫」，且p94的Formosa demo顯示AI是照著Skill機械執行、遇到不確定就照Skill規則誠實標記，不是自行變通。本稿只用老師自己的「Markdown檔案書寫研究流程」，不疊加額外的管理學詞彙。"
+   },
+   {
+    "analogy": "向量相似度 = 地圖上兩個地點的距離（GPS座標延伸）",
+    "why_rejected": "表面上很好懂，但會過度具象化成「真實空間」，跟老師自己在P11用的「地址」一詞份量不同——「地址」只是類比向量有一個可查詢的位置，並沒有暗示向量空間是物理空間。本稿只沿用「地址」，不延伸成地圖／GPS的完整比喻。"
+   },
+   {
+    "analogy": "Computer Use授權 = 把家裡鑰匙交給管家",
+    "why_rejected": "僕役／管家的比喻預設了一個懂得拿捏分寸的人類角色，但P76、P62老師講的核准機制（要求核准/代我核准/完整存取權）恰恰是因為AI不會自己拿捏分寸，才需要三段式的技術性防護。用管家比喻反而會沖淡老師想強調的風險意識。本稿直接呈現三個核准層級的技術定義，不比擬人物角色。"
+   },
+   {
+    "analogy": "分片Chunking = 切蛋糕、切西瓜",
+    "why_rejected": "廚房／食物類比在任務裡明令禁止。且老師自己在P10已經給了具體、專業的分法（按字數/段落/章節/頁碼，歷史學適合頁碼），不需要另外的生活化比喻。"
+   }
+  ],
+  "honest_notes": [
+   "最大的一件事：本稿把老師口頭跳過的10頁RAG細節投影片（P13、14、19-23、50、52、53）內容，仍然整理進第02、04節正文——引用的是投影片文字層，不是逐字稿口語內容，每一處都在grounding跟正文裡明確標註「投影片原文，老師口頭未展開」。如果楊老師或哲維老師認為這些沒講出口的內容不該放進科普稿（可能會顯得「補了老師沒教的東西」），這幾段可以整段拿掉，不影響其餘敘事。",
+   "P70-72故事地圖demo那位「系上一位老師」的身分，逐字稿全程沒有點名，本稿刻意沒有猜測姓名。但本輪視覺判讀發現故事地圖網站標題「一張身分證走了十四年｜黃祖銓檔案人權故事地圖」——黃祖銓是檔案故事的主角，不是那位合作老師。這點在正文跟honest_notes都已經明講，但這是本稿新增的推論（拿標題文字去對照P70的口語敘述），建議紅隊複核這個推論本身有沒有問題——例如「黃祖銓」是否可能也是那位老師的姓名（同名同姓的可能性極低但邏輯上没有排除），或者這個故事地圖案例是否適合公開放進科普網站（涉及白色恐怖／人權檔案主角本名，即便是老師自己公開展示過的內容，仍建議請楊老師或哲維老師過目後再定案是否保留這個具體名字）。",
+   "結語節與第06節大量引用了P86、P87、P89、P90、P94幾頁的視覺判讀內容（Skill清單、Formosa檔案實際處理輸出、Skill Creator更新紀錄）——這些頁面逐字稿全部是空白或ASR幻覺區間（見pages_empty_reason P66-69同類說明），所以這些具體文字（Skill名稱、輸出檔名、驗證結果清單、OCR規則更新文字）完全是本輪透過PyMuPDF把PDF頁面轉成PNG、親眼閱讀畫面文字得到的，不是逐字稿裡的內容，也不在既有的頁碼對齊JSON裡。這是本稿在既有素材之外新增的一手證據，建議發布前找一個人核對這幾張截圖判讀是否準確（尤其是p94那組檔案編號「PA AA RZ 208/86377」、p90的OCR規則文字，這類具體編號和技術規則最容易看錯）。",
+   "本稿只針對95頁裡的一部分近空白頁面（約37頁）做了PyMuPDF視覺判讀，其餘沒有逐頁重新視覺核對，是沿用既有頁碼對齊JSON（第五場逐字稿_頁碼對齊與潤飾_0919.json、第五場逐字稿_完整校對去口語化_0919.json）裡兩輪複核已完成的pages_empty_reason判讀。這兩份素材本身已標明「可信度最高」，本稿信任其結論，但沒有重新逐頁複查全部95頁。",
+   "起點節把「口頭跳過的10頁」跟「P82、83外掛相關跳過的2頁」分開計算並各自標註頁碼與理由——原始JSON的generated_note把兩類合併算成「12頁」，本稿為了敘事準確拆開處理，這個拆法是本稿自己做的，不是素材原文的分類方式，如果覺得拆開後反而複雜，可以合併回「12頁」一次講完。",
+   "起點節的措辭刻意避免任何「老師沒教完」「進度落後」的暗示，改用「老師自己在53:22現場宣布的決定」「誠實的取捨」來框定這個落差——這是依照任務要求（第四場紅隊複核對措辭有明確意見）刻意調整過的寫法，但語氣拿捏是主觀判斷，建議紅隊重點複核這幾段用詞會不會讓楊老師或哲維老師讀起來仍然覺得像是在說「這堂課上得不完整」。",
+   "P77「吉利啊，怎麼交到女朋友？」這句本稿完全沒有引用——沿用第五場逐字稿本身的立場（該句語意不明，屬ASR疑似誤聽，逐字稿團隊也還沒解決），選擇跳過這個demo例子，改用P76、P78其他更清楚的Computer Use操作描述。這不是遺漏，是刻意迴避一句連逐字稿校對本身都還沒查證清楚的話。",
+   "投影片畫面上多次出現的模型名稱「GPT-5.6 Sol」，本稿完全沒有寫進正文——這只是老師示範當下Codex介面顯示的模型版本號，屬於截圖當下的UI狀態，不是這堂課要教的知識內容，寫進科普稿反而會誤導讀者以為這是需要記住的技術規格，且版本號隨時間必然變動。",
+   "第03節「Colab實作」只整理了操作步驟本身，沒有涉及P27、28（OneDrive畫面切換過場）、P32（學生操作空白片段）這幾頁純過場內容——這些頁面本來就沒有教學實質，略過不影響完整性。"
+  ]
+ }
+}
