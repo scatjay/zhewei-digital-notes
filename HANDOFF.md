@@ -1,6 +1,6 @@
 # 交接文件 — 清大工作坊配套網站（張哲維老師）
 
-> 寫於 2026-09-19 11:46（12:00更新），工作坊Day2現場即時協作中。**楊老師明確交代：接手的機器
+> 寫於 2026-09-19 11:46（14:30更新，第五場完成後），工作坊Day2現場即時協作中。**楊老師明確交代：接手的機器
 > 「幾乎是空的」——不是同一台電腦換一個session，是換一台新筆電。**這代表：
 > - ✅ **git repo本身會活下來**：`git clone https://github.com/scatjay/zhewei-digital-notes.git`
 >   拿得到已經部署上線的一切（開幕式~圓桌一四場完整內容、NBLM三套件、本檔）。
@@ -41,7 +41,7 @@ NBLM三套件(語音摘要/資訊圖表/簡報摘要)生成 → embed進網站�
 訓練→注意力機制→解碼器的底層原理路線+Colab實作demo。這五個名詞的正式定義在**第六場p5-p30**。
 已有一份完整的科普轉譯草稿處理這個落差，見第4節。
 
-## 2. 目前完成度（截至11:46）
+## 2. 目前完成度（截至14:30）
 
 | 場次 | 逐字稿 | Splice進站 | NBLM三套件 | 備註 |
 |---|---|---|---|---|
@@ -50,37 +50,65 @@ NBLM三套件(語音摘要/資訊圖表/簡報摘要)生成 → embed進網站�
 | 第二場 | ✅ 完整校對+去口語化 | ✅ | ✅ 全齊 | 同上框架 |
 | 第三場 | ✅ 完整 | ✅ 全文article,單層7章節pill | ✅ 全齊 | 無投影片，scrollspy導覽 |
 | 圓桌一 | ✅ 完整 | ✅ 全文article,單層8章節pill | ✅ 全齊 | 無投影片，同上 |
-| **第四場** | ✅ v2完整（127頁，112頁有內容） | ✅ 12:xx上站 | ❌ 未enqueue | 科普轉譯7節已修完14條must_fix並splice，見第3/4節 |
-| 第五~七場、圓桌二 | ❌ 錄音尚未上傳 | ✅ stub(投影片先行) | — | 第五/六/未來展望投影片已上站 |
+| **第四場** | ✅ 兩輪完整校對+去口語化（127頁,112頁有內容） | ✅ 已上站 | ⏳ 已enqueue待daemon處理 | 科普轉譯7節+14條must_fix+30處贅語去重，見第3節 |
+| **第五場** | ✅ 兩輪完整校對+去口語化（95頁,75頁有內容） | ✅ 已上站 | ⏳ 已enqueue待daemon處理 | 科普轉譯8節+9條must_fix，見第3節 |
+| 第六場 | ❌ 錄音尚未上傳（現場進行中） | ✅ stub+3則現場筆記 | — | 投影片已上站，現場筆記見第3節末 |
+| 第七場、圓桌二 | ❌ 錄音尚未上傳 | ✅ stub(投影片先行) | — | 投影片已上站 |
 
 **NBLM簡報顯示模糊問題**：已解決，09-19把4個場次的NBLM簡報從Office Online Viewer換成
 LibreOffice headless轉出的原生PDF嵌入（瀏覽器原生渲染），4份pptx→pdf都已轉檔並上站
 (`_nblm_artifacts/*/slides.pdf`)。
 
-## 3. 第四場逐字稿＋科普轉譯（**已完成並上站**，commit `b30e9ff`）
+## 3. 第四、五場逐字稿＋科普轉譯（**都已完成並上站**）
 
-- 頁碼對齊agent跑完：127頁，112頁有內容，15頁（p35/92/115-127）誠實標記查無對應逐字稿
-  （教師口頭跳過，未勉強拼湊），22處ASR修正已套用。原始產出檔：
-  `E:/Downloads/zhewei-pa-aa-dossier/_recordings/第四場逐字稿_頁碼對齊與潤飾_0919.json`
-  （**這個路徑在新機器上不存在**——已用來splice進index.html，資料本身活在index.html裡的
-  `window.PAGE_TRANSCRIPT_S4`/`window.PAGE_TIME_S4`，不需要靠這個原始JSON存活）。
+兩場走的是同一套已經定型的pipeline：頁碼對齊(含視覺判讀空白頁) → **第一輪**去口語化 →
+**獨立第二輪**完整校對(重新逐頁對照投影片，通常會再挖出幾十條第一輪沒抓到的錯誤) →
+科普轉譯草稿(依該場實際內容自訂結構，不強套模板) → 獨立紅隊複核 → 逐條套用must_fix →
+splice → 部署驗證。**第二輪校對跟紅隊複核都必須是獨立指派，不能沿用第一輪agent自己複查**
+（同一個agent不容易抓到自己的盲點，09-19實測第四場第二輪抓到42條、第五場紅隊抓到人名
+「黃祖銓/黃祖泉」兩輪各錯一次、只有第三次獨立視覺判讀8倍放大才讀對「黃祖權」）。
+
+**第四場**（commit `24c2458`起共6次相關commit）：
+- 127頁，112頁有內容，15頁誠實標記查無對應（教師口頭跳過）。第二輪校對新找到42條ASR修正
+  （含「8億個引數」實為「8千億個引數」數字級錯誤）。另外掃出79處ASR重複贅語，其中30處
+  「X，X。」句尾無延伸的明確贅語已去重，約30處「X，X接新內容」的教學節奏延伸判斷為正常
+  用法保留（如「按下去，按下去之後…」）。
 - 科普轉譯7節（起點/01提示詞工程/02 Function Calling/03 AI Agent/04 MCP/05 Agent Skill/結語）
-  已依`review.must_fix_before_publish`14條逐項修正並splice進`tab-s4`：
-  04節「昨天下午」→「昨天上午」、01節術語表拆成提示詞/上下文兩列、起點節p22引文補回第七條、
-  04節重寫（不再誤把Obsidian掛資料夾講成MCP解決的事，改標明是延伸對照＋補p16原話）、
-  結語Harness層級圖修正、起點symlegend擴成7卡（加Token/Vibe Coding）、移除未溯源的
-  「條子」比喻、01/03節標記延伸比喻、起點節p11圖顏色描述修正（深藍字非紅字）、結語p93/94
-  框錯位置修正、03節h2語氣還原成可能式、02節JSON範例加註「投影片原樣如此」。
-- **有一條是判斷題、不是修正**：起點節h2「議程上那五個名詞，第四場一個都沒教」，紅隊複核
-  建議請楊老師二選一（原版 vs「要到下午第六場才正式登場——第四場先打地基」）。**時間緊迫，
-  這輪先採用後者（較軟的版本）上站**，如果楊老師覺得不對可以再換回去，兩個版本都在git歷史裡。
-  另一條紅隊沒下決定的是「02-05四節要不要整體搬到tab-s6」——這次維持放在tab-s4，理由跟h2一樣。
-- 部署驗證：JS語法(`node --check`)過、`<section>`/`<div>`標籤配平、git push成功、GitHub Pages
-  curl輪詢確認`PAGE_TRANSCRIPT_S4`已上線。**視覺走查未完整完成**——卡在網站自己的Gmail登入閘門
-  （Firebase OAuth，會開一個MCP工具看不到的瀏覽器彈窗），沒有輸入任何密碼就中止了，之後有機會
-  請楊老師或哲維老師本人肉眼過一次tab-s4。
-- **NBLM三套件尚未enqueue**（第4節保留原本的用法說明，材料是`_work_in_progress/session4/`
-  底下的`full_text_plain.txt`）。
+  已套用14條must_fix：04節「昨天下午」→「昨天上午」、01節術語表拆成提示詞/上下文兩列、
+  起點節p22引文補回第七條、04節重寫（不再誤把Obsidian掛資料夾講成MCP解決的事）、結語Harness
+  層級圖修正、起點symlegend擴成7卡（加Token/Vibe Coding）、移除未溯源比喻、03節h2語氣還原、
+  02節JSON範例加註「投影片原樣如此」。**起點節h2「議程五個名詞第四場一個都沒教」是判斷題**，
+  紅隊建議二選一，時間緊迫先採軟化版本上站（git歷史裡兩版都在，楊老師覺得不對可換回）。
+- 楊老師現場即時核對又抓到6處：張宏毅→張弘毅老師（掛耳咖啡包）、自工信/成績疊→資工系/
+  成績跌、指輪→齒輪、元模型→語言模型(2處)、Token Nice→Tokenize、幹預→干預(3處)、
+  Vibe Coding頁碼p20→p18。全部已修正上站。
+
+**第五場**（commit `ddabe8e`起共3次相關commit）：
+- 95頁，75頁有內容，20頁誠實標記查無對應（12頁教師53:22口頭明確宣布跳過RAG理論細節、
+  過場頁、安靜段落ASR幻覺）。第二輪校對**結果是原文已達標準、不需改動文字**（第一輪一次到位，
+  不是每場都會需要第二輪修正——差別在於第一輪一開始就套用了跟第四場相同的高標準規格）。
+- **重大發現**：投影片後半（p55-95，佔43%頁數、後段31分鐘）完全脫離官方議程「資料對話
+  機器人」主題，變成獨立的Codex（AI coding agent）操作教學，最後13分鐘才用Agent Skills
+  處理德國外交部檔案拉回史料情境——這不是教學疏漏，是老師自己當場口頭宣布的取捨。
+- 科普轉譯8節**依實際內容自訂結構**（起點/01為什麼要用RAG/02 RAG怎麼做出來/03自己動手做/
+  04 RAG的邊界/05轉場Codex是什麼/06 Codex長出手腳之後/結語），沒有硬套第四場五名詞模板。
+  紅隊複核9條must_fix：**人名訂正黃祖銓→黃祖權**（投影片放大8倍核實，兩輪草稿各錯一次同一字，
+  第三次獨立視覺判讀才讀對）、修正MCP表單誤讀（畫面上是介面灰色提示文字，不是老師示範操作）、
+  修正誤引的「Codex有很多很多的外掛」實為「Codex也有很多外掛功能，因為時間有限先簡單帶過」、
+  p52/p53標籤改「改寫為條列」並補回漏引的「精確的可回溯性」、起點節h2軟化措辭、
+  德文件→德文文件、YAML/Bi-Encoder/Cross-Encoder/API Key補白話註解、補週額度77%說明。
+
+**兩場的部署驗證**：JS語法(`node --check`)過、標籤配平、GitHub Pages curl輪詢確認上線。
+**視覺走查未完整完成**——卡在網站自己的Gmail登入閘門（Firebase OAuth，會開一個MCP工具
+看不到的瀏覽器彈窗），沒有輸入任何密碼就中止了，之後有機會請楊老師或哲維老師本人肉眼過
+一次tab-s4/tab-s5。
+
+**第六場（進行中，錄音尚未上傳）現場筆記已記錄3則**（tab-s6的user-note區塊，全部標明
+「現場筆記轉述，非逐字引言，待錄音處理後可對照校正」，且**不具名**——楊老師09-19在同一
+session講了兩次「不要寫我的名字」，已記進memory `feedback_zhewei_no_username_in_notes.md`）：
+①「AI是一場不可逆的典範轉型」②「強化研究成果的推廣」③「人文才是人類知識的目的」。
+楊老師自己說過一句「台灣的時代精神是實力主義，人文的邊緣化是全球化的現象」**明確交代
+不要放上網站**，只留在這份交接紀錄裡供接手者知道曾經講過，不要誤放上去。
 
 ## 4.5 科普轉譯是Day2往後每一場的標準做法（不只第四場）
 
@@ -89,15 +117,22 @@ LibreOffice headless轉出的原生PDF嵌入（瀏覽器原生渲染），4份pp
 splice進站時都要比照辦理的標準流程**。做法沿用第4節的模式：讀該場投影片全部內容+萃取前面場次
 老師自己的教學語氣與比喻手法(可累積參考第一~四場)+紅隊逐條查證grounding，不憑空發明比喻。
 
-## 5. NBLM三套件（第四場尚未enqueue）
+## 5. NBLM三套件（第四、五場都已enqueue，待daemon處理）
 
 管線在`E:/Downloads/nblm-orchestrator`，該線自己的規則檔`E:\Downloads\nblm-orchestrator\CLAUDE.md`。
-用法：
+`session4-transcript`跟`session5-transcript`兩個job都已經enqueue（用的是最終校對版文字，
+不是原始ASR），daemon狀態截至14:30是`assisted_health`延後（偵測到user在動作，避免打擾），
+兩個job都還是`queued`尚未`fired`。用法：
 ```bash
 python E:/Downloads/nblm-orchestrator/nblm_enqueue.py --project zhewei-workshop-0918 \
-  --paper-key session4-transcript --pdf "<第四場逐字稿txt路徑>" \
-  --artifacts audio,infographic,slides --focus "第四場說明" --priority 2
+  --paper-key session6-transcript --pdf "<第六場逐字稿txt路徑>" \
+  --artifacts audio,infographic,slides --focus "第六場說明" --priority 2
 ```
+**⚠ dedup檢查踩過的坑**：`--paper-key`的相似度比對是比對**key字串本身**，不是比對內容——
+「session6-transcript」跟「session5-transcript」只差一個字元會被判定94%相似擋下來
+（`⚠ 疑似重複→不入佇列待確認`），確認內容真的不同（例如檢查有沒有這場獨有的關鍵詞）後
+直接加`--force`重新跑同一條指令即可，不是bug。
+
 來源txt要放在`E:/Downloads/nblm-orchestrator/sources/zhewei-workshop-0918/`（參考已有的
 `session1-transcript.txt`等檔案格式：標題行+講者+來源說明+全文）。**別直接餵原始ASR，要用
 校對完成的版本**（跟前四場一致的做法）。
@@ -144,7 +179,9 @@ audio+img+iframe指向slides.pdf+pptx下載備援連結+模糊警語）。
 
 張哲維（不是張哲瑋，行前手冊為準）、李卓穎院長、陳登武、王道維（不是道偉）、盧曼(Niklas Luhmann,
 不是魯曼)、楊維真教授（不是楊瑞珍/楊偉珍）、黃仁勳（不是黃環君，五層蛋糕論其實是他的梗）、
-楊智傑（不是楊士傑，本人被誤聽）、卓穎院長（不是卓雲/卓穎所長混用）。完整查證報告：
+楊智傑（不是楊士傑，本人被誤聽）、卓穎院長（不是卓雲/卓穎所長混用）、張弘毅老師（提供掛耳
+咖啡包的台灣史學會老師，不是張宏毅，楊老師09-19現場核對）、黃祖權（第五場人權故事地圖案主，
+不是黃祖銓/黃祖泉，投影片放大8倍核實）。完整查證報告：
 `_docs/學者與專有名詞總檢查_0918.md`（Day1範圍，Day2尚未做過同等規模查證）。
 
 ## 8. 常用指令備忘
@@ -207,5 +244,7 @@ parentId = '1LKZyLOzNOTvFT-sihyq1hChouuLooWtq' and modifiedTime > '<今天UTC日
 ## 10. 這條session的skill/memory參考
 
 - `~/.claude/skills/zhewei-session-processing/SKILL.md`——完整9步驟管線，包含所有CSS/JS陷阱清單
-- memory: `project_zhewei_workshop_unit_20260918.md`、`reference_zhewei_recording_upload_location.md`、
-  `feedback_cannot_vs_not_found.md`
+- memory: `project_zhewei_workshop_unit_20260918.md`（含09-19更新：Day2 pipeline定型、
+  科普轉譯做法已獲楊老師確認）、`reference_zhewei_recording_upload_location.md`、
+  `feedback_cannot_vs_not_found.md`、`feedback_zhewei_no_username_in_notes.md`
+  （現場筆記絕不具名寫楊老師名字，09-19同session踩過兩次）
