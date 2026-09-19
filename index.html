@@ -1276,12 +1276,22 @@ footer code{font-family:var(--mono);background:var(--sunk);padding:1px 5px;borde
     <b>圓桌論壇（Day1）</b>
     <p>Day1 15:50-16:50｜引言人：林文源、李卓穎｜主持人：陳登武</p>
   </div>
-  <div class="cmdcard" id="slot-panel1">
-    <div class="cmdcard-head"><b>🎙️ 錄音 / 逐字稿 / NBLM三套件</b>
-      <span style="font-family:var(--mono);font-size:11px;color:var(--ink-3)">逐字稿已完成</span></div>
-    <pre style="color:var(--ink-3)">這場沒有投影片，是多人圓桌對談。下面直接放校對潤飾後的完整逐字稿。
-NBLM三套件(語音摘要/資訊圖表)生成中，完成後補在這裡。</pre>
-  </div>
+  <details class="slidereader" id="nblmSlotPanel1" open>
+    <summary><span>🎧📊📑 NBLM 三套件（NotebookLM 依本頁逐字稿摘要生成）</span>
+      <span class="chevron">▶</span></summary>
+    <div class="body" style="padding:16px 20px">
+      <p style="margin:0 0 8px;font-size:13px;color:var(--ink-2)">語音摘要：</p>
+      <audio controls preload="none" style="width:100%;display:block" src="_nblm_artifacts/panel1-transcript/audio.m4a"></audio>
+      <p style="margin:16px 0 8px;font-size:13px;color:var(--ink-2)">資訊圖表：</p>
+      <img src="_nblm_artifacts/panel1-transcript/infographic.png" alt="圓桌論壇一資訊圖表"
+        style="max-width:100%;border-radius:6px;border:1px solid var(--rule-strong)">
+      <p style="margin:16px 0 8px;font-size:13px;color:var(--ink-2)">簡報摘要：</p>
+      <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=https%3A%2F%2Fscatjay.github.io%2Fzhewei-digital-notes%2F_nblm_artifacts%2Fpanel1-transcript%2Fslides.pptx"
+        style="width:100%;height:85vh;min-height:500px;border:1px solid var(--rule-strong);border-radius:6px" loading="lazy"></iframe>
+      <p class="fallback">內嵌看不到的話（手機瀏覽器常見）
+        <a href="_nblm_artifacts/panel1-transcript/slides.pptx" target="_blank" rel="noopener">點這裡直接下載.pptx</a>。</p>
+    </div>
+  </details>
   <p style="margin:0 0 6px;font-size:11px;color:var(--ink-3)">
     ⚠ 逐字稿由語音辨識自動產生並經人工校對，仍可能有辨識錯誤，發現問題歡迎在下方留言告訴我們。
     多人圓桌沒有語者分離技術，發言人轉換是依語氣/話題判斷、非100%精確；其中一位發言人（逐字稿稱
