@@ -50,86 +50,37 @@ NBLM三套件(語音摘要/資訊圖表/簡報摘要)生成 → embed進網站�
 | 第二場 | ✅ 完整校對+去口語化 | ✅ | ✅ 全齊 | 同上框架 |
 | 第三場 | ✅ 完整 | ✅ 全文article,單層7章節pill | ✅ 全齊 | 無投影片，scrollspy導覽 |
 | 圓桌一 | ✅ 完整 | ✅ 全文article,單層8章節pill | ✅ 全齊 | 無投影片，同上 |
-| **第四場** | 🔄 **轉錄完成，頁碼對齊agent跑中** | ❌ | ❌ 未enqueue | **見第3節，現在進行中** |
+| **第四場** | ✅ v2完整（127頁，112頁有內容） | ✅ 12:xx上站 | ❌ 未enqueue | 科普轉譯7節已修完14條must_fix並splice，見第3/4節 |
 | 第五~七場、圓桌二 | ❌ 錄音尚未上傳 | ✅ stub(投影片先行) | — | 第五/六/未來展望投影片已上站 |
 
 **NBLM簡報顯示模糊問題**：已解決，09-19把4個場次的NBLM簡報從Office Online Viewer換成
 LibreOffice headless轉出的原生PDF嵌入（瀏覽器原生渲染），4份pptx→pdf都已轉檔並上站
 (`_nblm_artifacts/*/slides.pdf`)。
 
-## 3. 第四場逐字稿處理現況（進行中，最優先）
+## 3. 第四場逐字稿＋科普轉譯（**已完成並上站**，commit `b30e9ff`）
 
-- 錄音已下載：`E:/Downloads/zhewei-pa-aa-dossier/_recordings/9月19日 上午8-57.zip`
-  （34,387,055 bytes，逐位元核對過，Drive parentId固定
-  `1LKZyLOzNOTvFT-sihyq1hChouuLooWtq`）
-- 已解壓：`_recordings/_s4_extracted/9月19日 上午8-57.m4a`（87.7分鐘，08:57起錄，對得上09:00開場）
-- faster-whisper轉錄**已完成**（2574段，全長5264.6秒，smoke test階段確認**無幻覺**，這點跟
-  第三場不同不用特別處理開頭）。原始輸出在`E:/Downloads/zhewei-pa-aa-dossier/_recordings/
-  _work_s4/full_transcript.json`（**這個路徑在新機器上不存在，下面repo內的版本才是要用的**）
-- 簡轉繁**已完成，且已救進repo**：`_work_in_progress/session4/full_transcript_zhtw.json`
-  （1051段有異動）+ `_work_in_progress/session4/full_text_plain.txt`（純文字版，23645字）
-- 投影片文字層**已抽取，且已救進repo**：`_work_in_progress/session4/slides_extracted.txt`
-  （127頁，**57頁/44.9%文字層近乎空白**，是Colab截圖為主，比例遠高於前兩場，需要大量視覺判讀，
-  不要因為抓不到文字就跳過。投影片PDF本身`slides-session4.pdf`已經在repo根目錄，這個不用救）
-- **頁碼對齊+潤飾agent啟動時正在背景執行**，完成後會產出的檔案原始路徑是
+- 頁碼對齊agent跑完：127頁，112頁有內容，15頁（p35/92/115-127）誠實標記查無對應逐字稿
+  （教師口頭跳過，未勉強拼湊），22處ASR修正已套用。原始產出檔：
   `E:/Downloads/zhewei-pa-aa-dossier/_recordings/第四場逐字稿_頁碼對齊與潤飾_0919.json`
-  （**這個路徑在新機器上也不存在**）。**接手時第一件事：檢查
-  `_work_in_progress/session4/`底下有沒有一個叫這個名字或類似的對齊結果檔**——如果舊session
-  在agent跑完前就換了機器，這份產出可能還沒來得及被救進repo，代表**要重新派工**（prompt邏輯
-  見本檔git歷史裡這次commit的完整訊息，或直接用`full_transcript_zhtw.json`+
-  `slides_extracted.txt`兩個材料，比照第一/二場v2規格重做一次頁碼對齊，錨點同上）。
-- 已知ASR誤聽（跑完後校對時處理，或agent已經處理）：
-  「歷史學能」→歷史學門、「市長嘉賓」→現場嘉賓、「張志偉/張志伊老師」→張哲維老師、
-  「從提示詞了解生存式AI」→從提示詞工程了解生成式AI、「掛爾咖啡包」→掛耳咖啡包
-
-**下一步（agent跑完之後）**：
-1. 讀`第四場逐字稿_頁碼對齊與潤飾_0919.json`，檢查`corrections_applied`跟`pages_with_content`。
-2. Splice進`index.html`的`tab-s4`（目前是stub+投影片iframe+現場筆記，見index.html搜尋`id="tab-s4"`），
-   照第一場`tab-s1`的PDF.js單頁瀏覽器框架複製（不要重新設計版面，見skill第6節的python splice腳本）。
-3. **splice完要同時把科普轉譯章節接進去**——見第4節，已經有草稿了。
-4. 部署驗證五步驟（tag balance/node --check/git push/curl輪詢/CDP截圖），細節見skill第8節。
-5. 完成後跟楊老師報告，並enqueue第四場NBLM三套件（見第5節的nblm-orchestrator用法）。
-
-## 4. 第四場科普轉譯草稿（已落檔進repo，**需修正後才能上架，不是可直接splice**）
-
-楊老師09-19要求：第四場對歷史系師生太硬，要「非常科普、文科生可以接受的口吻」，且**必須源自
-哲維老師原教材，不能憑空發明比喻**。跑過一輪Workflow（5支agent：讀投影片127頁全部內容、
-萃取第一二場教學語氣、盤點網站體例、草擬7節科普章節、紅隊逐條查證grounding）。
-
-**已救出並commit到repo**：`_work_in_progress/session4_humanities_guide_draft_0919.json`
-（含`draft.sections`7節完整HTML草稿 + `review`紅隊複核結果）。原本只活在這輪session的
-workflow暫存（journal.jsonl），已經搬進repo，不會因為換機器或session結束而消失。
-
-⚠ **紅隊複核verdict是「需修正後上架」，不是可上架**——`review.must_fix_before_publish`
-列了15條具體修正項，全部是**逐頁對照投影片查證出來的事實/觀念錯誤**，不是文字潤飾，
-splice前一定要先修，舉幾條最重要的：
-1. 04節h2把「昨天下午」寫成「昨天上午」（第一場其實是上午10:30-12:00，第二場才是下午）——
-   老師本人在場，這種錯最容易被當場抓到。
-2. 01節術語表把「上下文Context」(第六場p3)的內容誤植在「提示詞」名下，跟老師p30自己
-   立的「提示詞工程 vs 上下文工程」兩層分界打架。
-3. 04節把「掛Obsidian資料夾進ChatGPT」講成MCP在解決的事，**其實那是一小時後第五場RAG的
-   題目**，MCP解的是p16講的「工具接線」，不是「餵資料給AI」——這條會讓讀者對兩場內容的
-   分工整個搞混。
-4. 結語那格把第六場p5的架構圖層級讀反了（AI Agent是上游，只有OpenClaw掛在馬鞍工程下游），
-   且漏了Vibe Coding節點。
-5. Token跟向量／Embedding全篇零定義卻用了，而第五場整場建在這兩個概念上——建議比照第二場
-   「符號速查」體例擴充symlegend，或至少加一句「請看第四場p34-39/p59-64」。
-6. 有一句「AI寫了一張條子，另一個程式拿著條子去改」是教材裡沒有的外借比喻，違反本次紀律，
-   建議直接刪除。
-7. 起點節h2「議程上那五個名詞，第四場一個都沒教」——事實正確（已獨立跑過關鍵詞計數驗證：
-   提示詞1次/MCP0次/Skill0次），但**這句話讀起來像在說老師沒照議程上課**，網站是系所主管
-   即時在看的，建議請楊老師從「一個都沒教」跟「要到第六場才正式登場，第四場先打地基」
-   兩個版本二選一，不要自己決定。
-
-完整15條在JSON的`review.must_fix_before_publish`陣列，逐條附投影片頁碼證據。
-
-草稿核心結構（7節，比原規劃的5節多兩節）：起點(落差說明)、01提示詞工程、02 Function Calling、
-03 AI Agent、04 MCP、05 Agent Skill、結語，每節都用第四場投影片實際內容(Transformer/Token/
-訓練等)加第一二場老師自己的比喻手法接起來，不用矽谷式比喻（樂高/食譜/瑞士刀）。
-
-**下一步**：找一個agent（或主線自己）讀這份JSON，照15條must_fix逐項修正`draft.sections`的
-`body_html`，修完再splice進`tab-s4`。修正時三個最重要的錨點不變：投影片p11編譯器圖、p22
-「中世紀以來史學研究方法沒有進步」那段話、第一場逐字稿p6「看不懂沒關係，這是資工專家的事」。
+  （**這個路徑在新機器上不存在**——已用來splice進index.html，資料本身活在index.html裡的
+  `window.PAGE_TRANSCRIPT_S4`/`window.PAGE_TIME_S4`，不需要靠這個原始JSON存活）。
+- 科普轉譯7節（起點/01提示詞工程/02 Function Calling/03 AI Agent/04 MCP/05 Agent Skill/結語）
+  已依`review.must_fix_before_publish`14條逐項修正並splice進`tab-s4`：
+  04節「昨天下午」→「昨天上午」、01節術語表拆成提示詞/上下文兩列、起點節p22引文補回第七條、
+  04節重寫（不再誤把Obsidian掛資料夾講成MCP解決的事，改標明是延伸對照＋補p16原話）、
+  結語Harness層級圖修正、起點symlegend擴成7卡（加Token/Vibe Coding）、移除未溯源的
+  「條子」比喻、01/03節標記延伸比喻、起點節p11圖顏色描述修正（深藍字非紅字）、結語p93/94
+  框錯位置修正、03節h2語氣還原成可能式、02節JSON範例加註「投影片原樣如此」。
+- **有一條是判斷題、不是修正**：起點節h2「議程上那五個名詞，第四場一個都沒教」，紅隊複核
+  建議請楊老師二選一（原版 vs「要到下午第六場才正式登場——第四場先打地基」）。**時間緊迫，
+  這輪先採用後者（較軟的版本）上站**，如果楊老師覺得不對可以再換回去，兩個版本都在git歷史裡。
+  另一條紅隊沒下決定的是「02-05四節要不要整體搬到tab-s6」——這次維持放在tab-s4，理由跟h2一樣。
+- 部署驗證：JS語法(`node --check`)過、`<section>`/`<div>`標籤配平、git push成功、GitHub Pages
+  curl輪詢確認`PAGE_TRANSCRIPT_S4`已上線。**視覺走查未完整完成**——卡在網站自己的Gmail登入閘門
+  （Firebase OAuth，會開一個MCP工具看不到的瀏覽器彈窗），沒有輸入任何密碼就中止了，之後有機會
+  請楊老師或哲維老師本人肉眼過一次tab-s4。
+- **NBLM三套件尚未enqueue**（第4節保留原本的用法說明，材料是`_work_in_progress/session4/`
+  底下的`full_text_plain.txt`）。
 
 ## 4.5 科普轉譯是Day2往後每一場的標準做法（不只第四場）
 
