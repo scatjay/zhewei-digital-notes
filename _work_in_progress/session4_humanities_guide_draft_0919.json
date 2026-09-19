@@ -1,0 +1,916 @@
+{
+  "draft": {
+    "sections": [
+      {
+        "eyebrow": "起點",
+        "h2": "議程上那五個名詞，第四場一個都沒教——先把這件事講明",
+        "sec_lede": "第四場投影片127頁，「提示詞」這三個字只出現在封面標題上，Function Calling、MCP、Agent Skill 一次都沒有出現。老師整場在講的是底層原理；那五個名詞的本體在下午第六場（p5–p30）。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">起點</span>\n  <h2>議程上那五個名詞，第四場一個都沒教——先把這件事講明</h2>\n  <p class=\"sec-lede\">第四場投影片127頁，「提示詞」這三個字只出現在封面標題上，Function Calling、MCP、Agent Skill 一次都沒有出現。老師整場在講的是底層原理；那五個名詞的本體在下午第六場（p5–p30）。</p>\n\n  <div class=\"protocol-box\">\n    <b>落差先攤開：</b>官方議程把「提示詞工程／Function Calling／AI Agent／MCP／Agent Skill」列在第四場，但第四場投影片實際走的是另一條路線——程式語言→編譯器→Transformer→Token→向量化→訓練→注意力機制→混和專家→解碼器，外加一份用《洛陽伽藍記》和《水經注》從零訓練三個小模型的 Colab 實作。那五個名詞要到第六場的投影片才正式登場。這一頁把兩邊都收進來：先講第四場的地基，再用老師自己第六場的定義，把五個名詞一個一個接上去。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">為什麼要先講地基？投影片p22已經自己回答了，這也是今天現場筆記記下的那一句。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p22原文</div>\n    從中世紀以來，史學研究實際操作方法本質上都沒有進步。<br>\n    歷史學必須了解程式語言，是史學研究方法現代化的第一步。→ 了解現代數位工具的原理 → 開發有利／方便於歷史研究的工具<br>\n    現代化後，才能進入AI時代。<br>\n    我是黑暗時代最後的歷史學家。<br>\n    下一代／大學生們有可能成為AI文藝復興百花齊放的新時代史家<br>\n    方法上／工具上的變革，才是真正的典範轉移。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">第11頁那張圖，是整場的座標原點</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">投影片p11是一張編譯器全景圖，畫了上下兩條路。上面那條是傳統程式設計：人有一個想法，必須自己把它<b>邏輯化、符號化、流程化、明確化</b>，才寫得成程式語言，再交給編譯器一路翻譯成組合語言、機器碼、指令。下面那條是生成式AI出現以後的路：人有一個想法，直接講自然語言。整張圖上只有「AI」被塗成黃色橢圓，其餘全是紅框方塊——它站的位置，就是自然語言跟機器之間那道縫。</p>\n\n  <div class=\"flowline\">\n    <div class=\"fnode\"><b>以前怎麼讓機器做事</b><span>想法 →〔邏輯化・符號化・流程化・明確化〕→ 程式語言 → 編譯器 → 機器碼（投影片p11上路）</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>現在怎麼讓機器做事</b><span>想法 → 自然語言 → 直接講。投影片p20只有三行字：「生成式AI出現以後 → Vibe Coding → 直接講」</span></div>\n    <div class=\"farrow\">→</div>\n    <div class=\"fnode\"><b>代價寫在同一張圖上</b><span>訊息損耗・脈絡落差・概念不明——AI就接在這三個詞上面（投影片p11下路）</span></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">底下五節要講的東西，全部都在處理那三個詞。這不是我們替老師想的比喻，是他畫在p11同一張圖上的三個紅字。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">五個名詞，先認一遍</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-3)\">照第二場「符號速查」的做法，先對一遍名詞，之後看到就認得。每一個下面都有專節，這裡只給一句話。</p>\n\n  <div class=\"symlegend\">\n    <div class=\"symcard\"><div class=\"sym\">Prompt</div><div class=\"meaning\">提示詞</div><div class=\"ex\">你丟給AI的那段話</div></div>\n    <div class=\"symcard\"><div class=\"sym\">Function</div><div class=\"meaning\">函數調用</div><div class=\"ex\">把「有哪些工具、怎麼叫」寫成統一格式</div></div>\n    <div class=\"symcard\"><div class=\"sym\">Agent</div><div class=\"meaning\">代理人</div><div class=\"ex\">拿著工具、真的去動手的那個程式</div></div>\n    <div class=\"symcard\"><div class=\"sym\">MCP</div><div class=\"meaning\">模型上下文協定</div><div class=\"ex\">讓不同的AI都接得上同一批工具</div></div>\n    <div class=\"symcard\"><div class=\"sym\">Skill</div><div class=\"meaning\">技能說明書</div><div class=\"ex\">用Markdown寫給Agent看的工作流程</div></div>\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>老師自己劃的界線（第一場逐字稿原話）：</b>「那關於這個架構是怎麼樣、裡面的內容如何，看不懂沒關係，因為其實這是資工專家的事情，不是我們的工作，我們只要稍微了解一下原理就可以了。」這句話適用於底下每一節——看懂它在解決什麼問題就夠了，不必看懂它怎麼實作。\n  </div>\n\n  <p style=\"margin:12px 0 0;font-size:13px;color:var(--ink-3)\">（同理，第四場中段那些純數學的段落，第五、六場一次都沒有再用到：BPE演算法的合併規則p39、Sigmoid／Tanh／ReLU三種激活函式p81-84、包子饅頭肉粽那組線性層算例p74-77、Softmax與Attention公式p98-99、MoE路由使用率p103-109。那一整段是原理的證明過程，知道它在做加法跟乘法就好。）</p>\n</section>",
+        "grounding": [
+          {
+            "claim": "第四場127頁裡「提示詞」只出現在封面標題，Function Calling／MCP／Agent Skill 0次",
+            "source": "第四場投影片 p1 標題頁；全份127頁文字層以 PyMuPDF 逐頁實查關鍵詞計數（本輪親自跑過）",
+            "verbatim": "第四場 從提示詞工程了解生成式AI的本質（p1標題）"
+          },
+          {
+            "claim": "那五個名詞的本體在第六場 p5–p30",
+            "source": "第六場投影片 p5（三層總地圖）、p9（提示詞工程）、p11（Function Calling）、p13/p18（AI Agent）、p16-17（MCP）、p24-25（Agent Skill）、p30（三句收束）"
+          },
+          {
+            "claim": "第四場實際路線＝程式語言→編譯器→Transformer→Token→向量化→訓練→注意力機制→混和專家→解碼器",
+            "source": "第四場投影片 p3「認識程式語言／人是如何讓機器做事」、p11編譯器、p30「Transformer AI模型架構」、p33-35 Token、p59-64 向量化、p71-87 訓練、p95-99 注意力機制、p103-109 MoE、p110-114 解碼器"
+          },
+          {
+            "claim": "用《洛陽伽藍記》和《水經注》從零訓練三個小模型的 Colab 實作",
+            "source": "第四場投影片 p46（上傳《洛陽伽藍記》.md）、p117-119（階段13 加入《水經注》微調）、p120-121（三模型比較總表）"
+          },
+          {
+            "claim": "投影片p22原文六條全文照引",
+            "source": "第四場投影片 p22 文字層逐字",
+            "verbatim": "從中世紀以來，史學研究實際操作方法本質上都沒有進步。／歷史學必須了解程式語言，是史學研究方法現代化的第一步。-> 了解現代數位工具的原理-> 開發有利/方便於歷史研究的工具／現代化後，才能進入AI時代。／我是黑暗時代最後的歷史學家。／下一代/大學生們有可能成為AI文藝復興百花齊放的新時代史家／方法上/工具上的變革，才是真正的典範轉移。"
+          },
+          {
+            "claim": "p11 分上下兩路；上路四個動作是邏輯化／符號化／流程化／明確化；下路三個詞是訊息損耗／脈絡落差／概念不明；AI 是唯一黃色節點",
+            "source": "第四場投影片 p11 文字層（含節點文字「邏輯化 符號化 流程化 明確化」「訊息損耗 脈絡落差 概念不明」「AI」）＋素材三提供的版面判讀"
+          },
+          {
+            "claim": "投影片p20只有三行字",
+            "source": "第四場投影片 p20 文字層",
+            "verbatim": "生成式AI出現以後 ->Vibe Coding ->直接講"
+          },
+          {
+            "claim": "「看不懂沒關係」界線句",
+            "source": "第一場逐字稿 p6 原話",
+            "verbatim": "那關於這個架構是怎麼樣、裡面的內容如何，看不懂沒關係，因為其實這是資工專家的事情，不是我們的工作，我們只要稍微了解一下原理就可以了。"
+          },
+          {
+            "claim": "BPE合併規則、三種激活函式、線性層算例、Softmax/Attention公式、MoE路由使用率在第五、六場都沒有再用到",
+            "source": "延伸推論，非老師原話。做法是把第四場 p39/p81-84/p74-77/p98-99/p103-109 的主題詞拿去比對 session5、session6 投影片文字層，皆無再現。老師自己對應的說法只有第一場 p6「看不懂沒關係」"
+          },
+          {
+            "claim": "「照第二場『符號速查』的做法」",
+            "source": "網站 index.html tab-s2 既有章節第2節（eyebrow「符號速查」，symlegend 五卡）"
+          }
+        ]
+      },
+      {
+        "eyebrow": "01 — 提示詞工程",
+        "h2": "「把話講清楚」為什麼會變成一門工程",
+        "sec_lede": "第四場整場沒有教怎麼寫提示詞——但p11那張圖已經把它要解決的問題畫完了。至於定義，要到第六場p9才出現。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">01 — 提示詞工程</span>\n  <h2>「把話講清楚」為什麼會變成一門工程</h2>\n  <p class=\"sec-lede\">第四場整場沒有教怎麼寫提示詞——但p11那張圖已經把它要解決的問題畫完了。至於定義，要到第六場p9才出現。</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">要理解提示詞為什麼是個問題，先回到第一場老師講電腦本質的那一段。他整段都在否定電腦像人：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p72）</div>\n    我們知道電腦的本質，就跟我們以前用的計算機是一樣的道理：它可以算得很快，很會算，但它只會算，它是一個口令一個動作，不太容易舉一反三，也不太體貼，它沒有溫情，只有散熱的問題，也沒有感受。它展現出來的看似人一般的智慧，其實都是用計算模擬出來的結果。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">「一個口令一個動作、不太容易舉一反三」——提示詞工程整門學問就長在這句話上。既然它不會舉一反三，口令怎麼下就是全部的功夫。這跟我們對學生交代作業是同一回事：交代得含糊，收回來的東西就會離你要的很遠，而且它不會反問你。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">提示詞其實有兩種，而你只打得到其中一種</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第六場p6、p9把提示詞拆成兩層。這件事很重要，因為它解釋了一個常見的困惑：為什麼同樣一句話，在不同的AI服務裡回答會差那麼多。</p>\n\n  <div class=\"mapping\">\n    <div class=\"map-l\"><b>System Prompt 系統提示詞</b><span>投影片p9原文：「人設和做事規則 ＝ 開發者在後台進行配置」。不是你說出來的，是事前預設好的，每次對話都自動附上</span></div>\n    <div class=\"map-arrow\">+</div>\n    <div class=\"map-r\"><b>User Prompt 使用者提示詞</b><span>投影片p9原文：「具體任務 ＝ 使用者自己輸入」。就是你打進去的那句話</span></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師在p9舉的例子，正好就是一個史學研究者會下的規矩——這組例子直接抄下來就可以用：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p9原例</div>\n    System Prompt ＝ 我是一個蔣中正的歷史研究者，請不要直接給出答案，要一步一步具有邏輯的推理，並且必須要有史料作為證據。<br>\n    User Prompt ＝ 蔣中正喜歡吃什麼？\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">看得出來，那段 System Prompt 講的其實就是史學訓練本身：不要直接給答案、要推理、要有史料當證據。第六場p9接著說「Prompt太模糊，以至於LLM不知道該怎麼做出你想要的回答……所以語言能力很重要，要求精確表達的語言能力」——這是整個技術議程裡，少數把人文訓練直接說成技術能力的地方。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">四個容易誤會的地方</h2>\n  <div class=\"term-tbl\">\n    <table>\n      <thead><tr><th>術語</th><th>常見誤解</th><th>實際是</th></tr></thead>\n      <tbody>\n        <tr><td>提示詞</td><td class=\"wrong\">就是你打的那句話</td><td class=\"right\">你那句話＋系統提示詞＋對話歷史＋當前輸出＋工具列表，一起送出去（第六場p3）</td></tr>\n        <tr><td>System Prompt</td><td class=\"wrong\">AI的個性</td><td class=\"right\">開發者在後台設的規則與人設，你看不到，但每次對話都在（第六場p6、p9）</td></tr>\n        <tr><td>溫度 Temperature</td><td class=\"wrong\">調準確度</td><td class=\"right\">給機率較低的字詞較高的機會；越高隨機性越強（第四場p113）</td></tr>\n        <tr><td>Top-K</td><td class=\"wrong\">調回答長度</td><td class=\"right\">只從機率最高的前K個Token裡挑；K＝1就是每次都選最高的（第四場p114）</td></tr>\n      </tbody>\n    </table>\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>為什麼它會胡說，答案在第四場：</b>投影片p33一句話定了性——「LLM 大型語言模型，本質是文字接龍、一個龐大的數學函數」。p110示範得更直白，老師拿自己的名字接龍：「我是 → 解碼器 → 哲維92%、老師0.01%」。它每一步都只是在挑下一個字的機率，溫度跟Top-K就是在調這個挑法。第五場p4會列出LLM的五個侷限並收在「→容易產生幻覺問題」，p5再回頭指一句「為什麼會有這些侷限？→ 來自於LLM的底層原理」——指的就是這裡。\n  </div>\n</section>",
+        "grounding": [
+          {
+            "claim": "電腦「一個口令一個動作、不太容易舉一反三」",
+            "source": "第一場逐字稿 p72 原話",
+            "verbatim": "它可以算得很快，很會算，但它只會算，它是一個口令一個動作，不太容易舉一反三，也不太體貼，它沒有溫情，只有散熱的問題，也沒有感受。它展現出來的看似人一般的智慧，其實都是用計算模擬出來的結果。"
+          },
+          {
+            "claim": "「這跟我們對學生交代作業是同一回事……它不會反問你」",
+            "source": "延伸推論，非老師原話。是把第一場p72「一個口令一個動作、不太容易舉一反三」翻成歷史系聽眾的日常場景；老師本人未做此對照"
+          },
+          {
+            "claim": "System Prompt ＝ 人設和做事規則 ＝ 開發者在後台配置；User Prompt ＝ 具體任務 ＝ 使用者自己輸入",
+            "source": "第六場投影片 p9 文字層逐字",
+            "verbatim": "System Prompt = 人設和做事規則 = 開發者在後台進行配置／User Prompt = 具體任務 = 使用者自己輸入"
+          },
+          {
+            "claim": "蔣中正那組 System/User Prompt 範例",
+            "source": "第六場投影片 p9 文字層逐字",
+            "verbatim": "System Prompt =我是一個蔣中正的歷史研究者，請不要直接給出答案，要一步一步具有邏輯的推理，並且必須要有史料作為證據。／User Prompt = 蔣中正喜歡吃什麼？"
+          },
+          {
+            "claim": "「Prompt太模糊……所以語言能力很重要，要求精確表達的語言能力」",
+            "source": "第六場投影片 p9 文字層逐字",
+            "verbatim": "Prompt太模糊，以至於LLM不知道該怎麼做出你想要的回答。／把Prompt 寫得更精確，變得很重要 -> 所以語言能力很重要，要求精確表達的語言能力-> Prompt Engineering"
+          },
+          {
+            "claim": "提示詞其實包含對話歷史＋當前問題＋當前輸出＋工具列表＋System Prompt",
+            "source": "第六場投影片 p3 文字層逐字",
+            "verbatim": "Context = LLM每次處理任務時所接受到的信息總和／Context有對話歷史+當前問題+當前輸出+工具列表+System Prompt"
+          },
+          {
+            "claim": "溫度 Temperature 是給機率較低的字詞較高的機會，越高隨機性越強",
+            "source": "第四場投影片 p113 文字層逐字",
+            "verbatim": "為了讓模型更有創造性，給予概率較低的字詞較高的機會，這稱之為溫度Temperature／溫度Temperature越高，隨機性越強"
+          },
+          {
+            "claim": "Top-K 是從前K個機率最高的Token中選擇，K=1只選最高",
+            "source": "第四場投影片 p114 文字層逐字",
+            "verbatim": "從前K隔代率最高的Token中進行選擇／Top-K = 1 只選最高的／Top-K = 2 選擇前兩高的"
+          },
+          {
+            "claim": "「LLM 本質是文字接龍、一個龐大的數學函數」",
+            "source": "第四場投影片 p33 文字層逐字",
+            "verbatim": "本質是文字接龍、一個龐大的數學函數"
+          },
+          {
+            "claim": "老師拿自己名字做接龍示範「我是→哲維92%、老師0.01%」",
+            "source": "第四場投影片 p110 文字層逐字",
+            "verbatim": "<開始>我是->解碼器-> 哲維92%、老師0.01%...等等"
+          },
+          {
+            "claim": "第五場 p4 五個侷限收在「容易產生幻覺」、p5 指回底層原理",
+            "source": "第五場投影片 p4、p5 文字層逐字",
+            "verbatim": "知識侷限性／知識實時性／上下文窗口限制／推理成本極高／推理速度變慢 -> 容易產生幻覺問題（p4）；為什麼會有這些侷限？-> 來自於LLM的底層原理（p5）"
+          },
+          {
+            "claim": "term-tbl 的「常見誤解」欄位",
+            "source": "延伸，非老師原話。四個誤解是為文科聽眾設的對照面，右欄「實際是」才是教材原文（出處已寫在格子裡）"
+          }
+        ]
+      },
+      {
+        "eyebrow": "02 — 函數調用 Function Calling",
+        "h2": "讓AI真的動得了手的那一道手續：把工具寫成它讀得懂的格式",
+        "sec_lede": "第六場p11只用一張投影片講完它。但要理解它為什麼非有不可，得先回到第一場那句「它只會在自己的框架裡面繞」。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">02 — 函數調用 Function Calling</span>\n  <h2>讓AI真的動得了手的那一道手續：把工具寫成它讀得懂的格式</h2>\n  <p class=\"sec-lede\">第六場p11只用一張投影片講完它。但要理解它為什麼非有不可，得先回到第一場那句「它只會在自己的框架裡面繞」。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p73）</div>\n    你想，它本質就是大量的運算，如果大家知道數學運算的過程就會知道：如果沒有新的東西給它，它算來算去，只會趨近於什麼？它只會在自己的框架裡面繞，不會有突破——突破只能由人所創造出來的新資料，或人不同的思考想法給它，它才有辦法突破既有運算演算法的框架。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">函數調用要解的就是這件事：怎麼把框架外的東西遞進去。做法很土——把「我有哪些工具、每個工具叫什麼、要給它什麼參數」寫成一份固定格式的清單，跟你的問題一起送給AI。第六場p11的原例只有三行：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p11原例</div>\n    { “name”: “list_files”,<br>\n    &nbsp;&nbsp;“desc”: “列目錄”<br>\n    &nbsp;&nbsp;“params”: {“path”: “str”}\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">翻成白話：這個工具叫 <code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">list_files</code>，它的用途是「列目錄」，你要給它一個叫 <code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">path</code> 的文字。投影片p11原文的說法是：把「用自然語言描述的 System Prompt 和返回格式，進行標準化、統一格式和規範描述，例如以JSON格式描寫」——這些用JSON寫下來的規格，就叫 Function Calling。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">最反直覺的一點：AI從頭到尾只是在產生文字</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第六場p13把整條線拆開來，看完會發現一件跟直覺相反的事。AI自己從來沒有碰過你的檔案——它只是<b>寫出一段「要呼叫哪個函數」的文字</b>，然後由旁邊那個程式照著這段文字去執行。投影片p13原話：「LLM得到這個Prompt後，根據Prompt內容生成一篇具有調用函數指定的文本……AI Agent根據這篇生成文本調用並執行函數，就能執行修改檔案的操作。」</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">所以「AI幫我改了檔案」這句話嚴格說並不準確：AI寫了一張條子，另一個程式拿著條子去改。下一節講的就是那個拿條子的東西。</p>\n\n  <div class=\"protocol-box\">\n    <b>它還順手做了一件像校勘的事：</b>第六場p14說「LLM本質上是機率生成」，所以Agent收到那段文字之後，會先核對「diff中引用的原始程式碼是否與當前文件相符。如果不相符，說明LLM誤解了上下文。那麼AI Agent就會讓模型重新生成。直到一致為止。」——先比對再落筆、對不上就重來。這個動作跟第二場p85要我們把辨識的整個過程都複製進底稿檔案、再拿去跟原始圖片一個字一個字比對，是同一種紀律；差別只在一邊是機器對自己做，一邊是我們對史料做。\n  </div>\n\n  <p style=\"margin:12px 0 0;font-size:13px;color:var(--ink-3)\">（延伸解讀，非老師原話：如果要在我們自己的領域裡找一個對應物，最接近的是第二場p94講的 metadata——「它能把任何兩個不同的實體，依照表格的方式，整理成一張非常大的表格」。先講好欄位，兩批資料才交換得了；先講好格式，AI跟工具才接得起來。老師沒有把這兩件事並排講過，這個對照是這裡加的。）</p>\n</section>",
+        "grounding": [
+          {
+            "claim": "AI「只會在自己的框架裡面繞，不會有突破」",
+            "source": "第一場逐字稿 p73 原話",
+            "verbatim": "如果沒有新的東西給它，它算來算去，只會趨近於什麼？它只會在自己的框架裡面繞，不會有突破——突破只能由人所創造出來的新資料，或人不同的思考想法給它，它才有辦法突破既有運算演算法的框架。"
+          },
+          {
+            "claim": "Function Calling ＝ 統一格式、規範描述、以JSON格式描寫",
+            "source": "第六場投影片 p11 文字層逐字",
+            "verbatim": "統一格式、規範描述／將用自然語言描述的System Prompt和返回格式，進行標準化、統一格式和規範描述，例如以JSON格式描寫／這些JSON 格式描寫的System Prompt ，稱之為Function Calling"
+          },
+          {
+            "claim": "p11 的 JSON 原例三行（list_files／列目錄／path）",
+            "source": "第六場投影片 p11 文字層逐字（原投影片就是三行、結尾沒有閉合大括號，此處照原樣保留未代為補上）",
+            "verbatim": "{ “name”: “list_files”, “desc”: “列目錄” “params”: {“path”: “str”}"
+          },
+          {
+            "claim": "LLM只是生成一篇「具有調用函數指定的文本」，真正執行的是 AI Agent",
+            "source": "第六場投影片 p13 文字層逐字",
+            "verbatim": "LLM得到這個Prompt後，根據Prompt內容生成一篇具有調用函數指定的文本／如此一來AI Agent根據這篇生成文本調用並執行函數，就能執行修改檔案的操作。"
+          },
+          {
+            "claim": "LLM 本質上是機率生成，所以 Agent 會核對 diff 是否相符，不符就重生成直到一致",
+            "source": "第六場投影片 p14 文字層逐字",
+            "verbatim": "LLM本質上是機率生成／因此AI Agent在收到LLM生成文本時，diff中引用的原始程式碼是否與當前文件相符。如果不相符，說明LLM誤解了上下文。那麼AI Agent就會讓模型重新生成。直到一致為止。"
+          },
+          {
+            "claim": "跟第二場底稿留存、逐字比對是同一種紀律",
+            "source": "第二場逐字稿 p85 原話",
+            "verbatim": "我們必須把AI，或者剛剛用的手稿辨識軟體，辨識的整個過程都複製下來，貼進我們的「底稿檔案」……或是拿去跟原始圖片一個字一個字比對，如果有錯，就可以知道錯在哪裡，並且追溯回去修正。"
+          },
+          {
+            "claim": "Function Calling 與 metadata 的對照",
+            "source": "延伸推論，非老師原話（文中已明白標示）。metadata 那句出自第二場逐字稿 p94",
+            "verbatim": "Metadata的關鍵是什麼？它能把任何兩個不同的實體，依照表格的方式，整理成一張非常大的表格。"
+          }
+        ]
+      },
+      {
+        "eyebrow": "03 — AI Agent",
+        "h2": "把研究流程六步驟交出去跑的，就是它",
+        "sec_lede": "第一場老師拆完歷史研究六步驟之後，說拆解的目的是為了流程化、系統化、進而自動化——Agent 就是那個「自動化」。技術上的定義在第六場p13、p18。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">03 — AI Agent</span>\n  <h2>把研究流程六步驟交出去跑的，就是它</h2>\n  <p class=\"sec-lede\">第一場老師拆完歷史研究六步驟之後，說拆解的目的是為了流程化、系統化、進而自動化——Agent 就是那個「自動化」。技術上的定義在第六場p13、p18。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p88）</div>\n    當我們把步驟拆解之後，我們才有辦法把這個步驟進一步流程化、系統化，甚至未來透過 AI agent 的方式進行自動化，都變成是有可能的。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">那六個步驟在第一場p86：知識的分類 → 快速記錄自己的想法 → 凝聚跟思考 →（數位的分析方法，老師說這步「有時候不見得一定會有」）→ 書寫 → 知識共享。Agent 要做的事，就是把這條你已經在跑的流程接手去跑。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">老師自己的定義：工具列表就是LLM的感官與四肢</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第六場p18用的是身體的說法，不是機械的說法：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第六場投影片p18原文</div>\n    LLM 是無法感知或改變外界環境<br>\n    如何解決 → 工具列表 ＝ LLM的感官／四肢<br>\n    ・讀寫文件內容　・查看文件列表　・運行終端命令<br>\n    將LLM和工具整合起來，變成能感知和改變外界環境的智能程序，就稱之為 Agent\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">換句話說：LLM 本身是一顆關在盒子裡、只會算機率接龍的腦；Agent 是幫它裝上眼睛跟手的那層程式。第六場p13列的三個最基本的函數是 <code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">read</code>、<code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">write</code>、<code style=\"font-family:var(--mono);background:var(--sunk);padding:1px 6px;border-radius:3px\">list</code>——讀檔、寫檔、看有哪些檔。就這三件事，已經足夠讓它替你整理一整個資料夾的史料筆記。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">一個Agent身上有四個零件</h2>\n  <div class=\"closing\" style=\"grid-template-columns:repeat(2,1fr);margin-top:16px\">\n    <div><b>Memory 記憶</b><span>分短期記憶與長期記憶。這裡要特別記住：第六場p10說「LLM本身沒有記憶。每次給它的消息，都是全新、獨立的請求」——記憶是Agent幫它記的，不是它自己有</span></div>\n    <div><b>Tools 工具</b><span>投影片p21舉的例子有日曆、計算機、代碼解釋器、搜尋……也就是上一節那份函數清單</span></div>\n    <div><b>Planning 計畫</b><span>投影片p21列了四項：思維鍊、子目標分解、反思機制、自我審查。白話說就是它會先拆步驟，做完會回頭檢查</span></div>\n    <div><b>Action 行動</b><span>真的去執行。第六場p22另外給了一個模式名稱：Plan and Execute，先規劃再執行</span></div>\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">為什麼歷史學門要在意這個東西</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">老師在第一場給的理由跟技術無關，是數位人文推了十幾年推不動的那個痛點：</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p14）</div>\n    最困難的其實是文本分析工具，沒有學生願意一個一個去標註那些詞語……但是呢，隨著 2025 年年底，出現了一個非常重要的東西，就是 AI agent 的快速發展，我發現過去很難入門的數位人文工具，已經變得越來越容易使用了，因為那個標註的工作，你就不用自己標，AI 都幫你標好了。\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>誠實面：它很吵，而且很貴。</b>第六場p19給了一個很具體的數字——當你只是輸入「你好」兩個字，真正送給LLM的資料有「89775字符 90K數據」，裡面塞了讀程式碼的注意事項、記憶與上下文的管理說明、怎麼使用Skill、當前運行的環境、各個子Agent的用途、各個工具的詳細描述。投影片自己下的結論是：「→ 消耗TOKEN、容易產生幻覺」。所以Agent不是掛越多工具越好。\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>還有一格它不能碰。</b>第二場p85講完整套手稿自動化之後，老師立刻回頭踩了一腳：「所以整套流程做完之後，最關鍵的地方是在最下面：前面都只是史料的辨識，最後一定要留一個位置寫下自己的解讀……前面這些辨識的工作都可以讓電腦來幫忙，但最後這段解讀，一定是研究者自己在閱讀、建構資料的過程中累積出來的。」Agent 講得再厲害，這一格沒有變。\n  </div>\n</section>",
+        "grounding": [
+          {
+            "claim": "拆解步驟是為了流程化、系統化、進而由 AI agent 自動化",
+            "source": "第一場逐字稿 p88 原話",
+            "verbatim": "當我們把步驟拆解之後，我們才有辦法把這個步驟進一步流程化、系統化，甚至未來透過 AI agent 的方式進行自動化，都變成是有可能的。"
+          },
+          {
+            "claim": "研究流程六步驟，第四步「不見得一定會有」",
+            "source": "第一場逐字稿 p86 原話",
+            "verbatim": "第一個，進行知識的分類；第二個，快速記錄自己的想法；第三個，就是凝聚跟思考……第四步有時候不見得一定會有，就是數位的分析方法……所以第五步就是最後的書寫；第六步可能就是把自己書寫的東西進行知識共享"
+          },
+          {
+            "claim": "工具列表 ＝ LLM的感官／四肢；LLM整合工具後才叫 Agent",
+            "source": "第六場投影片 p18 文字層逐字",
+            "verbatim": "LLM 是無法感知或改變外界環境／如何解決->工具列表 = LLM的感官/四肢／將LLM和工具整合起來，變成能感知和改變外界環境的智能程序，就稱之為Agent"
+          },
+          {
+            "claim": "「LLM 是一顆關在盒子裡、只會算機率接龍的腦；Agent 是幫它裝上眼睛跟手的那層程式」",
+            "source": "延伸改寫，非老師原話。是把第六場p18「感官／四肢」的身體說法＋第四場p33「文字接龍」合成一句；老師沒有講過「關在盒子裡的腦」"
+          },
+          {
+            "claim": "read、write、list 是最基本的三個函數",
+            "source": "第六場投影片 p13 文字層逐字",
+            "verbatim": "AI Agent內部具有事先寫好的程序，例如：read、write、list 用來讀寫檔案I/O操作的函數"
+          },
+          {
+            "claim": "Agent 四零件 Memory／Tools／Action／Planning 與其子項",
+            "source": "第六場投影片 p21 文字層逐字",
+            "verbatim": "Agent／Memory記憶（Short-term Memort 短期記憶／Long-term Memort 長期記憶）／Tools工具（Calendar()日曆／Calculator()計算機／CodeInterpreter()代碼解釋器／Search()搜尋…其他）／Action行動／Planning計畫（Reflection 反思機制／Self-critics 自我審查／Chain of thoughts 思維鍊／Subgoal decomposition 子目標分解）"
+          },
+          {
+            "claim": "LLM本身沒有記憶，每次都是全新獨立的請求",
+            "source": "第六場投影片 p10 文字層逐字",
+            "verbatim": "LLM本身沒有記憶。每次給它的消息，都是全新、獨立的請求。"
+          },
+          {
+            "claim": "Plan and Execute 先規劃再執行",
+            "source": "第六場投影片 p22 文字層逐字",
+            "verbatim": "Plan and Execute 模式／先規劃再執行"
+          },
+          {
+            "claim": "歷史學門要在意 Agent 的理由是標註工作",
+            "source": "第一場逐字稿 p14 原話",
+            "verbatim": "最困難的其實是文本分析工具，沒有學生願意一個一個去標註那些詞語……隨著 2025 年年底，出現了一個非常重要的東西，就是 AI agent 的快速發展……因為那個標註的工作，你就不用自己標，AI 都幫你標好了。"
+          },
+          {
+            "claim": "輸入「你好」時真正送出 89775字符／90K數據，結論是消耗TOKEN、容易產生幻覺",
+            "source": "第六場投影片 p19 文字層逐字",
+            "verbatim": "當輸入 “你好”時，真正給LLM的數據有 89775字符 90K數據，其中包含：User Prompt： 你好／讀程式碼的注意事項 – Harness／如何管理記憶和上下文的說明／如何使用Skill／當前運行的環境／各個子Agent的用途／各個工具的詳細描述／-> 消耗TOKEN、容易產生幻覺"
+          },
+          {
+            "claim": "最後一格留給研究者自己的解讀",
+            "source": "第二場逐字稿 p85 原話",
+            "verbatim": "所以整套流程做完之後，最關鍵的地方是在最下面：前面都只是史料的辨識，最後一定要留一個位置寫下自己的解讀……前面這些辨識的工作都可以讓電腦來幫忙，但最後這段解讀，一定是研究者自己在閱讀、建構資料的過程中累積出來的。"
+          }
+        ]
+      },
+      {
+        "eyebrow": "04 — MCP 模型上下文協定",
+        "h2": "昨天下午你已經做過一次MCP要解決的事",
+        "sec_lede": "第一場最後那一步——把Obsidian的資料夾掛進ChatGPT專案，讓AI讀得到你的筆記——就是MCP在處理的問題。第六場p16-17是它的通用版。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">04 — MCP 模型上下文協定</span>\n  <h2>昨天下午你已經做過一次MCP要解決的事</h2>\n  <p class=\"sec-lede\">第一場最後那一步——把Obsidian的資料夾掛進ChatGPT專案，讓AI讀得到你的筆記——就是MCP在處理的問題。第六場p16-17是它的通用版。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p88）</div>\n    我們要做一件事情：把 ChatGPT 這樣一個 AI 平台，讓它去讀取我們寫數位筆記時的內容。……這邊有一個「專案」，這邊有一個加號，點下去，然後你可以給它取名稱，這邊你可以選擇「加資料夾」，點進去之後，它要你選擇一個資料夾，這個時候你就選擇你剛剛用 Obsidian 所創建的那個資料夾，這樣的話，你在 Obsidian 裡面做的所有東西，都有辦法在 AI 裡面讀到，然後幫你進一步處理。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">那一步是綁死在 ChatGPT 上的：換一個AI，整套要重做。第六場p16講的就是這個問題——「每個不同的LLM，他們的工具接入平台都不相同，為了統一，因此有了模型上下文協定 Model Context Protocol」。協定的意思就是講好一套通信格式：工具寫一次，哪個AI都接得上。</p>\n\n  <div class=\"mapping\">\n    <div class=\"map-l\"><b>MCP Server</b><span>投影片p16：「運行通用工具」。可以跟Agent放在同一台電腦裡透過標準輸入輸出通信，也可以佈署在網路上用Http通信；除了服務，也可以提供數據（resources）跟提示詞模板（prompts）</span></div>\n    <div class=\"map-arrow\">→</div>\n    <div class=\"map-r\"><b>MCP Client</b><span>投影片p16：「調用通用工具，通常是 AI Agent」。也就是上一節那個拿著條子去動手的程式</span></div>\n  </div>\n\n  <div class=\"protocol-box\">\n    <b>投影片p16最後一句要記起來：</b>「它與AI沒有關係，只負責幫助Agent 管理工具、資源和提示詞。」MCP 不是一種AI、不會思考、也不會讓誰變聰明。它就是一份接線規格。\n  </div>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">老師在p17舉的例子，是一個歷史學者的例子</h2>\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這一整頁投影片示範的問題是：<b>「蔣中正在1937年12月做了什麼？請幫我整理可以使用的史料和著作，我要去哪裡找？」</b>備好的工具有三個：定位工具、圖書館接口、檔案館接口。下面是投影片p17寫的流程，順序沒有改：</p>\n\n  <div class=\"stepline\" style=\"margin-top:20px\">\n    <div class=\"step hit\"><b>LLM思考 → 需要知道使用者的位置 → 調用定位工具</b><p>Agent 啟動MCP協定、調用工具、找到使用者的經緯度，再把經緯度交回給LLM。</p></div>\n    <div class=\"step\"><b>LLM思考 → 這個問題需要查詢哪些圖書館／檔案館</b><p>Agent 檢索圖書館／檔案館，把結果返回給LLM。</p></div>\n    <div class=\"step\"><b>LLM思考 → 使用者到圖書館／檔案館位置的路徑交通規劃</b><p>Agent 調用 Google Map 工具規劃路線，返回結果給LLM。</p></div>\n    <div class=\"step hit\"><b>LLM 根據檢索結果＋路線規劃 → 生成最終答案 → 平台 → 使用者</b><p>投影片p17自己下的結論：「上述工作流程讓LLM可以有自主規劃能力＋自主調用工具 → AI Agent」。</p></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">值得注意的是，這條流程裡LLM沒有「知道」任何一筆史料。它做的事只有三件：判斷現在缺什麼、決定該叫哪個工具、把工具拿回來的東西整理成一段話。真正去查館藏的是接口，真正動手的是Agent。這也是為什麼第六場p16要特別強調 MCP 跟AI沒有關係。</p>\n\n  <div class=\"protocol-box\">\n    <b>接下來兩場都會再用到它：</b>第五場後半（p55起）會在 CODEX 裡實際碰到 MCP 跟外掛；第六場會把 MCP 放回p5那張總地圖裡，跟 AI Agent、Agent Skill、函數調用、OpenClaw 擺在同一層。這一節看懂了，那兩場就不會卡在名詞上。\n  </div>\n</section>",
+        "grounding": [
+          {
+            "claim": "第一場最後把 Obsidian 資料夾掛進 ChatGPT 專案",
+            "source": "第一場逐字稿 p88 原話",
+            "verbatim": "我們要做一件事情：把 ChatGPT 這樣一個 AI 平台，讓它去讀取我們寫數位筆記時的內容。……這邊你可以選擇「加資料夾」，點進去之後，它要你選擇一個資料夾，這個時候你就選擇你剛剛用 Obsidian 所創建的那個資料夾，這樣的話，你在 Obsidian 裡面做的所有東西，都有辦法在 AI 裡面讀到，然後幫你進一步處理。"
+          },
+          {
+            "claim": "「那一步是綁死在 ChatGPT 上的：換一個AI，整套要重做」",
+            "source": "延伸推論，非老師原話。是把第六場p16「每個不同的LLM，他們的工具接入平台都不相同」套回第一場的實作步驟；老師沒有把這兩件事並排講過"
+          },
+          {
+            "claim": "MCP 的由來：各家LLM工具接入平台不同，為了統一",
+            "source": "第六場投影片 p16 文字層逐字",
+            "verbatim": "每個不同的LLM，他們的工具接入平台都不相同，為了統一，因此有了模型上下文協定Model Context Protocol"
+          },
+          {
+            "claim": "MCP Server ＝ 運行通用工具；MCP Client ＝ 調用通用工具，通常是 AI Agent；可同機標準輸入輸出或上網 Http；另可提供 resources 與 prompts",
+            "source": "第六場投影片 p16 文字層逐字",
+            "verbatim": "運行通用工具 稱之為MCP Server／調用通用工具 稱之為MCP Client，通常是 AI Agent／除了服務 也可以提供數據 稱之為 resources／提供 Prompt模板的 稱之為 prompts／MCP Server 可以和AI Agent 放在同一台電腦之中，透過標準輸入輸出進行通信／也可以佈署在網路上，透過Http進行通信"
+          },
+          {
+            "claim": "「它與AI沒有關係，只負責幫助Agent 管理工具、資源和提示詞」",
+            "source": "第六場投影片 p16 最後一行文字層逐字",
+            "verbatim": "它與AI沒有關係，只負責幫助Agent 管理工具、資源和提示詞"
+          },
+          {
+            "claim": "蔣中正1937年12月那個問題與三個工具、四段流程",
+            "source": "第六場投影片 p17 文字層逐字（stepline 四步照原順序，僅斷句改寫）",
+            "verbatim": "問題：蔣中正在1937年12月做了什麼？請幫我整理可以使用的史料和著作，我要去哪裡找？／工具：定位工具、圖書館接口、檔案館接口／LLM思考 -> 需要知道使用者的位置 -> 調用定位工具……LLM根據檢索圖書館/檔案館結果+查詢路線規劃 -> 生成最終答案 ->平台 -> 使用者／上述工作流程讓LLM可以有自主規劃能力+自主調用工具-> AI Agent"
+          },
+          {
+            "claim": "「LLM沒有知道任何一筆史料，它只做三件事」",
+            "source": "延伸解讀，非老師原話。是對第六場p17流程圖的歸納；與p16「它與AI沒有關係」、p13「LLM生成調用函數的文本」一致"
+          },
+          {
+            "claim": "第五場後半會在 CODEX 裡碰到 MCP 與外掛",
+            "source": "第五場投影片 p55 起的 CODEX 實機段落（素材三所列章節：CODEX中的MCP、外掛、Agent Skill）"
+          },
+          {
+            "claim": "第六場p5總地圖把 AI Agent／Agent Skill／MCP／函數調用／OpenClaw 掛在同一層",
+            "source": "第六場投影片 p5 版面文字塊實查（同一欄下方節點：AI Agent、Agent Skill、MCP、函數調用、OpenClaw）"
+          }
+        ]
+      },
+      {
+        "eyebrow": "05 — Agent Skill",
+        "h2": "一份寫給AI看的說明書，其實就是把你自己的做法寫下來",
+        "sec_lede": "第一場老師說「我們必須一定要跟會開發工具的人講說我們需要什麼」。Agent Skill 就是把這句話寫成一個檔案——而且用的是第二場你們已經學過的 Markdown。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">05 — Agent Skill</span>\n  <h2>一份寫給AI看的說明書，其實就是把你自己的做法寫下來</h2>\n  <p class=\"sec-lede\">第一場老師說「我們必須一定要跟會開發工具的人講說我們需要什麼」。Agent Skill 就是把這句話寫成一個檔案——而且用的是第二場你們已經學過的 Markdown。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">第一場逐字稿原話（p14）</div>\n    我們如何把工具變得更容易讓我們使用，或者更容易從我們自己的角度去參與這個工具的開發。當然我們不可能自己投入工具的開發，但我們必須一定要跟會開發工具的人講說我們需要什麼。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第六場p24給的定義是：「將工作流程（個人化的工作流程），以文本的方式書寫（根據特定格式），稱之為Skill，並且透過Agent調用，這一連串的流程稱之為 Agent Skill。」同一頁下一行更白話——<b>「簡單說：給Agent 看的 說明文檔 以Markdown格式書寫」</b>。</p>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">這裡有一個對歷史系特別省力的地方：<b>Markdown 你們第二場已經學完了</b>。第二場p32從一個井字號加半形空格開始教起，說它「就像我們用 Word 編輯不同階層一樣」。Agent Skill 用的就是同一套語法，沒有新的東西要學。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">一份Skill分兩層</h2>\n  <div class=\"principle\">\n    <div class=\"prow\"><span class=\"letter\">A</span>\n      <p><b>元數據層。</b>投影片p24的說法是「說明文檔的封面、描述他的功能、負責的工作，至少有 Name + Description」。作用是讓Agent知道什麼時候該打開這份文件——「當要求符合該MD的METADATA 時，才將符合的Prompt 傳送給AI」。這一層存在的理由很現實：「為了方便管理、避免浪費token」。</p></div>\n    <div class=\"prow\"><span class=\"letter\">B</span>\n      <p><b>指令層。</b>投影片p24：「不做具體要求，只將事情說明白，如：執行目標、判斷規則、輸出格式、範例」。也就是把你平常怎麼做這件事講一遍：要達成什麼、遇到什麼情況怎麼判斷、最後要長什麼樣子、給一個例子。</p>\n      <div class=\"example-box\">\n        <div class=\"tag\">投影片p24原文（同頁其餘幾條）</div>\n        為了調用工具，也可以在其中加入py執行檔和CSV表格<br>\n        為了更精細化，可以在 Skill 拆解工作流程，讓AI按照流程進行工作<br>\n        將Agent Skill 存放在特定的目錄結構裡 Skills（連同工具的程式碼）\n      </div></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">如果要找一個已經在手上的例子：第二場p85那套手稿處理流程——先辨識、把每一版結果都貼進底稿檔案、最佳化、翻譯、拿去跟原圖一個字一個字比對、最後留一格寫自己的解讀——那整套講出來的順序，寫下來就是一份Skill。第六場p24講的「個人化的工作流程，以文本的方式書寫」，指的正是這種東西。</p>\n\n  <div class=\"protocol-box\">\n    <b>它同時是一道界線，不只是一份說明。</b>第六場p25：「執行能力給了AI行動力。Skill則是為AI指明了方向。AI就能在Skill設定的邊界中，謹慎使用執行的權力。」上一節我們才講Agent有了手可以改檔案；Skill 就是那雙手的行為準則。對我們來說這句話的份量在於：<b>那個準則是研究者自己寫的</b>，不是廠商預設的。\n  </div>\n\n  <p style=\"margin:12px 0 0;font-size:13px;color:var(--ink-3)\">（老師在第一場p18其實已經發過一份了：他說範例資料夾的第二個資料夾，「是我自己寫的一個 AI Agent skill 程式的基本框架，也先下載下來就可以了」。當時沒有展開講，現在知道那是什麼了。）</p>\n</section>",
+        "grounding": [
+          {
+            "claim": "「我們必須一定要跟會開發工具的人講說我們需要什麼」",
+            "source": "第一場逐字稿 p14 原話",
+            "verbatim": "我們如何把工具變得更容易讓我們使用，或者更容易從我們自己的角度去參與這個工具的開發。當然我們不可能自己投入工具的開發，但我們必須一定要跟會開發工具的人講說我們需要什麼。"
+          },
+          {
+            "claim": "Agent Skill 的定義：個人化工作流程以文本書寫、透過Agent調用；簡單說就是給Agent看的Markdown說明文檔",
+            "source": "第六場投影片 p24 文字層逐字",
+            "verbatim": "將工作流程(個人化的工作流程)，以文本的方式書寫(根據特定格式)，稱之為Skill，並且透過Agent調用，這一連串的流程 稱之為Agent Skill／簡單說：給Agent 看的 說明文檔 以Markdown格式書寫"
+          },
+          {
+            "claim": "元數據層至少要有 Name + Description；符合METADATA才傳給AI；理由是方便管理、避免浪費token",
+            "source": "第六場投影片 p24 文字層逐字",
+            "verbatim": "元數據層：說明文檔的封面、描述他的功能、負責的工作，至少有Name + Description／當要求符合該MD的METADATA 時，才將符合的Prompt 傳送給AI／為了方便管理、避免浪費token，因此又在每個Skill中進行區分"
+          },
+          {
+            "claim": "指令層四項：執行目標、判斷規則、輸出格式、範例",
+            "source": "第六場投影片 p24 文字層逐字",
+            "verbatim": "指令層：不做具體要求，只將事情說明白，如：執行目標、判斷規則、輸出格式、範例"
+          },
+          {
+            "claim": "可加入py執行檔和CSV表格、可拆解工作流程、存放在Skills目錄結構裡",
+            "source": "第六場投影片 p24 文字層逐字",
+            "verbatim": "為了調用工具，也可以在其中加入py執行檔和CSV表格／為了更精細化，可以在 Skill 拆解工作流程，讓AI按照流程進行工作／將Agent Skill 存放在特定的目錄結構裡 Skills (連同工具的程式碼)"
+          },
+          {
+            "claim": "Markdown 第二場已經學過，井字號加半形空格，「就像我們用Word編輯不同階層一樣」",
+            "source": "第二場逐字稿 p32 原話",
+            "verbatim": "這個概念就像我們用Word編輯不同階層一樣：第一層給階層一、第二層給階層二，只是Markdown簡化成用井字號加一個空格就能表示。"
+          },
+          {
+            "claim": "「第二場p85那套手稿處理流程，寫下來就是一份Skill」",
+            "source": "延伸應用，非老師原話。流程本身出自第二場逐字稿 p85；把它認定為 Skill 的一個實例，是依第六場p24的定義所做的套用，老師未如此並列",
+            "verbatim": "我們必須把AI，或者剛剛用的手稿辨識軟體，辨識的整個過程都複製下來，貼進我們的「底稿檔案」……最後一定要留一個位置寫下自己的解讀。（第二場p85）"
+          },
+          {
+            "claim": "Skill 是一道界線：執行能力給行動力，Skill指明方向，AI在Skill設定的邊界中謹慎使用執行的權力",
+            "source": "第六場投影片 p25 文字層逐字",
+            "verbatim": "執行能力給了AI行動力。／Skill則是為AI指明了方向／AI就能在Skill設定的邊界中，謹慎使用執行的權力"
+          },
+          {
+            "claim": "老師第一場發的範例資料夾裡就有一份他自己寫的 AI Agent skill 框架",
+            "source": "第一場逐字稿 p18 原話",
+            "verbatim": "第二個呢，是我自己寫的一個 AI Agent skill 程式的基本框架，也先下載下來就可以了。"
+          }
+        ]
+      },
+      {
+        "eyebrow": "結語",
+        "h2": "五個名詞講完了，位置還是留給你",
+        "sec_lede": "第四場真正的收尾是p93、p94兩頁——那是整份技術投影片裡，最直接朝著文科聽眾說話的地方。",
+        "body_html": "<section>\n  <span class=\"sec-eyebrow\">結語</span>\n  <h2>五個名詞講完了，位置還是留給你</h2>\n  <p class=\"sec-lede\">第四場真正的收尾是p93、p94兩頁——那是整份技術投影片裡，最直接朝著文科聽眾說話的地方。</p>\n\n  <div class=\"example-box\">\n    <div class=\"tag\">投影片p93、p94原文</div>\n    <b>理解AI本質：</b>人們只需要關注於提供大量的輸入數據和預期輸出結果。也就是提供X和Y，電腦透過巨量數據，自動推導出最符合所有數據分布情況的函數<br><br>\n    <b>目的導向：</b>人文／歷史研究應該關心的是目的，而非AI架構的方法，後者是計算機科學的事。<br>\n    因此，從AI底層來看，清楚自己的目的是使用AI的第一要務<br>\n    要讓AI訓練成自己想要的樣子之前，人們必須知道，自己想要的是什麼\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">「要讓AI訓練成自己想要的樣子之前，人們必須知道，自己想要的是什麼」——講了兩個小時的Token、向量、注意力機制之後，落點在這一句。上面五節的每一個名詞，如果拿掉這一句，就只剩下名詞。</p>\n\n  <h2 style=\"margin-top:28px;font-size:17px\">下午會用三句話把這五個名詞收起來</h2>\n  <div class=\"closing\" style=\"grid-template-columns:repeat(3,1fr);margin-top:16px\">\n    <div><b>提示詞工程</b><span>怎麼問（第六場p30原句）</span></div>\n    <div><b>上下文工程</b><span>怎麼記（第六場p30原句）</span></div>\n    <div><b>Harness 工程</b><span>怎麼管（第六場p30原句。p5那張總地圖把 AI Agent、Agent Skill、MCP、函數調用、OpenClaw 全部掛在這一層底下，圖上譯作「馬鞍工程」）</span></div>\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">第六場p29會再補一句作為這三層的立場：「Humans Steer. Agents execute.」——投影片自己的註解是「雖然人類不再需要親自執行，但執行任務的工作並沒有消失，而是演變成完全不同的形態……人的核心職責變了，變成了建立工作穩定可靠的系統架構、支撐框架」。然後p31、p32把問題丟回給在場的人：「如何設計一個符合歷史研究／人文研究／寫作／創作需求的AI Agent？？？」他自己給的答案方向是「使用者的個人特色、個人經驗、與他人的鏈結、共鳴」以及「人文研究的工作流程、質量評估與資料驗證」。</p>\n\n  <div class=\"protocol-box\">\n    <b>回到第一場的那三個詞。</b>老師在第一場p9說：「我個人一直認為，歷史學的根本在於史料上面的可驗證性、可追溯性跟可糾錯性。」這三個詞在第五場p24（RAG的優點「回答有來源可追溯，不容易胡說」）、第五場p54（「強化：可驗證、可回溯、可糾錯」）跟第六場p52、p64都會再出現。判斷上面五個名詞值不值得用，標準是這三個詞，不是「方不方便」。\n  </div>\n\n  <p style=\"margin:16px 0 0;font-size:13px;color:var(--ink-2)\">最後一句還是第一場那句、他講了兩遍的那句：「這幾個步驟，無論哪個步驟，都還是會回到寫筆記上面，寫筆記上面。」（第一場p87）今天講的全部，都是為了讓那件事更快一點。</p>\n</section>",
+        "grounding": [
+          {
+            "claim": "理解AI本質：只需關注提供X和Y",
+            "source": "第四場投影片 p93 文字層逐字",
+            "verbatim": "人們只需要關注於提供大量的輸入數據和預期輸出結果。／也就是提供X和Y，電腦透過巨量數據，自動推導出最符合所有數據分布情況的函數"
+          },
+          {
+            "claim": "目的導向三句",
+            "source": "第四場投影片 p94 文字層逐字",
+            "verbatim": "人文/歷史研究應該關心的是目的，而非AI架構的方法，後者是計算機科學的事。／因此，從AI底層來看，清楚自己的目的是使用AI的第一要務／要讓AI訓練成自己想要的樣子之前，人們必須知道，自己想要的是什麼"
+          },
+          {
+            "claim": "提示詞工程怎麼問／上下文工程怎麼記／Harness工程怎麼管",
+            "source": "第六場投影片 p30 文字層逐字",
+            "verbatim": "提示詞工程->怎麼問／上下文工程->怎麼記／Harness工程->怎麼管"
+          },
+          {
+            "claim": "p5總地圖第三欄圖上作「馬鞍工程」，底下掛 AI Agent／Agent Skill／MCP／函數調用／OpenClaw",
+            "source": "第六場投影片 p5 版面文字塊實查（文字層該欄為「系統化」「馬鞍／工程」，下方節點為 AI Agent、Agent Skill、MCP、函數調用、OpenClaw；p30 則寫作 Harness工程）"
+          },
+          {
+            "claim": "Humans Steer. Agents execute. 及其註解",
+            "source": "第六場投影片 p29 文字層逐字",
+            "verbatim": "Humans Steer. Agents execute.／雖然人類不再需要親自執行，但執行任務的工作並沒有消失，而是演變成完全不同的形態／人的核心職責變了，變成了建立工作穩定可靠的系統架構、支撐框架，以此來盡可能提高工作效率(歷史/人文研究的效率)"
+          },
+          {
+            "claim": "p31、p32 把問題丟回給在場的人，並給出兩個答案方向",
+            "source": "第六場投影片 p31、p32 文字層逐字",
+            "verbatim": "如何設計一個符合歷史研究/人文研究/寫作/創作需求的AI Agent？？？（p31）／使用者的個人特色、個人經驗、與他人的鏈結、共鳴 -> 閱讀經驗與筆記中文筆風格／人文研究的工作流程、質量評估與資料驗證。（p32）"
+          },
+          {
+            "claim": "歷史學的根本在於可驗證性、可追溯性、可糾錯性",
+            "source": "第一場逐字稿 p9 原話",
+            "verbatim": "我個人一直認為，歷史學的根本在於史料上面的可驗證性、可追溯性跟可糾錯性，如此一來，歷史學才有辦法從很多重複性的工作中解脫出來。"
+          },
+          {
+            "claim": "這三個詞在第五場p24、p54與第六場p52、p64再現",
+            "source": "第五場投影片 p24、p54 與第六場投影片 p52、p64 文字層逐字",
+            "verbatim": "回答有來源可追溯，不容易胡說（五p24）／強化：可驗證、可回溯、可糾錯（五p54）／強化史料/資料：可驗證性、可追溯性、可糾錯性（六p52）／強化研究材料 可驗證、可回溯、可糾錯（六p64）"
+          },
+          {
+            "claim": "「這幾個步驟，無論哪個步驟，都還是會回到寫筆記上面，寫筆記上面。」",
+            "source": "第一場逐字稿 p87 原話",
+            "verbatim": "這幾個步驟，無論哪個步驟，都還是會回到寫筆記上面，寫筆記上面。"
+          },
+          {
+            "claim": "「判斷五個名詞值不值得用，標準是這三個詞，不是方不方便」",
+            "source": "延伸推論，非老師原話。是把第一場p9的三個詞當成評估準則明講出來；老師本人是分散在第一場p9、第二場p85、第五場p54、第六場p52反覆使用，未講成一句判準"
+          }
+        ]
+      }
+    ],
+    "analogies_rejected": [
+      {
+        "analogy": "MCP ＝ USB 規格／插座轉接頭",
+        "why_rejected": "矽谷科技圈的標準比喻，任務明令禁止；而且老師第六場p16自己就給了更準確的說法「通信協議 將通用工具 統一起來託管」，外借比喻只會讓人以為它是硬體。"
+      },
+      {
+        "analogy": "Function Calling ＝ 點菜單、廚房食譜",
+        "why_rejected": "廚房／食譜類比在禁止清單上。更關鍵的是它會誤導：菜單暗示AI在「選」，但第六場p13顯示LLM只是生成一段文字，選跟做都是Agent。"
+      },
+      {
+        "analogy": "AI Agent ＝ 一個研究助理／助教",
+        "why_rejected": "最好懂、也最危險。它會讓聽眾把責任感與判斷力投射到Agent身上，直接推翻老師第一場p2的立場「它就像一個羅賴把（工具）一樣，怎麼樣去使用它，是使用者的問題，而不是工具的問題」。老師自己在第六場p18用的是沒有主體性的說法：工具列表＝LLM的感官／四肢。所以本稿採用他的身體說法，不用擬人助理。"
+      },
+      {
+        "analogy": "Agent Skill ＝ 研究生訓練手冊／教案",
+        "why_rejected": "方向對但多餘且會誤導。老師p24已經自己說了「給Agent看的說明文檔」，不需要再疊一層；而且教案預設對象會自行理解與變通，Skill的對象不會——p25強調的是「邊界」不是「啟發」。"
+      },
+      {
+        "analogy": "提示詞工程 ＝ 寫史料徵集啟事／檔案調閱單",
+        "why_rejected": "在教材裡找不到任何根據，純粹是我為了貼近歷史系而想的。而且它暗示有一份固定表單可以填，與第六場p9強調的「要求精確表達的語言能力」相反。"
+      },
+      {
+        "analogy": "Token ＝ 句讀／斷句",
+        "why_rejected": "好懂，但會強化正好要破除的誤解。第四場p34-35明講「Token並非詞、也並非一對一的關係，而是AI可以處理的最小單位」，句讀比喻會讓人以為一個Token等於一個詞。老師自己用的是「詞典的概念」（p35）。"
+      },
+      {
+        "analogy": "上下文 Context ＝ 短期記憶／人的記憶力",
+        "why_rejected": "第六場p10明說「LLM本身沒有記憶」，記憶是Agent幫它補的。用記憶當比喻等於直接跟投影片打架，所以本稿在 Agent 那節反過來把這件事寫成提醒。"
+      },
+      {
+        "analogy": "Harness ＝ 馬具／韁繩（照字面展開）",
+        "why_rejected": "p5圖上確實譯作「馬鞍工程」，但老師沒有把這個字當比喻用過一次；展開成騎馬的畫面是我自己加的。本稿只照實註明圖上譯名，不展開比喻。"
+      }
+    ],
+    "honest_notes": [
+      "最大的一件事：五節裡有四節（Function Calling／AI Agent／MCP／Agent Skill）的定義來源是第六場投影片，不是第四場。這是刻意的，也在起點節裡用 protocol-box 明講了。如果楊老師或哲維老師希望 tab-s4 只放第四場自己的內容，正確做法是把 02–05 四節整體搬到 tab-s6，起點節與01節留在 s4。這個決定不是我這條線能下的。",
+      "第四場投影片裡沒有任何一句可以直接引用的「老師對提示詞工程的定義」——這一條我查得很確定（全份127頁「提示詞」只在p1標題出現一次）。所以01節的定義全部來自第六場p9。文中已經寫明「至於定義，要到第六場p9才出現」。",
+      "三處是延伸改寫，grounding 裡都標了，但只有一處在正文明寫「延伸解讀，非老師原話」（02節的 metadata 對照）。另外兩處是：01節「這跟我們對學生交代作業是同一回事」、03節「LLM是一顆關在盒子裡、只會算機率接龍的腦」。如果要更嚴格，這兩處也該在正文加標，或直接刪掉——刪掉不影響論證。",
+      "第六場p5總地圖的第三欄，PDF文字層抓到的是「系統化」＋「馬鞍／工程」，而p30寫的是「Harness工程」。本稿以 Harness 為主、括號註明圖上譯作「馬鞍工程」。這一頁是密集的圖文排版，建議發布前用 Read 的 pages 參數把 session6 p5 當圖看一次確認字樣。",
+      "第六場p11那段 JSON 原例，投影片上本來就沒有閉合的大括號（文字層就是三行、結尾沒有 }）。本稿照原樣保留、沒有代為補上，也沒有在正文解釋它不完整——如果覺得這樣看起來像我們抄錯，可以加一句「投影片原樣如此」。",
+      "「第四場那些數學段落，第五、六場一次都沒再用到」這句是我比對兩份投影片文字層之後的判斷，不是老師說的話。老師自己對應的說法只有第一場p6的「看不懂沒關係」。這句話語氣很篤定，若不放心可以改成「後面兩場沒有再出現」。",
+      "第四場 p115–p127 多頁沒有文字層（純截圖與 Excel 畫面），本稿完全沒有引用那幾頁的細節，也沒有寫模型生成的那些偽《洛陽伽藍記》段落——那些字需要放大逐字核對，風險高、對五個名詞的解說也沒有幫助。",
+      "起點節寫「這也是今天現場筆記記下的那一句」，指的是 tab-s4 現有 user-note 裡「中世紀以來，史學研究方法本質上沒有進步」那條。splice 時如果那段 user-note 被移除或改寫，這句要跟著改，否則會指向不存在的東西。",
+      "本稿只寫 <section>，沒有動 stub-note／user-note／slidereader，也沒有加 live-quote。依 s1/s2 體例，live-quote 應放在所有 section 之前；建議用第四場p22「方法上／工具上的變革，才是真正的典範轉移」當 s4 的 live-quote，但那要另外決定，我沒有代寫。另外 s4 的 slidereader 目前沒有 open 屬性、也沒有 pdf.js 雙欄 viewer 與 NBLM 區塊，這些都不在本次範圍。",
+      "難度上的誠實：這一頁沒有把第四場變簡單，只是把它重新排序成「先講為什麼、再講是什麼」。Token、向量、注意力機制、MoE 這些第四場真正花了大半場講的東西，本稿只在需要解釋幻覺與上下文限制時碰到，沒有逐項科普——如果楊老師要的是「把第四場整場127頁科普化」，那是另一份工作，本稿只覆蓋官方議程列的那五個名詞。"
+    ]
+  },
+  "review": {
+    "grounding_audit": [
+      {
+        "claim": "第四場127頁裡「提示詞」只出現在封面標題，Function Calling／MCP／Agent Skill 0次",
+        "cited_source": "第四場投影片 p1＋全份127頁文字層關鍵詞計數",
+        "verdict": "verified",
+        "note": "我自己用 PyMuPDF 重跑一次：s4 提示詞=1（在 p1 標題）、MCP=0、Skill=0、Function=1（是 p65「核心目標函數 Objective Function」的誤中，不是 Function Calling）。對照組 s6：提示詞22、Prompt27、Agent75、MCP20、Skill20、OpenClaw34。數字完全對得上。"
+      },
+      {
+        "claim": "那五個名詞的本體在第六場 p5–p30",
+        "cited_source": "第六場 p5/p9/p11/p13/p16-17/p18/p24-25/p30",
+        "verdict": "verified",
+        "note": "逐頁開過：p9 提示詞工程、p11 Function Calling、p13+p18 AI Agent、p16-17 MCP、p24-25 Agent Skill、p30 三句。全部在。"
+      },
+      {
+        "claim": "第四場實際路線＝程式語言→編譯器→Transformer→Token→向量化→訓練→注意力機制→混和專家→解碼器",
+        "cited_source": "第四場 p3/p11/p30/p33-35/p59-64/p71-87/p95-99/p103-109/p110-114",
+        "verdict": "verified",
+        "note": "抽查 p3「認識程式語言／人是如何讓機器做事」、p59「向量概念」、p71「編碼(Encoder)…運算函式稱之為模型參數」、p95「注意力機制 Attention」、p104 MoE、p110「文字生成=解碼器」，順序與頁碼皆吻合。"
+      },
+      {
+        "claim": "用《洛陽伽藍記》和《水經注》從零訓練三個小模型的 Colab 實作",
+        "cited_source": "第四場 p46、p117-119、p120-121",
+        "verdict": "verified",
+        "note": "這幾頁沒有文字層，我把它們算圖出來親眼看過：p46 Colab 檔案樹確實有「水經注.md」「洛陽伽藍記.md」、正在上傳洛陽伽藍記.md、YAML 顯示 作者\"[[楊衒之]]\"；p117 標題「13. 加入新文本：微調 Attention 與 MoE」；p121 總表列 RNN／Multi-Head Attention／Mixture of Experts 三模型與新文本詞彙擴充 5747。草稿沒有憑空講。"
+      },
+      {
+        "claim": "投影片p22原文六條全文照引",
+        "cited_source": "第四場 p22 文字層逐字",
+        "verdict": "verified",
+        "note": "六條逐字無誤，但 p22 實際有【七】條——第七條「Thomas Kuhn所說的典範轉移，正在發生。」被靜默省略，而那正是 tab-s4 現有 user-note 第二句所指的那一句。「全文照引」四個字因此不成立，且省掉的剛好是能把現場筆記接起來的那條。必補。"
+      },
+      {
+        "claim": "p11 分上下兩路；上路四動作；下路三個詞；AI 是唯一黃色節點",
+        "cited_source": "第四場 p11 文字層＋版面判讀",
+        "verdict": "verified",
+        "note": "算圖看過：兩路、四動作、三個詞、AI 確實是全圖唯一的黃色橢圓，全部屬實。但草稿「其餘全是紅框方塊」不精確——圖上還有三個深藍色圓圈（人×2、完成任務）。正文另一句「他畫在p11同一張圖上的三個紅字」也不對：那三個詞是紅『框』裡的深藍字，不是紅字。"
+      },
+      {
+        "claim": "投影片p20只有三行字（生成式AI出現以後→Vibe Coding→直接講）",
+        "cited_source": "第四場 p20 文字層",
+        "verdict": "verified",
+        "note": "文字層就是這三行，一字不差。"
+      },
+      {
+        "claim": "「看不懂沒關係」界線句出自第一場 p6",
+        "cited_source": "第一場逐字稿 p6",
+        "verdict": "verified",
+        "note": "p6 逐字比對一致。附帶：同型句在 p2 也有（「裡面很多技術細節、那些程式，我們看不懂沒關係」），草稿只引 p6 沒問題。"
+      },
+      {
+        "claim": "BPE合併規則、三種激活函式、線性層算例、Softmax/Attention公式、MoE路由使用率在第五、六場都沒有再用到",
+        "cited_source": "草稿自標為延伸推論、非老師原話",
+        "verdict": "flagged_as_extension",
+        "note": "草稿誠實標了，而且我獨立驗過是對的：BPE／Softmax／ReLU／Sigmoid／Tanh／激活／Attention／注意力／MoE／專家／線性層 這 11 個詞，在 session5、session6 全份文字層命中數都是 0。這條可以放心留著，語氣也不必軟化。"
+      },
+      {
+        "claim": "「照第二場『符號速查』的做法」",
+        "cited_source": "index.html tab-s2 第2節",
+        "verdict": "verified",
+        "note": "index.html 全檔「符號速查」出現 1 次，symlegend 標記在第 918 行，五張 symcard。體例引用正確。"
+      },
+      {
+        "claim": "電腦「一個口令一個動作、不太容易舉一反三」",
+        "cited_source": "第一場逐字稿 p72",
+        "verdict": "verified",
+        "note": "p72 逐字一致，含「沒有溫情，只有散熱的問題」。"
+      },
+      {
+        "claim": "「這跟我們對學生交代作業是同一回事……它不會反問你」",
+        "cited_source": "草稿標為延伸推論",
+        "verdict": "flagged_as_extension",
+        "note": "grounding 有標，但【正文沒有標】。草稿自己在 honest_notes 也承認了。依本次任務紀律應補標或刪，刪掉不影響論證。"
+      },
+      {
+        "claim": "System Prompt ＝ 人設和做事規則＝開發者後台配置；User Prompt ＝ 具體任務＝使用者輸入",
+        "cited_source": "第六場 p9",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "蔣中正那組 System/User Prompt 範例",
+        "cited_source": "第六場 p9",
+        "verdict": "verified",
+        "note": "「我是一個蔣中正的歷史研究者，請不要直接給出答案，要一步一步具有邏輯的推理，並且必須要有史料作為證據。」「蔣中正喜歡吃什麼？」逐字一致。"
+      },
+      {
+        "claim": "「Prompt太模糊……所以語言能力很重要，要求精確表達的語言能力」",
+        "cited_source": "第六場 p9",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "提示詞其實包含對話歷史＋當前問題＋當前輸出＋工具列表＋System Prompt",
+        "cited_source": "第六場 p3",
+        "verdict": "misattributed",
+        "note": "p3 那一句定義的是【Context 上下文】，不是【提示詞】：「Context = LLM每次處理任務時所接受到的信息總和／Context有對話歷史+當前問題+當前輸出+工具列表+System Prompt」。老師 p6 講的提示詞只分「系統提示詞、用戶提示詞」兩層，p30 更把「提示詞工程→怎麼問」和「上下文工程→怎麼記」明確分成兩層。草稿在 term-tbl 把 Context 的內容掛在「提示詞」名下，等於把老師今天下午要教的分工先抹平了。"
+      },
+      {
+        "claim": "溫度 Temperature 給機率較低的字詞較高的機會，越高隨機性越強",
+        "cited_source": "第四場 p113",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Top-K 從前K個機率最高的Token中選擇，K=1只選最高",
+        "cited_source": "第四場 p114",
+        "verdict": "verified",
+        "note": "一致。原投影片作「從前K隔代率最高的Token中進行選擇」（老師自己的錯字），草稿已代為修順，可接受，但若要標「原文」就要照原樣。"
+      },
+      {
+        "claim": "「LLM 本質是文字接龍、一個龐大的數學函數」",
+        "cited_source": "第四場 p33",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "老師拿自己名字接龍「我是→哲維92%、老師0.01%」",
+        "cited_source": "第四場 p110",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "第五場 p4 五個侷限收在「容易產生幻覺」、p5 指回底層原理",
+        "cited_source": "第五場 p4、p5",
+        "verdict": "verified",
+        "note": "p4 五條＋「-> 容易產生幻覺問題」、p5「為什麼會有這些侷限？-> 來自於LLM的底層原理」，逐字一致。"
+      },
+      {
+        "claim": "term-tbl 的「常見誤解」欄位是為文科聽眾設的對照面",
+        "cited_source": "草稿標為延伸",
+        "verdict": "flagged_as_extension",
+        "note": "標示合格。但其中「提示詞」那一列的右欄（應為正解）本身出錯，見上面 misattributed 那條。"
+      },
+      {
+        "claim": "AI「只會在自己的框架裡面繞，不會有突破」",
+        "cited_source": "第一場逐字稿 p73",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Function Calling ＝ 統一格式、規範描述、以JSON格式描寫",
+        "cited_source": "第六場 p11",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "p11 的 JSON 原例三行（list_files／列目錄／path），原投影片沒有閉合大括號",
+        "cited_source": "第六場 p11",
+        "verdict": "verified",
+        "note": "三行內容正確。但草稿 honest_notes 說「結尾沒有 }」描述錯了——我把 p11 算圖看過，最後一行是「\"params\": {\"path\": \"str\"}」，結尾是有 } 的（那是內層物件的），真正缺的是最外層那個 } 以及「列目錄」後面的逗號。若要在正文加註「投影片原樣如此」，註解要寫對。"
+      },
+      {
+        "claim": "LLM只是生成「具有調用函數指定的文本」，真正執行的是 AI Agent",
+        "cited_source": "第六場 p13",
+        "verdict": "verified",
+        "note": "逐字一致。這是全稿最重要也最正確的一個技術判斷。"
+      },
+      {
+        "claim": "LLM 本質上是機率生成，Agent 會核對 diff 不符就重生成直到一致",
+        "cited_source": "第六場 p14",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "跟第二場底稿留存、逐字比對是同一種紀律",
+        "cited_source": "第二場逐字稿 p85",
+        "verdict": "verified",
+        "note": "p85 逐字一致（「貼進我們的『底稿檔案』……拿去跟原始圖片一個字一個字比對」）。這個對照本身是延伸，但草稿的措辭（「是同一種紀律；差別只在一邊是機器對自己做，一邊是我們對史料做」）已經把界線講清楚，合格。"
+      },
+      {
+        "claim": "Function Calling 與 metadata 的對照（第二場 p94）",
+        "cited_source": "草稿標為延伸推論，正文已明白標示",
+        "verdict": "flagged_as_extension",
+        "note": "p94「它能把任何兩個不同的實體，依照表格的方式，整理成一張非常大的表格」逐字一致；延伸標示在正文與 grounding 都有。這是全稿標示做得最好的一處。"
+      },
+      {
+        "claim": "拆解步驟是為了流程化、系統化、進而由 AI agent 自動化",
+        "cited_source": "第一場逐字稿 p88",
+        "verdict": "verified",
+        "note": "逐字一致。但老師原話帶保留語氣：「甚至【未來】透過 AI agent 的方式進行自動化，都變成是【有可能的】」，草稿 h2「把研究流程六步驟交出去跑的，就是它」把可能性講成已然，語氣走遠了一步。"
+      },
+      {
+        "claim": "研究流程六步驟，第四步「不見得一定會有」",
+        "cited_source": "第一場逐字稿 p86",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "工具列表＝LLM的感官／四肢；LLM整合工具後才叫 Agent",
+        "cited_source": "第六場 p18",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "「LLM 是一顆關在盒子裡、只會算機率接龍的腦」",
+        "cited_source": "草稿標為延伸改寫",
+        "verdict": "flagged_as_extension",
+        "note": "grounding 有標，【正文沒標】。草稿 honest_notes 自己也點名了這一處。"
+      },
+      {
+        "claim": "read、write、list 是最基本的三個函數",
+        "cited_source": "第六場 p13",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Agent 四零件 Memory／Tools／Action／Planning 與其子項",
+        "cited_source": "第六場 p21",
+        "verdict": "verified",
+        "note": "逐字一致，含日曆／計算機／代碼解釋器／搜尋、反思機制／自我審查／思維鍊／子目標分解。原投影片把 Memory 打成 Memort，草稿沒有跟著錯，好。"
+      },
+      {
+        "claim": "LLM本身沒有記憶，每次都是全新獨立的請求",
+        "cited_source": "第六場 p10",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Plan and Execute 先規劃再執行",
+        "cited_source": "第六場 p22",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "歷史學門要在意 Agent 的理由是標註工作（第一場 p14）",
+        "cited_source": "第一場逐字稿 p14",
+        "verdict": "verified",
+        "note": "逐字一致，含「2025 年年底……AI agent 的快速發展」。"
+      },
+      {
+        "claim": "輸入「你好」時真正送出 89775字符／90K數據",
+        "cited_source": "第六場 p19",
+        "verdict": "verified",
+        "note": "逐字一致，七個項目與結論「-> 消耗TOKEN、容易產生幻覺」都在。"
+      },
+      {
+        "claim": "最後一格留給研究者自己的解讀",
+        "cited_source": "第二場逐字稿 p85",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "第一場最後把 Obsidian 資料夾掛進 ChatGPT 專案（p88）",
+        "cited_source": "第一場逐字稿 p88",
+        "verdict": "verified",
+        "note": "引文逐字一致。【但時間講錯了】：slides-session1.pdf p1 寫明第一場是「2026年9月18日1030-1200」，錄音檔也是 morning。草稿 h2 與 lede 的「昨天下午」應為「昨天上午」。下午1330-1500 是第二場（數位筆記到數位思維），不是掛資料夾那一段。"
+      },
+      {
+        "claim": "「那一步是綁死在 ChatGPT 上的：換一個AI，整套要重做」",
+        "cited_source": "草稿標為延伸推論",
+        "verdict": "flagged_as_extension",
+        "note": "標示合格，推論也站得住（p16 原話就是各家接入平台不同）。問題在於這條延伸被放在正文中段，而【建立在它上面的 h2 與 lede 卻沒有標】——見下方 oversimplifications。"
+      },
+      {
+        "claim": "MCP 的由來：各家LLM工具接入平台不同，為了統一",
+        "cited_source": "第六場 p16",
+        "verdict": "verified",
+        "note": "逐字一致。p16 還有一句草稿沒用、但更好用的定義：「通信協議 將通用工具 統一起來託管」。"
+      },
+      {
+        "claim": "MCP Server＝運行通用工具；MCP Client＝調用通用工具，通常是 AI Agent；同機標準輸入輸出或上網 Http；另可提供 resources 與 prompts",
+        "cited_source": "第六場 p16",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "「它與AI沒有關係，只負責幫助Agent 管理工具、資源和提示詞」",
+        "cited_source": "第六場 p16 最後一行",
+        "verdict": "verified",
+        "note": "逐字一致，確實是 p16 最後一行。"
+      },
+      {
+        "claim": "蔣中正1937年12月那個問題與三個工具、四段流程",
+        "cited_source": "第六場 p17",
+        "verdict": "verified",
+        "note": "問題句、三個工具（定位工具、圖書館接口、檔案館接口）、流程順序與結論「上述工作流程讓LLM可以有自主規劃能力+自主調用工具-> AI Agent」全部對得上。草稿只做斷句改寫，沒有改順序。"
+      },
+      {
+        "claim": "「LLM沒有知道任何一筆史料，它只做三件事」",
+        "cited_source": "草稿標為延伸解讀",
+        "verdict": "flagged_as_extension",
+        "note": "標示合格，且與 p13、p16 一致。這是全稿最有價值的一句延伸，建議保留。"
+      },
+      {
+        "claim": "第五場後半會在 CODEX 裡碰到 MCP 與外掛",
+        "cited_source": "第五場 p55 起",
+        "verdict": "verified",
+        "note": "CODEX 段落確實從 p55 開始（p55「CODEX操作」）；MCP 在 p80「CODEX中的MCP」、外掛在 p83、Agent Skill 在 p84。「p55起」的講法成立。"
+      },
+      {
+        "claim": "第六場p5總地圖把 AI Agent／Agent Skill／MCP／函數調用／OpenClaw 掛在同一層（馬鞍工程）底下",
+        "cited_source": "第六場 p5 版面文字塊",
+        "verdict": "misattributed",
+        "note": "p5 我算圖看過，箭頭方向與草稿講的相反。圖上是：上下文工程→函數調用→（Vibe Coding／MCP／Agent Skill）；MCP→AI Agent；然後【AI Agent 與 系統化 一起流進 馬鞍工程】；馬鞍工程→OpenClaw。也就是說只有 OpenClaw 在馬鞍工程下游，AI Agent 是它的上游而非下屬，而 Vibe Coding 這個節點草稿整個漏掉了。此外「馬鞍工程」四字確實印在圖上（p30 才寫 Harness工程），這半條是對的。"
+      },
+      {
+        "claim": "「我們必須一定要跟會開發工具的人講說我們需要什麼」",
+        "cited_source": "第一場逐字稿 p14",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Agent Skill 定義：個人化工作流程以文本書寫、透過Agent調用；給Agent看的Markdown說明文檔",
+        "cited_source": "第六場 p24",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "元數據層至少 Name + Description；符合METADATA才傳給AI；理由是方便管理、避免浪費token",
+        "cited_source": "第六場 p24",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "指令層四項：執行目標、判斷規則、輸出格式、範例",
+        "cited_source": "第六場 p24",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "可加入py執行檔和CSV表格、可拆解工作流程、存放在Skills目錄",
+        "cited_source": "第六場 p24",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Markdown 第二場已學過，井字號加半形空格，「就像我們用Word編輯不同階層一樣」",
+        "cited_source": "第二場逐字稿 p32",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "「第二場p85那套手稿處理流程，寫下來就是一份Skill」",
+        "cited_source": "草稿標為延伸應用",
+        "verdict": "flagged_as_extension",
+        "note": "標示合格，且與 p24 定義相符。這是全稿對歷史系聽眾最有說服力的一步。"
+      },
+      {
+        "claim": "Skill 是一道界線：執行能力給行動力，Skill指明方向，AI在Skill設定的邊界中謹慎使用執行的權力",
+        "cited_source": "第六場 p25",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "老師第一場發的範例資料夾裡就有一份他自己寫的 AI Agent skill 框架",
+        "cited_source": "第一場逐字稿 p18",
+        "verdict": "verified",
+        "note": "逐字一致：「第二個呢，是我自己寫的一個 AI Agent skill 程式的基本框架，也先下載下來就可以了。」"
+      },
+      {
+        "claim": "理解AI本質：只需關注提供X和Y（p93）",
+        "cited_source": "第四場 p93",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "目的導向三句（p94）",
+        "cited_source": "第四場 p94",
+        "verdict": "verified",
+        "note": "逐字一致。但草稿把 p93/p94 稱為「第四場真正的收尾」不成立——這兩頁在 127 頁裡的中段，p95 緊接著就是注意力機制，真正的結尾是 p125-127（儲存模型、打包下載 34 個成果檔）。"
+      },
+      {
+        "claim": "提示詞工程怎麼問／上下文工程怎麼記／Harness工程怎麼管",
+        "cited_source": "第六場 p30",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "Humans Steer. Agents execute. 及其註解",
+        "cited_source": "第六場 p29",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "p31、p32 把問題丟回給在場的人，並給出兩個答案方向",
+        "cited_source": "第六場 p31、p32",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "歷史學的根本在於可驗證性、可追溯性、可糾錯性",
+        "cited_source": "第一場逐字稿 p9",
+        "verdict": "verified",
+        "note": "逐字一致。"
+      },
+      {
+        "claim": "這三個詞在第五場p24、p54與第六場p52、p64再現",
+        "cited_source": "第五場 p24/p54、第六場 p52/p64",
+        "verdict": "verified",
+        "note": "四處全部查到，逐字一致。額外一處草稿沒提：第六場 p79「RAG (檢索增強生成)／強化資料可驗證性」，可用可不用。"
+      },
+      {
+        "claim": "「這幾個步驟，無論哪個步驟，都還是會回到寫筆記上面，寫筆記上面。」",
+        "cited_source": "第一場逐字稿 p87",
+        "verdict": "verified",
+        "note": "逐字一致，疊句也保留了。"
+      },
+      {
+        "claim": "「判斷五個名詞值不值得用，標準是這三個詞，不是方不方便」",
+        "cited_source": "草稿標為延伸推論",
+        "verdict": "flagged_as_extension",
+        "note": "標示合格。"
+      },
+      {
+        "claim": "起點節「這也是今天現場筆記記下的那一句」指向 tab-s4 現有 user-note",
+        "cited_source": "index.html tab-s4 user-note",
+        "verdict": "verified",
+        "note": "tab-s4 現況我讀過（全長 728 字元、位置在 tab-s2 之後）：user-note 兩句，第一句正是「中世紀以來，史學研究方法本質上沒有進步。」第二句是孔恩典範轉移。指涉成立。也順便確認 .term-tbl 在 index.html 只出現在 CSS（179-186 行），版面裡 0 次使用，草稿拿它來用是對的。"
+      }
+    ],
+    "oversimplifications": [
+      {
+        "where": "04 節 h2「昨天下午你已經做過一次MCP要解決的事」＋ sec-lede",
+        "problem": "兩個問題疊在一起。（一）事實：第一場是 09/18 上午 1030-1200（slides-session1.pdf p1 寫明），掛 Obsidian 資料夾那一步在第一場尾聲，是昨天【上午】，不是下午；下午那場是第二場。與會老師自己記得昨天的時程，這種錯會被當場抓到。（二）觀念：把「把資料夾掛進 ChatGPT 專案」講成「MCP 要解決的事」，會讓聽眾把 MCP 理解成『讓 AI 看得到我的檔案』。但老師 p16 的定義是『各家 LLM 工具接入平台都不相同，為了統一』——MCP 解決的是【工具接線】問題，不是【資料餵給 AI】問題。更麻煩的是，『讓 AI 讀我的史料』正是一小時後第五場 RAG 的主題（第五場 12 頁以上在講向量與檢索）。聽眾上午被告知那叫 MCP，中午又被告知那叫 RAG，兩場會互相打架。",
+        "suggested_fix": "改成「昨天上午你已經碰過同一類問題的一個版本」，並把主軸換成老師自己的問題陳述：『昨天那一步只對 ChatGPT 有效，換一家 AI 就要整套重做——MCP 要解決的就是這個』。Obsidian 那段降為 example-box 並在正文標「這個對照是這裡加的，老師沒有把兩件事並排講過」。另外補上老師 p16 那句更好用的定義：「通信協議 將通用工具 統一起來託管」。"
+      },
+      {
+        "where": "01 節 term-tbl 第一列：「提示詞／常見誤解：就是你打的那句話／實際是：你那句話＋系統提示詞＋對話歷史＋當前輸出＋工具列表，一起送出去（第六場p3）」",
+        "problem": "把 Context 當成提示詞。p3 那句定義的是【上下文 Context】；老師 p6 講的提示詞只有「系統提示詞、用戶提示詞」兩層；p30 更把「提示詞工程→怎麼問」與「上下文工程→怎麼記」分成兩個不同的工程。草稿等於先把老師下午要立的分界抹掉，然後在同一頁的結語又把 p30 那三句當亮點列出來——自相矛盾。",
+        "suggested_fix": "拆成兩列。提示詞那列右欄改成「系統提示詞＋使用者提示詞兩層，你只打得到第二層（第六場p6、p9）」；另加一列「上下文 Context／誤解：AI 記得我／實際是：對話歷史＋當前問題＋當前輸出＋工具列表＋System Prompt 的總和，每次重送（第六場p3、p10）」。這樣結語的『怎麼問／怎麼記』才接得起來。"
+      },
+      {
+        "where": "結語「下午會用三句話把這五個名詞收起來」的 closing 三格，Harness 那格的說明",
+        "problem": "p5 總地圖的層級關係讀反了。圖上是 函數調用→MCP→AI Agent，而 AI Agent 與『系統化』一起流進『馬鞍工程』，馬鞍工程再流向 OpenClaw。也就是 AI Agent 是馬鞍工程的上游，不是掛在它底下；真正掛在它下游的只有 OpenClaw。草稿還把圖上的 Vibe Coding 節點整個漏掉。另外 p30 那三句是三個【工程層次】，並不是「把五個名詞收起來」——Function Calling 與 MCP 都不在那三句裡。",
+        "suggested_fix": "改成：「p5 那張地圖是把今天的名詞排成一條線：提示詞→上下文工程→函數調用→（Vibe Coding／MCP／Agent Skill）→AI Agent→再加上『系統化』，才構成圖上寫的『馬鞍工程』，最後長出 OpenClaw。」標題也從「把五個名詞收起來」改成「把今天的名詞排成三層」。"
+      },
+      {
+        "where": "03 節 h2「把研究流程六步驟交出去跑的，就是它」",
+        "problem": "老師 p88 原話是「甚至【未來】透過 AI agent 的方式進行自動化，都變成是【有可能的】」——是可能性，不是完成式。草稿把它寫成已經可以交出去跑。這一頁最需要保住的就是老師的節制語氣，尤其在他整天反覆踩「最後一格留給研究者」那一腳的脈絡下。",
+        "suggested_fix": "改成「老師說，拆解六步驟就是為了讓它未來『有可能』被交出去跑——Agent 就是那個『未來』現在長成的樣子」。一句話就能同時保住準確與力道。"
+      },
+      {
+        "where": "05 節 A/B 兩層之間",
+        "problem": "沒有回答文科聽眾最會問的那一句：「這跟我平常打的一段指令有什麼不一樣？」老師 p24 其實自己回答了兩次——「以MD書寫，並帶有 METADATA 進行分類的【Prompt】」「LLM會根據預設的資料夾中，讀取Skill，將Skill放入Prompt中進行提問」。也就是說 Skill 骨子裡就是一段提示詞，差別只在它存成檔案、帶分類、【符合條件時才被載入】。草稿把省 token 那點寫進 A 層了，但沒把「它本質上仍是提示詞」這句講出來，讀者容易誤以為 Skill 是一支程式。",
+        "suggested_fix": "在 A 層前面補一句老師原話：「p24 講得很直白——Skill 就是『以MD書寫、並帶有 METADATA 進行分類的 Prompt』。它不是程式，它還是一段話，只是這段話存成檔案、貼了標籤，而且只有在用得到的時候才被叫出來。」"
+      },
+      {
+        "where": "結語 sec-lede「第四場真正的收尾是p93、p94兩頁」",
+        "problem": "p93/p94 在 127 頁裡位於中段，p95 立刻接注意力機制，真正的結尾是 p125-127（儲存模型、打包下載 34 個成果檔）。說成「收尾」，任何一位把投影片拉到底的老師都會發現對不上。",
+        "suggested_fix": "改成「第四場中段有兩頁——p93、p94——是整份技術投影片裡最直接朝文科聽眾說話的地方，也是這一頁真正的落點」。內容不必動，只動框。"
+      },
+      {
+        "where": "02 節「AI寫了一張條子，另一個程式拿著條子去改。下一節講的就是那個拿條子的東西。」",
+        "problem": "「條子」是一個外借的比喻，教材裡沒有根據，也不在 analogies_rejected 名單裡，正文更沒有標為延伸。依這次任務的紀律（比喻不能憑空發明），它屬於漏網的一個。它本身不算誤導，但它讓 Agent 帶上了一點『跑腿的人』的人味，正好是草稿自己在 analogies_rejected 裡拒絕『研究助理』比喻時要避開的東西。",
+        "suggested_fix": "換成老師自己的語彙：「AI 產生的是一段文字，真正去動檔案的是 Agent——所以嚴格說『AI 幫我改了檔案』並不準確。」把比喻拿掉，論證一點都沒少。"
+      },
+      {
+        "where": "01 節 term-tbl 的溫度 Temperature 與 Top-K 兩列",
+        "problem": "這兩個是解碼端的旋鈕，在一般聊天介面上根本看不到、也調不了（老師 p115-116 是在 Colab 裡調的）。放在「提示詞工程」這一節、又用「常見誤解 vs 實際是」的表格呈現，會讓老師們以為自己可以去 ChatGPT 設定裡找溫度。",
+        "suggested_fix": "保留這兩列，但在表格下加一句小字：「這兩個旋鈕在一般聊天介面上是沒有的，老師是在 Colab 的程式碼裡調給大家看（第四場 p115-116）。放在這裡是為了解釋它為什麼會胡說，不是叫大家去找開關。」"
+      },
+      {
+        "where": "起點節 example-box「投影片p22原文」",
+        "problem": "標「原文」卻只引六條，第七條「Thomas Kuhn所說的典範轉移，正在發生。」被省掉。這一條剛好是 tab-s4 現有現場筆記第二句（孔恩典範轉移）唯一的投影片出處，省掉之後，現場筆記那句就變成沒有依據的孤句。",
+        "suggested_fix": "補回第七條。補回去之後，起點節那句「這也是今天現場筆記記下的那一句」可以一次接住 user-note 的兩句，反而更漂亮。"
+      },
+      {
+        "where": "起點節「這不是我們替老師想的比喻，是他畫在p11同一張圖上的三個紅字」與 p11 的版面描述",
+        "problem": "兩處細節與實際版面不符：那三個詞是【紅框裡的深藍字】不是紅字；「其餘全是紅框方塊」也漏了圖上三個深藍色圓圈（人×2、完成任務）。這頁的說服力正建立在「我們沒有亂編，去看圖」上，描述對不上會反噬。",
+        "suggested_fix": "改成「是他框在 p11 同一張圖上的三個詞」；版面描述改成「圖上只有 AI 是黃色橢圓，其餘是紅框方塊與幾個深藍圓圈」。"
+      }
+    ],
+    "accessibility_check": "我照一位讀了一輩子史料、沒碰過程式的歷史系教授的順序，從頭往下讀，卡住的地方按出現先後列：\n\n**1. 起點節第二段，一口氣六個生詞。**「程式語言→編譯器→Transformer→Token→向量化→訓練→注意力機制→混和專家→解碼器」出現在整頁的第三行，中間沒有任何緩衝。這是全頁最勸退的一句，而且它出現在讀者還沒建立任何信任之前。草稿確實在同一節末尾放了「這一段是原理的證明過程，知道它在做加法跟乘法就好」，但那在九行之後，救得太晚。建議把那句「不必記」的許可【往上搬到這串名詞的正下方】，或乾脆在名詞串後面直接接一句：「這九個詞今天不必記，列出來只是要說明：老師整場走的是另一條路。」\n\n**2. 「Vibe Coding」——零解釋，而且在第一個 flowline 裡。**起點節的 flowline 第二格直接寫「投影片p20只有三行字：生成式AI出現以後 → Vibe Coding → 直接講」。老師在 p20 也沒解釋，但他是口頭講的，網頁沒有口頭。這是全頁第一個會讓人停下來的英文詞，而且它就在最顯眼的視覺元件裡。至少要補「（老師這裡指的就是：不寫程式，直接用講的）」。\n\n**3. Token 完全沒有定義，卻用了兩次。**01 節的 Top-K 那一列寫「只從機率最高的前K個Token裡挑」，03 節的 protocol-box 寫「消耗TOKEN」。全頁沒有任何一處說 Token 是什麼。這不只是可讀性問題——第四場 p34 老師花了整整一頁講 Token（「並非詞、也並非一對一的關係，而是AI可以處理的最小單位」「平均1Token=1.5~2個中文」），而第五場 p13-14 會直接拿 Token 向量化去對比 RAG 向量化。一小時後的課建立在這個詞上，這一頁卻讓它以無定義的狀態出現兩次。\n\n**4. 同一個問題的更大版本：向量／Embedding 全頁零出現。**第五場（10:40 開始）文字層裡「向量」命中 12 頁以上、Embedding 命中 9 頁，整場建在這個概念上。這一頁完全沒碰。草稿在 honest_notes 誠實承認了這是刻意的範圍決定，這個承認是對的，但決定本身要送上去給楊老師判——因為網站上第四場那一頁若不接住 Token 與向量，第五場就沒有任何前置說明可以指。\n\n**5. 「JSON」只有半句話的緩衝。**02 節先出現 example-box 裡三行 `{ \"name\": \"list_files\", ...}`，才在下一段翻白話。對從未看過程式碼的人，那個大括號區塊會先造成一次視覺停頓。建議把白話翻譯【放在 example-box 前面】，讓讀者先知道自己要看什麼再看。\n\n**6. 「diff」沒有解釋。**02 節 protocol-box 引 p14：「diff中引用的原始程式碼是否與當前文件相符」。diff 是全頁唯一一個完全裸奔的英文技術詞。可以在引文後補一句「（diff 就是『改哪幾行』的清單——像我們改稿時只標出動過的那幾句）」。\n\n**7. 「MD」「METADATA」。**05 節 A 層引 p24 原文「當要求符合該MD的METADATA 時」。MD 就是 Markdown 檔的副檔名，但這一頁從沒說。METADATA 在第二場有講過（p94 metadata），但大寫全形出現時會像另一個東西。\n\n**8. 「Colab」「py執行檔」。**起點節說「一份……的 Colab 實作」、05 節引「加入py執行檔和CSV表格」。CSV 第二場講過沒問題；Colab 與 py 都是第一次出現。\n\n**9. 假設了聽眾知道、但其實沒交代的一件事：第六場是什麼時候。**起點節說「本體在下午第六場（p5–p30）」，04 節說「接下來兩場」，結語說「下午會用三句話」。一位沒帶議程表在手邊的老師，讀到這裡不知道第五場在 10:40、第六場在 13:10。補一行時間（像 stub-note 那樣）成本極低。\n\n**最值得做的一件事**：依第二場「符號速查」的體例，把起點節的 symlegend 從五張擴成七張，多加 Token 與 Vibe Coding 兩卡（Token 用老師 p34 自己的「AI 可以處理的最小單位」＋「平均 1 個 Token ≈ 1.5~2 個中文字」）。這一動同時解掉第 2、3 兩個卡點，而且完全在老師自己的教材裡，不必發明任何東西。",
+    "voice_match": "整體比我預期得好。草稿抓到了網站體例最核心的三件事：每一句都掛出處、延伸就明講是延伸、官方議程對不上就當場攤開（起點節那個 protocol-box 幾乎是 s8 stub-note 的正確延伸用法）。破折號的用法、「先給結論再用破折號補一句誠實的限制」這個句型，也對得上 s1/s2 的 tone_examples。下面只點走音的具體句子。\n\n**走音一：「最反直覺的一點：AI從頭到尾只是在產生文字」（02 節小 h2）。**這是科技媒體的標題句法，不是這個網站的。站上小 h2 的實際樣子是「歷史系的生存危機，其實不是AI」「從抽屜裡的卡片，到盧曼的三萬張卡片」——是講人話的完整句，不是「最 X 的一點」這種懸念式導語。建議改成「AI 其實沒有碰過你的檔案——它只是寫了一段文字」。內容一字不改，口吻回來了。\n\n**走音二：「誠實面：它很吵，而且很貴。」（03 節 protocol-box）。**「很吵」沒有任何根據——p19 講的是 89775 字符、消耗 TOKEN、容易產生幻覺，沒有任何一處講到吵。這是為了句子節奏好聽而加的形容詞，是全稿最像 AI 自己寫的一句。老師講代價時用的是數字（第二場 p85「一到兩年 vs 兩三個禮拜」、p108「70幾位同學一學期 vs 五位同學五天」）。建議直接改成「誠實面：你只打兩個字，它背後送出去的是九萬字。」——用老師自己給的那個數字當重音，比形容詞有力得多。\n\n**走音三：「做法很土——」（02 節）。**這句其實蠻接近哲維的口語層（他會說「很麻煩」「羅賴把」），但「土」帶有貶義，而他講到自己的技術做法時從不自貶功能、只自嘲自己（老花、拿自己論文當靶）。他的習慣是自嘲【人】不自嘲【方法】。改成「做法其實很單純——」就完全在他的聲腔裡了。\n\n**走音四：03 節 h2「把研究流程六步驟交出去跑的，就是它」。**斷言太滿。老師這一整天最固定的動作，是講完一段自動化立刻回頭踩一腳（第二場 p85 那一格、第一場 p84「閱讀跟思考永遠不會被取代」）。草稿在同一節末尾確實補了那一腳（protocol-box 引 p85），做得對；但 h2 先把話講死了，兩者的力道互相抵銷。把 h2 改回老師的保留語氣（「老師說，拆解六步驟，就是為了讓它未來『有可能』被交出去跑」），節內的張力才對。\n\n**走音五（較輕）：02 節 sec-lede「第六場p11只用一張投影片講完它」。**下一段馬上就靠 p13、p14 撐了半節，讀起來像自己打自己。改成「第六場只用 p11 一張投影片下定義，但要看懂它為什麼非有不可，得再往後翻兩頁」。\n\n**一個判斷題，不是走音，但要楊老師點頭**：起點節 h2「議程上那五個名詞，第四場一個都沒教——先把這件事講明」。誠實是這個網站的體例沒錯，s8 也有前例。但 s8 那次講的是「老師自己編號叫第八場、官方議程查不到」，指向的是編號；這次的句子讀起來像在說老師沒照議程上課，而且與會的系所主管正在即時看這個頁面。同樣的事實可以講成「議程上那五個名詞，要到下午第六場才正式登場——第四場先打地基」，攤開的程度一樣，但矛頭從授課者移回議程表。這條我不替楊老師決定，但發布前一定要他看過這一句。\n\n**做得特別對、建議明確保留的三處**：（一）02 節把 Agent 核對 diff 講成「先比對再落筆、對不上就重來」並接回第二場 p85 的底稿紀律——這是從老師自己的教材長出來的橋，不是外借比喻，全稿最好的一段。（二）analogies_rejected 裡拒絕「AI Agent＝研究助理」的理由（會推翻第一場 p2「羅賴把」的立場），這個判斷完全正確，而且 p2 那句我查過、一字不差。（三）結語用 p94「要讓AI訓練成自己想要的樣子之前，人們必須知道，自己想要的是什麼」當落點，再接第一場 p87 的疊句收尾——結構與 s1 結語節「一句原話＋指出它跟開場的呼應」的收法完全一致。",
+    "verdict": "需修正後上架",
+    "must_fix_before_publish": [
+      "【事實錯誤】04 節 h2 與 sec-lede 的「昨天下午」改為「昨天上午」。slides-session1.pdf p1 寫明第一場是 2026/9/18 1030-1200；下午 1330-1500 是第二場。掛 Obsidian 資料夾那一步在第一場尾聲（逐字稿 p88）。與會老師記得自己昨天的行程，這是最容易被當場抓到的一條。",
+      "【觀念錯誤】01 節 term-tbl 第一列把「上下文 Context（第六場p3）」的內容掛在「提示詞」名下。老師 p6 的提示詞只有系統／使用者兩層，p30 明確把「提示詞工程→怎麼問」與「上下文工程→怎麼記」分成兩層。拆成兩列修掉，否則這一頁會先抹掉老師下午要立的分界，還跟自己結語的三句話打架。",
+      "【溯源缺漏】起點節 example-box 標「投影片p22原文」卻只引六條，實際有七條——補回第七條「Thomas Kuhn所說的典範轉移，正在發生。」這條剛好是 tab-s4 現有現場筆記第二句（孔恩典範轉移）唯一的投影片出處，補回去反而讓兩句現場筆記一次接住。",
+      "【觀念錯誤＋撞課】04 節不能把「把 Obsidian 資料夾掛進 ChatGPT 專案」講成「MCP 要解決的事」。MCP 解的是工具接線（p16：各家 LLM 工具接入平台不同，為了統一），不是把資料餵給 AI——後者正是一小時後第五場 RAG 的題目（第五場 12 頁以上在講向量檢索）。把主軸換成「換一家 AI 就要整套重做」，Obsidian 那段降為明標的延伸對照，並補上 p16 更好用的原話「通信協議 將通用工具 統一起來託管」。",
+      "【讀圖錯誤】結語 Harness 那一格的層級講反了。第六場 p5 圖上是：函數調用→MCP→AI Agent，AI Agent 與「系統化」一起流進「馬鞍工程」，馬鞍工程→OpenClaw。AI Agent 是上游不是下屬，真正掛在馬鞍工程下游的只有 OpenClaw；圖上的 Vibe Coding 節點也被漏掉。這一頁若被人打開 p5 對照，會直接看出來。",
+      "【可及性，且會拖累第五場】Token 全頁沒有定義卻用了兩次（Top-K 那列、「消耗TOKEN」）；向量／Embedding 更是零出現，而第五場（10:40）整場建在這兩個概念上。最小成本解法：依第二場「符號速查」體例，把起點節 symlegend 從五卡擴成七卡，加 Token（用老師 p34 原話「AI 可以處理的最小單位」「平均 1 Token＝1.5~2 個中文」）與 Vibe Coding 兩卡。若楊老師決定不擴，則要在頁首明說「Token 與向量請看第四場投影片 p34-39、p59-64」，不能留白。",
+      "【比喻紀律】02 節「AI寫了一張條子，另一個程式拿著條子去改」是教材裡沒有的外借比喻，正文與 analogies_rejected 都沒有交代。依本次紀律應刪除或標明；刪掉論證一點都不減。",
+      "【未標延伸】草稿自己在 honest_notes 點名的兩處，正文補標或刪除：01 節「這跟我們對學生交代作業是同一回事」、03 節「LLM 是一顆關在盒子裡、只會算機率接龍的腦」。grounding 裡有標、正文沒標，讀者看到的是沒標的那一份。",
+      "【版面描述對不上圖】起點節「他畫在p11同一張圖上的三個紅字」→ 實際是紅框裡的深藍字；「其餘全是紅框方塊」→ 圖上還有三個深藍圓圈（人×2、完成任務）。這一節的說服力建立在「去看圖」，描述必須對。",
+      "【框錯位置】結語 sec-lede「第四場真正的收尾是p93、p94兩頁」——這兩頁在 127 頁的中段，p95 緊接注意力機制，真正的結尾是 p125-127。改成「中段那兩頁，是整份技術投影片裡最直接朝文科聽眾說話的地方」，內容不必動。",
+      "【語氣還原】03 節 h2 把老師的可能性講成完成式。p88 原話是「甚至未來透過 AI agent 的方式進行自動化，都變成是有可能的」。改回保留語氣，才接得住同節末尾引第二場 p85 那一腳。",
+      "【交給楊老師判斷，不要我們自己決定】起點節 h2「議程上那五個名詞，第四場一個都沒教」——事實正確（我獨立跑過關鍵詞計數：s4 提示詞1（標題）、MCP 0、Skill 0、Function Calling 0），但頁面是系所主管即時在看的，這句讀起來像在說授課者沒照議程。建議備一個替代版本「要到下午第六場才正式登場——第四場先打地基」讓楊老師二選一。另，草稿 honest_notes 提的「02–05 四節該不該整體搬到 tab-s6」也是同一層級的決定，一併請示。",
+      "【小訂正】honest_notes 裡「第六場p11 的 JSON 結尾沒有 }」描述有誤——我把 p11 算圖看過，最後一行是 \"params\": {\"path\": \"str\"}，結尾有 }，真正缺的是最外層那個 } 與「列目錄」後的逗號。若要在正文加註「投影片原樣如此」，註解本身要寫對。",
+      "【小訂正】01 節 Top-K 那列標「第四場p114」，但草稿把原文的錯字（投影片作「從前K隔代率最高的Token」）代為修順了。修順沒問題，但不要在同一格標成「原文」。"
+    ]
+  }
+}
